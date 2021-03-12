@@ -1,10 +1,12 @@
+import {Link} from "react-router-dom";
+
 const Navbar = () => {
     return (
         <nav className="navbar">
             <h1>Création de Festival</h1>
             <div className="links">
-                <a href="/allGames">Tous les jeux</a>
-                <a href="/allEditeur">Voir tous les éditeurs</a>
+                <Link to="/allGames">Tous les jeux</Link>
+                <Link to="/allEditeur">Voir tous les éditeurs</Link>
             </div>
         </nav>
     );
