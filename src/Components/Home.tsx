@@ -1,5 +1,5 @@
 import FestivalList from "./FestivalList";
-import useFetch from "./useFetch";
+import useFetch from "../Utilities/useFetch";
 
 const Home = () => {
 
