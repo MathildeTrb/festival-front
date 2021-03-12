@@ -1,17 +1,17 @@
 {
   "festivals": [
     {
-      "id_festival": 1,
-      "name_festival" : "Festival 2020",
+      "id": 1,
+      "name" : "Festival 2020",
       "current" : false
     },
     {
-      "id_festival": 2,
-      "name_festival" : "Festival 2019",
+      "id": 2,
+      "name" : "Festival 2019",
       "current" : false
     },{
-      "id_festival": 3,
-      "name_festival" : "Festival 2018",
+      "id": 3,
+      "name" : "Festival 2018",
       "current" : false
     }
   ]
