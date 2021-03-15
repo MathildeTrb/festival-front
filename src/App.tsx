@@ -1,16 +1,12 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Navbar from "./components/Navbar";
-import Home from "./components/Home";
+import Routes from "./components/Routes";
 
-function App() {
-  return (
-    <div className="App">
-        <Navbar/>
-        <div className="content">
-            <Home/>
-        </div>
+const App: FC = () => (
+    <div>
+        <Navbar />
+        <Routes/>
     </div>
-  );
-}
+)
 
 export default App;
