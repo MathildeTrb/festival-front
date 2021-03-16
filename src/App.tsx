@@ -4,7 +4,7 @@ import Routes from "./components/Routes";
 
 const App: FC = () => (
     <div>
-        <Navbar />
+        <Navbar/>
         <Routes/>
     </div>
 )

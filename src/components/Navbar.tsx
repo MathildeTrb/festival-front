@@ -1,12 +1,13 @@
 import {Link} from "react-router-dom";
+import "../css/index.css"
 
 const Navbar = () => {
     return (
         <nav className="navbar">
             <h1>Création de Festival</h1>
-            <div className="links">
-                <Link to="/allGames">Tous les jeux</Link>
-                <Link to="/allEditeur">Voir tous les éditeurs</Link>
+            <div>
+                <Link className="a" to="/allGames">Tous les jeux</Link>
+                <Link className="a" to="/allEditeur">Voir tous les éditeurs</Link>
             </div>
         </nav>
     );
