@@ -7,7 +7,7 @@ const Navbar = () => {
             <h1>Création de Festival</h1>
             <div>
                 <Link className="a" to="/allGames">Tous les jeux</Link>
-                <Link className="a" to="/allEditeur">Voir tous les éditeurs</Link>
+                <Link className="a" to="/allEditors">Voir tous les éditeurs</Link>
             </div>
         </nav>
     );
