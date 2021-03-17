@@ -1,25 +1,26 @@
 import React, {FC, useContext, useState} from 'react';
 import Navbar from "./components/Navbar";
 import Routes from "./components/Routes";
-import useFetch from "./utils/useFetch";
-import {Col} from "react-bootstrap";
-
-const festival = {id: 0, name: "", isCurrent:false}
-export const ContextCurrentFestival = React.createContext(festival)
+import Sidebar from "./components/Sidebar";
+import "./css/index.css"
+import {Col, Container, Row} from "react-bootstrap";
 
 const App: FC = () => {
 
-    const {data: currentFestival, setData: setCurrentFestival} = useFetch("http://localhost:8000/festivals/current")
-    const [value, setValue] = useState(currentFestival)
-
-
     return (
-        <ContextCurrentFestival.Provider value={currentFestival}>
-            <div>
+        <Container fluid>
+            <Row>
                 <Navbar/>
-                <Routes/>
-            </div>
-        </ContextCurrentFestival.Provider>
+            </Row>
+            <Row>
+                <Col id={'sidebar-menu'} md={1}>
+                        <Sidebar />
+                </Col>
+                <Col md={11}>
+                    <Routes/>
+                </Col>
+            </Row>
+        </Container>
     )
 
 }
