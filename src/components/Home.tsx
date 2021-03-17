@@ -1,8 +1,5 @@
-import useFetch from "../utils/useFetch";
 import FestivalList from "./FestivalList";
-import {Button} from "react-bootstrap";
 import useAxios from "../utils/useAxios";
-//import FestivalCurrent from "./FestivalCurrent"
 
 const Home = () => {
 

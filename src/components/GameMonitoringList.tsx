@@ -1,6 +1,14 @@
+import {useContext} from "react";
+import {FestivalContext} from "../App";
+
 const GameMonitoringList = () => {
+
+    const {selectedFestival} = useContext(FestivalContext);
+
     return (
-        <p>je suis game monitoring list</p>
+        <div>
+            {selectedFestival.name}
+        </div>
     )
 }
 

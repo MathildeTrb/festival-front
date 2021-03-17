@@ -3,13 +3,19 @@ import "../css/index.css"
 import {Col, Dropdown, Image, Nav, Row} from "react-bootstrap";
 import useFetch from "../utils/useFetch";
 import logo from "../pictures/logo_FDJ_FINAL_800.png"
+import useAxios from "../utils/useAxios";
+import {useContext} from "react";
+import {FestivalContext} from "../App";
+
 
 const Navbar = () => {
 
-    const {data: festivals, error, isPending} = useFetch("http://localhost:8000/festivals")
-    const {data: selectedFestival, setData: setSelectedFestival} = useFetch("http://localhost:8000/festivals/current")
+    const {data: festivals, error, isPending} = useAxios("festivals")
+    //const {data: selectedFestival, setData: setSelectedFestival} = useAxios("festivals/current")
 
-    const handleChange = (eventKey, event) => {
+    const {selectedFestival, setSelectedFestival} = useContext(FestivalContext);
+
+    const handleChange = (eventKey) => {
         setSelectedFestival(JSON.parse(eventKey))
     }
 
@@ -33,15 +39,14 @@ const Navbar = () => {
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {festivals.map((festival, index) =>
-                                <Dropdown.Item as="button" value={festival} key={index}
-                                               eventKey={JSON.stringify(festival)} onSelect={handleChange}>
+                                <Dropdown.Item as="button" value={festival} key={index} eventKey={JSON.stringify(festival)} onSelect={handleChange}>
                                     {festival.name}
                                 </Dropdown.Item>
                             )}
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>
-                <Col md={8} className={"navbar-col"}>
+                <Col md={8}>
                     <Nav fill variant="tabs" defaultActiveKey="/">
                         <Nav.Item>
                             <Link to="/" className='nav-link'>Informations générales</Link>

@@ -1,7 +1,10 @@
 const ExhibitorMonitoringList = () => {
     return (
-        <p>je suis la liste des réservations des exposants </p>
+        <div>
+            exhibitor monitoring list
+        </div>
     )
+
 }
 
 export default ExhibitorMonitoringList
