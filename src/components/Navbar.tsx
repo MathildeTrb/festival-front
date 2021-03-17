@@ -57,7 +57,7 @@ const Navbar = () => {
                             <Link to={`/${selectedFestival.id}/invoicing`} className='nav-link'>Facturation</Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Link to="/profil" className='nav-link'>profil</Link>
+                            <Link to="/profil" className='nav-link'>Profil</Link>
                         </Nav.Item>
                     </Nav>
                 </Col>

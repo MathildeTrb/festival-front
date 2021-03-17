@@ -15,6 +15,11 @@ const Routes: FC = () => {
                 <Route exact path="/:idFestival/games" component={GameMonitoringList}/>
                 <Route exact path='/:idFestival/exhibitors' component={ExhibitorMonitoringList}/>
                 <Route exact path='/:idFestival/invoicing' component={InvoicingList}/>
+                {/*<Route exact path='/profil' component={}/>*/}
+                {/*<Route exact path='/login' component={}/>*/}
+                {/*<Route exact path='/register' component={}/>*/}
+                {/*<Route exact path='/allUsers' component={}/>*/}
+                //TODO: créer les components
                 <Route path='*'>
                     <NotFound/>
                 </Route>
