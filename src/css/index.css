@@ -7,6 +7,10 @@
     color: #111761;
 }
 
-.upNavbar {
+#dropdown-basic{
     background-color: #99a0ca;
+}
+
+.nav-link{
+    color: #111761;
 }
