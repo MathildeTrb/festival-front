@@ -1,15 +1,20 @@
 import {Link} from "react-router-dom";
 import "../css/index.css"
-import {Col, Dropdown, Image, Nav, Navbar as BootstrapNavbar, NavDropdown, Row} from "react-bootstrap";
-import useFetch from "../utils/useFetch";
+import {Col, Dropdown, Image, Nav, Row} from "react-bootstrap";
 import logo from "../pictures/logo_FDJ_FINAL_800.png"
+import useAxios from "../utils/useAxios";
+import {useContext} from "react";
+import {FestivalContext} from "../App";
+
 
 const Navbar = () => {
 
-    const {data: festivals, error, isPending} = useFetch("http://localhost:8000/festivals")
-    const {data: selectedFestival, setData: setSelectedFestival} = useFetch("http://localhost:8000/festivals/current")
+    const {data: festivals, error, isPending} = useAxios("festivals")
+    //const {data: selectedFestival, setData: setSelectedFestival} = useAxios("festivals/current")
 
-    const handleChange = (eventKey, event) => {
+    const {selectedFestival, setSelectedFestival} = useContext(FestivalContext);
+
+    const handleChange = (eventKey) => {
         setSelectedFestival(JSON.parse(eventKey))
     }
 
