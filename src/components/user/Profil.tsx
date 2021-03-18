@@ -26,7 +26,7 @@ const Profil = () => {
             setUser(res.data)
             setIsPending(false)
         })
-    }, [setUser])
+    }, [setUser, token])
 
     const deleteAccount = () => {
         axios.delete('users', {

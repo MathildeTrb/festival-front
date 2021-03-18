@@ -62,7 +62,7 @@ const Navbar = () => {
                         <Nav.Item>
                             <NavDropdown title={<> <FaList/> Informations générales </>} id="basic-nav-dropdown">
                                 <NavDropdown.Item >
-                                    <Link className={"nav-link"} to ="/allGames"> Jeux </Link>
+                                    <Link className={"nav-link"} to ="/games"> Jeux </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item >

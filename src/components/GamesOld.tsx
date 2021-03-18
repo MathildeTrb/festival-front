@@ -2,7 +2,7 @@ import React from "react";
 import {Table} from "react-bootstrap";
 import useFetch from "../utils/useFetch";
 
-const Games = ({games}) => {
+const GamesOld = ({games}) => {
     return(
         <Table striped bordered hover variant='dark'>
             <thead>
@@ -34,6 +34,6 @@ const Games = ({games}) => {
     )
 }
 
-export default Games
+export default GamesOld
 
 
