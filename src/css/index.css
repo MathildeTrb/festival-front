@@ -33,6 +33,28 @@
     height: 30px;
     border: none;
     border-radius: 6px;
+    margin-left: 10px;
+}
+
+.mon-delete-button {
+    background-color: #e36491;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    margin-left: 10px;
+}
+
+.mon-validate-button {
+    background-color: #639d37 ;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    margin-left: 10px;
+    color: white;
+}
+
+.mon-input {
+    margin : 10px;
 }
 
 .image-css {

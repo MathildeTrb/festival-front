@@ -1,10 +1,10 @@
 import {useState} from "react";
 import jwtDecode from "jwt-decode";
 
-/*interface Token {
+interface Token {
     id: number,
     isAdmin: boolean
-}*/
+}
 
 const useToken = () => {
 
@@ -35,15 +35,16 @@ const useToken = () => {
         }
     }
 
-    /*const isAdmin = () => {
+    const isAdmin = () => {
         const decodedToken: Token = jwtDecode(token);
         return decodedToken.isAdmin;
-    }*/
+    }
 
     return {
         token,
         saveToken,
         removeToken,
+        isAdmin,
         isLogged
     };
 }
