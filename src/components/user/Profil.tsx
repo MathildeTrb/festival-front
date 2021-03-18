@@ -1,12 +1,18 @@
 import useToken from "../../utils/useToken";
 import {useEffect, useState} from "react";
 import axios from "../../utils/axios";
+import {AiOutlineDelete} from 'react-icons/ai'
+import {useHistory} from "react-router";
+import ModalUpdateProfil from "./ModalUpdateProfil";
 
 const Profil = () => {
 
-    const {token} = useToken()
+    const {token, removeToken} = useToken()
 
     const[user, setUser] = useState(null)
+    const[modalShow, setModalShow] = useState(false)
+
+    const history = useHistory()
 
     useEffect(() => {
         axios.get("users/profil", {
@@ -19,7 +25,19 @@ const Profil = () => {
         })
     }, [setUser])
 
-    console.log(user)
+    const deleteAccount = () => {
+        axios.delete('users',  {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }})
+            .then(res => {
+                console.log(res.data)
+                removeToken();
+                }
+            )
+        history.push("/")
+    }
 
     return (
         <>
@@ -29,7 +47,19 @@ const Profil = () => {
                 <p>id : {user.id}</p>
                 <p>mail : {user.mail}</p>
                 <p>fonction : {user.isAdmin ? "admin"  : "organisateur" }</p>
-                <button className="mon-button">suppression du compte</button>
+                <button className="mon-delete-button" onClick={deleteAccount}>
+                    <AiOutlineDelete/> suppression
+                </button>
+                <button className="mon-button" onClick={() => setModalShow(true)}>
+                    modification
+                </button>
+
+                <ModalUpdateProfil
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    user={user}
+                />
+
             </article>
             }
         </>

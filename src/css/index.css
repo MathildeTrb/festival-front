@@ -33,6 +33,15 @@
     height: 30px;
     border: none;
     border-radius: 6px;
+    margin-left: 10px;
+}
+
+.mon-delete-button {
+    background-color: #e36491;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    margin-left: 10px;
 }
 
 .image-css{
