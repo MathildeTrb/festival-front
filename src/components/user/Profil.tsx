@@ -2,6 +2,7 @@ import useToken from "../../utils/useToken";
 import {useEffect, useState} from "react";
 import axios from "../../utils/axios";
 import {AiOutlineDelete} from 'react-icons/ai'
+import {BsPencilSquare} from 'react-icons/bs'
 import {useHistory} from "react-router";
 import ModalUpdateProfil from "./ModalUpdateProfil";
 
@@ -17,6 +18,7 @@ const Profil = () => {
     const history = useHistory()
 
     useEffect(() => {
+        console.log(token)
         axios.get("users/profil", {
             headers: {
                 "Content-Type": "application/json",
@@ -25,7 +27,7 @@ const Profil = () => {
         }).then(res => {
             setUser(res.data)
             setIsPending(false)
-        })
+        }).catch(err => console.log(err))
     }, [setUser, token])
 
     const deleteAccount = () => {
@@ -44,16 +46,25 @@ const Profil = () => {
     }
 
     const updateAccount = (user) => {
-
-        axios.put("users", {"user": user}, {
+        axios.put("users/account", {"user": user}, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + token
             }
-        }).then( res =>
+        }).then( res => {
             setUser(res.data)
-        )
+            }
+        ).catch(err => console.log(err))
+    }
 
+    const updatePassword = (passwordManaged) => {
+        console.log(passwordManaged)
+        axios.put("users/password", {"passwordManaged": passwordManaged},{
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
+        }).then(res => console.log(res.data))
     }
 
     return (
@@ -69,13 +80,14 @@ const Profil = () => {
                     <AiOutlineDelete/> suppression
                 </button>
                 <button className="mon-button" onClick={() => setModalShow(true)}>
-                    modification
+                    <BsPencilSquare/> modification
                 </button>
 
                 <ModalUpdateProfil
                     show={modalShow}
                     onHide={() => setModalShow(false)}
-                    onClick={updateAccount}
+                    updateAccount={updateAccount}
+                    updatePassword={updatePassword}
                     user={user}
                 />
 

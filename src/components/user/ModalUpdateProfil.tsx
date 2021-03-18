@@ -11,20 +11,31 @@ const ModalUpdateProfil = (props) => {
     const [firstname, setFirstname] = useState(previousUser.firstname);
     const [lastname, setLastname] = useState(previousUser.lastname);
     const [mail, setMail] = useState(previousUser.mail);
-    const [password, setPassword] = useState("");
+    const [oldPassword, setOldPassword] = useState<string>();
+    const [newPassword, setNewPassword] = useState<string>()
 
     function handleSubmit() {
-
-        const savedPassword = (password === "" ? password : previousUser.password);
 
         const user = {
             "id" : previousUser.id,
             "firstname": firstname,
             "lastname": lastname,
-            "mail": mail,
-            "password": savedPassword
+            "mail": mail
         }
-        props.onClick(user)
+
+        props.updateAccount(user)
+
+        if (oldPassword && newPassword){
+
+            const passwordManaged = {
+                "id": previousUser.id,
+                "oldPassword": oldPassword,
+                "newPassword": newPassword
+            }
+
+            props.updatePassword(passwordManaged)
+        }
+
         props.onHide()
     }
 
@@ -35,7 +46,7 @@ const ModalUpdateProfil = (props) => {
     return (
         <Modal
             {...props}
-            size="lg"
+            size="xl"
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
@@ -81,14 +92,26 @@ const ModalUpdateProfil = (props) => {
                                     onChange={handleChange(setLastname)}
                                 />
                             </Col>
+                        </Row>
+                        <Row>
                             <Col>
-                                <label>Mot de passe : </label>
+                                <label>Ancien mot de passe : </label>
                                 <input
                                     className="mon-input"
                                     type="password"
                                     required
-                                    value={password}
-                                    onChange={handleChange(setPassword)}
+                                    value={oldPassword}
+                                    onChange={handleChange(setOldPassword)}
+                                />
+                            </Col>
+                            <Col>
+                                <label>Nouveau mot de passe : </label>
+                                <input
+                                    className="mon-input"
+                                    type="password"
+                                    required
+                                    value={newPassword}
+                                    onChange={handleChange(setNewPassword)}
                                 />
                             </Col>
                         </Row>
