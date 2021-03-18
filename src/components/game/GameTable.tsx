@@ -1,6 +1,7 @@
 import {FC} from "react";
 import GameRow from "./GameRow";
-import {IGame} from "../types";
+import {IGame} from "../../utils/types";
+import {GiClick} from "react-icons/all";
 
 const GameTable: FC<{games: IGame[]}> = ({games}) => {
     return (
@@ -13,9 +14,11 @@ const GameTable: FC<{games: IGame[]}> = ({games}) => {
                 <th scope="col">Âge minimum</th>
                 <th scope="col">Durée</th>
                 <th scope="col">Type</th>
-                <th scope="col">Manuel</th>
                 <th scope="col">Prototype</th>
-                <th scope="col">Editeur</th>
+                <th scope="col">Editeur <GiClick/></th>
+                <th scope="col"/>
+                <th scope="col"/>
+                <th scope="col"/>
             </tr>
             </thead>
             <tbody>

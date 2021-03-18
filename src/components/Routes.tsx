@@ -12,7 +12,7 @@ import Register from "./user/Register";
 import Users from "./user/Users";
 import PrivateRoute from "./PrivateRoute";
 import Logout from "./user/Logout";
-import Games from "./Games";
+import Games from "./game/Games";
 
 const Routes: FC = () => {
     return (

@@ -1,4 +1,4 @@
-import useAxios from "../utils/useAxios";
+import useAxios from "../../utils/useAxios";
 import {FC} from "react";
 import {Spinner} from "react-bootstrap";
 import GameTable from "./GameTable";

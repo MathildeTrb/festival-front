@@ -1,4 +1,4 @@
-import {ICompany} from "../types";
+import {ICompany} from "../../utils/types";
 import {FC} from "react";
 import {Modal} from "react-bootstrap";
 
