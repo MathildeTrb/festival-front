@@ -3,14 +3,39 @@
 /* base styles */
 * {
     margin: 0;
-    font-family: "Roboto Slab";
+    font-family: "Roboto Slab", serif;
     color: #111761;
+}
+
+.navbar-col{
+    text-align: center;
+    margin: auto;
 }
 
 #dropdown-basic{
     background-color: #99a0ca;
+    border: 0px solid #99a0ca;
+}
+
+#dropdown-menu{
+    text-decoration: none;
+    background-color: white;
+    color: #111761;
+    border: none;
 }
 
 .nav-link{
     color: #111761;
 }
+
+.mon-button {
+    background-color: #99a0ca;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+}
+
+.image-css{
+    height: 100px;
+}
+

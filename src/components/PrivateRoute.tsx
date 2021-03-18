@@ -1,7 +1,7 @@
 import useToken from "../utils/useToken";
 import {Route, Redirect} from "react-router-dom";
 
-const PrivateRoute = ({ component: Component, roles, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
 
     const {token} = useToken();
 
@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: Component, roles, ...rest }) => {
         <Route {...rest} render={props => {
 
             const redirectParams = {
-                pathname: "/user/login",
+                pathname: "/login",
                 state: {
                     from: props.location,
                 }
