@@ -9,11 +9,12 @@ import {BiUser} from 'react-icons/bi'
 import {HiOutlineInformationCircle} from 'react-icons/hi'
 import {FaGamepad, FaFileInvoiceDollar, FaList} from 'react-icons/fa'
 import {AiOutlineAudit} from 'react-icons/ai'
+import {Festival} from "../utils/types";
 
 
 const Navbar = () => {
 
-    const {data: festivals, error, isPending} = useAxios("festivals")
+    const {data: festivals, error, isPending} = useAxios<Festival[]>("festivals")
 
     const {selectedFestival, setSelectedFestival} = useContext(FestivalContext);
 
@@ -37,7 +38,7 @@ const Navbar = () => {
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {festivals.map((festival, index) =>
-                                <Dropdown.Item as="button" value={festival} key={index} eventKey={JSON.stringify(festival)} onSelect={handleChange}>
+                                <Dropdown.Item as="button" value={festival.name} key={index} eventKey={JSON.stringify(festival)} onSelect={handleChange}>
                                     {festival.name}
                                 </Dropdown.Item>
                             )}

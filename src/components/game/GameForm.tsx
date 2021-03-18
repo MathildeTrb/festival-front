@@ -1,18 +1,69 @@
-import {Form, Row, Col} from "react-bootstrap";
-import {IGame} from "../../utils/types";
-import {FC} from "react";
+import {Form, Row, Col, Button} from "react-bootstrap";
+import {Company, Game, GameType} from "../../utils/types";
+import {FC, useState} from "react";
 import GameTypeSelectList from "./GameTypeSelectList";
+import axios from "../../utils/axios";
 
-const GameForm: FC<{game?: IGame}> = ({game}) => {
+const GameForm: FC<{game?: Game, onCreate: (g: Game) => void}> = ({game, onCreate}) => {
+
+    const [name, setName] = useState<string>()
+    const [minNumberPlayer, setMinNumberPlayer] = useState<number>();
+    const [maxNumberPlayer, setMaxNumberPlayer] = useState<number>();
+    const [minYearPlayer, setMinYearPlayer] = useState<number>();
+    const [duration, setDuration] = useState<number>();
+    const [type, setType] = useState<GameType>();
+    const [isPrototype, setIsPrototype] = useState<boolean>(game && game.isPrototype)
+    const [manual, setManual] = useState<string>();
+    const [image, setImage] = useState(null);
+    const [editor, setEditor] = useState<Company>();
+
+    const handleChange = set => event => {
+        set(event.target.value);
+    }
+
+    const handleChangeJSON = set => event => {
+        set(JSON.parse(event.target.value))
+    }
+
+    const inversePrototype = () => {
+        setIsPrototype(value => !value);
+    }
+
+    const handleSubmit = action => event => {
+        event.preventDefault();
+
+        console.log(isPrototype)
+
+       /* const newGame: Game = {
+            name,
+            minNumberPlayer,
+            maxNumberPlayer,
+            minYearPlayer,
+            duration,
+            type,
+            isPrototype,
+            manual,
+            editor
+        }
+
+        /!*action("games", {
+            game: newGame
+        })
+            .then(() => {
+                onCreate(newGame)
+            })*!/
+
+        onCreate(newGame);*/
+    }
 
     return (
-        <Form>
+        <Form onSubmit={handleSubmit(axios.put)}>
             <Form.Group as={Row}>
                 <Form.Label column sm="3">
                     Nom
                 </Form.Label>
                 <Col sm="9">
-                    <Form.Control type="text" defaultValue={game ? game.name : ""} />
+                    <Form.Control type="text" value={name} onChange={handleChange(setName)} defaultValue={game ? game.name : ""} />
                 </Col>
             </Form.Group>
 
@@ -54,7 +105,7 @@ const GameForm: FC<{game?: IGame}> = ({game}) => {
                     Prototype
                 </Form.Label>
                 <Col sm="1">
-                    <Form.Control type="text" defaultValue={game ? game.minYearPlayer : ""}/>
+                    <Button variant={isPrototype ? "success" : "danger"} onClick={inversePrototype}>{isPrototype ? "OUI" : "NON"}</Button>
                 </Col>
             </Form.Group>
 
@@ -63,9 +114,13 @@ const GameForm: FC<{game?: IGame}> = ({game}) => {
                     Type
                 </Form.Label>
                 <Col sm="6">
-                    <GameTypeSelectList selected={game.type}/>
+                    <GameTypeSelectList selected={game ? game.type.id : undefined}/>
                 </Col>
             </Form.Group>
+
+            <div className="text-center">
+                <button disabled className="mon-button" type="submit">Valider</button>
+            </div>
         </Form>
     )
 }

@@ -1,7 +1,7 @@
 import {useState} from "react";
-/*import jwtDecode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
-interface Token {
+/*interface Token {
     id: number,
     isAdmin: boolean
 }*/
@@ -25,12 +25,17 @@ const useToken = () => {
         setToken(null);
     }
 
-    /*const isLogged = () => {
+    const isLogged = () => {
 
-        const decodedToken: Token = jwtDecode(token);
+        try {
+            jwtDecode(token);
+            return true;
+        } catch (e) {
+            return false;
+        }
     }
 
-    const isAdmin = () => {
+    /*const isAdmin = () => {
         const decodedToken: Token = jwtDecode(token);
         return decodedToken.isAdmin;
     }*/
@@ -38,7 +43,8 @@ const useToken = () => {
     return {
         token,
         saveToken,
-        removeToken
+        removeToken,
+        isLogged
     };
 }
 

@@ -1,8 +1,9 @@
 import useAxios from "../../utils/useAxios";
+import {User} from "../../utils/types";
 
 const Users = () => {
 
-    const {data: loadedUsers, isPending, error} = useAxios("users")
+    const {data: loadedUsers, isPending, error} = useAxios<User[]>("users")
 
     return (
         <>
@@ -25,7 +26,7 @@ const Users = () => {
                             <td>{user.firstname}</td>
                             <td>{user.lastname}</td>
                             <td>{user.mail}</td>
-                            <td>{user.isAdmin ? "6administrateur" : "organisateur"}</td>
+                            <td>{user.isAdmin ? "administrateur" : "organisateur"}</td>
                         </tr>
                     )
                 })}
