@@ -5,6 +5,10 @@ import logo from "../pictures/logo_FDJ_FINAL_800.png"
 import useAxios from "../utils/useAxios";
 import {useContext} from "react";
 import {FestivalContext} from "../App";
+import {BiUser} from 'react-icons/bi'
+import {HiOutlineInformationCircle} from 'react-icons/hi'
+import {FaGamepad, FaFileInvoiceDollar, FaList} from 'react-icons/fa'
+import {AiOutlineAudit} from 'react-icons/ai'
 
 
 const Navbar = () => {
@@ -26,7 +30,7 @@ const Navbar = () => {
                 <Col md={2}>
                     <Image className="image-css" src={logo} fluid/>
                 </Col>
-                <Col md={2} className={"navbar-col"}>
+                <Col md={1} className={"navbar-col"}>
                     <Dropdown>
                         <Dropdown.Toggle id="dropdown-basic">
                             {selectedFestival.name}
@@ -40,23 +44,23 @@ const Navbar = () => {
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>
-                <Col md={8} className={"navbar-col"}>
+                <Col md={9} className={"navbar-col"}>
                     <Nav fill variant="tabs" defaultActiveKey="/">
                         <Nav.Item className='nav-item'>
-                            <Link to="/" className='nav-link'>Informations du festival</Link>
+                            <Link to="/" className='nav-link'><HiOutlineInformationCircle/> Informations du festival</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
-                            <Link to={`/${selectedFestival.id}/exhibitors`} className='nav-link'>Réservations
+                            <Link to={`/${selectedFestival.id}/exhibitors`} className='nav-link'> <AiOutlineAudit/> Réservations
                                 exposants</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
-                            <Link to={`/${selectedFestival.id}/games`} className='nav-link'>Réservations jeux</Link>
+                            <Link to={`/${selectedFestival.id}/games`} className='nav-link'> <FaGamepad/> Réservations jeux</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
-                            <Link to={`/${selectedFestival.id}/invoicing`} className='nav-link'>Facturations du festival</Link>
+                            <Link to={`/${selectedFestival.id}/invoicing`} className='nav-link'> <FaFileInvoiceDollar/> Facturations du festival</Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <NavDropdown title="Informations de l'association" id="basic-nav-dropdown">
+                            <NavDropdown title={<> <FaList/> Informations générales </>} id="basic-nav-dropdown">
                                 <NavDropdown.Item >
                                     <Link className={"nav-link"} to ="/allGames"> Jeux </Link>
                                 </NavDropdown.Item>
@@ -71,7 +75,15 @@ const Navbar = () => {
                             </NavDropdown>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
-                            <Link to="/profil" className='nav-link'>Profil</Link>
+                            <NavDropdown title={<BiUser/>} id="basic-nav-dropdown">
+                                <NavDropdown.Item>
+                                    <Link to="/profil" className='nav-link'>Profil</Link>
+                                </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item>
+                                    <Link to="/logout" className='nav-link'>Déconnexion</Link>
+                                </NavDropdown.Item>
+                            </NavDropdown>
                         </Nav.Item>
                     </Nav>
                 </Col>
