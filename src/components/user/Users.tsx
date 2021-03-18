@@ -1,13 +1,21 @@
 import useAxios from "../../utils/useAxios";
-import {RiDeleteBin6Line} from "react-icons/ri"
 import {Col, Row} from "react-bootstrap";
+import useToken from "../../utils/useToken";
+import UsersRow from "./UsersRow";
 
 const Users = () => {
 
-    const {data: loadedUsers, isPending, error} = useAxios("users")
+    const {data: loadedUsers, setData: setLoadedUsers, isPending, error} = useAxios("users")
+    const {isAdmin, token} = useToken()
+
+    const handleDelete = user => {
+        console.log(loadedUsers)
+        setLoadedUsers(loadedUsers.filter(value => value.id !== user.id))
+        console.log(loadedUsers)
+    }
 
     return (
-        <>
+        <div>
             {isPending && <p>Is loading ...</p>}
             {error && <p>{error}</p>}
             {loadedUsers &&
@@ -23,21 +31,11 @@ const Users = () => {
                                 <th scope="col">Prénom</th>
                                 <th scope="col">mail</th>
                                 <th scope="col">fonction</th>
-                                <th scope="col"/>
+                                {isAdmin() && <th scope="col"/>}
                             </tr>
                             </thead>
                             <tbody>
-                            {loadedUsers.map((user) => {
-                                return (
-                                    <tr>
-                                        <td>{user.firstname}</td>
-                                        <td>{user.lastname}</td>
-                                        <td>{user.mail}</td>
-                                        <td>{user.isAdmin ? "administrateur" : "organisateur"}</td>
-                                        <td><RiDeleteBin6Line/></td>
-                                    </tr>
-                                )
-                            })}
+                            {loadedUsers.map((user, index) => <UsersRow key={index} user={user} onDelete={handleDelete}/>)}
                             </tbody>
                         </table>
                     </Col>
@@ -47,7 +45,7 @@ const Users = () => {
                 </Row>
 
             }
-        </>
+        </div>
     );
 }
 

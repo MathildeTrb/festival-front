@@ -24,3 +24,12 @@ export interface ICompany {
     address: string;
     canBeExhibitor: boolean;
 }
+
+export type User = {
+    id?: number;
+    firstname: string;
+    lastname: string;
+    mail: string;
+    password: string;
+    isAdmin: boolean;
+}
