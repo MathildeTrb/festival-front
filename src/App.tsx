@@ -25,7 +25,7 @@ const App: FC = () => {
 
     return (
         <>
-            {isPending && <div>Is loading le con de ta race</div>}
+            {isPending && <div>Is loading</div>}
             {selectedFestival &&
             <FestivalContext.Provider value={value}>
                 <div>
