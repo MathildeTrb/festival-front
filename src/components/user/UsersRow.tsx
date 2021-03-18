@@ -27,7 +27,6 @@ const UsersRow: FC<{user: User, onDelete: (user: User) => void}> = ({user, onDel
             }
         }).then(() => {
             onDelete(user)
-            console.log("j'ai appelé on delete ave le user id " + user.id)
             setShowModal(false)
         }).catch((err) => {
             console.log(err)
