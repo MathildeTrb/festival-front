@@ -8,7 +8,7 @@ interface Token {
 
 const useToken = () => {
 
-    const getToken = () => {
+    const getToken = (): string => {
         const tokenString: string = localStorage.getItem("token");
         return JSON.parse(tokenString);
     }

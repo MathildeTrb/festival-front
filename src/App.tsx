@@ -20,34 +20,38 @@ export const FestivalContext = createContext({
 const App: FC = () => {
 
     const {data: selectedFestival, setData: setSelectedFestival, isPending} = useAxios("festivals/current");
-    /*const [selectedFestival, setSelectedFestival] = useState({
-        id: 5,
-        name: "Festival de Mathou",
-        isCurrent: true
-    })*/
+
     const value = {selectedFestival, setSelectedFestival}
 
     return (
         <Container fluid>
-            {isPending && <div>Is loading le con de ta race</div>}
+            {isPending && <div>Is loading ...</div>}
             {selectedFestival &&
             <FestivalContext.Provider value={value}>
-                <Row>
-                    <Navbar/>
-                </Row>
-                <Row>
-                    <Col id={'sidebar-menu'} md={1}>
-                        <Sidebar />
-                    </Col>
-                    <Col md={11}>
-                        <Routes/>
-                    </Col>
-                </Row>
+                <Navbar/>
+                <Routes/>
             </FestivalContext.Provider>}
         </Container>
+        // <Container fluid>
+        //     {isPending && <div>Is loading ...</div>}
+        //     {selectedFestival &&
+        //     <FestivalContext.Provider value={value}>
+        //         <Row>
+        //             <Navbar/>
+        //         </Row>
+        //         <Row>
+        //             <Col id={'sidebar-menu'} md={1}>
+        //                 <Sidebar />
+        //             </Col>
+        //             <Col md={11}>
+        //                 <Routes/>
+        //             </Col>
+        //         </Row>
+        //     </FestivalContext.Provider>}
+        // </Container>
 
     )
 
 }
 
-export default App;
+export default App

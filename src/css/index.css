@@ -9,37 +9,33 @@
 
 .navbar-col{
     text-align: center;
-    margin : auto;
+    margin: auto;
 }
 
 #dropdown-basic{
     background-color: #99a0ca;
+    border: 0px solid #99a0ca;
+}
+
+#dropdown-menu{
+    text-decoration: none;
+    background-color: white;
+    color: #111761;
+    border: none;
 }
 
 .nav-link{
     color: #111761;
 }
 
-#sidebar-menu{
+.mon-button {
     background-color: #99a0ca;
-    margin-top: 20px;
-    padding-top: 20px;
-    padding-bottom: 30%;
-}
-
-.sidebar-li{
-    float: left;
-    border-bottom: 1px solid #111761;
-}
-
-.sidebar-link {
-    display: table-cell;
     height: 30px;
-    color: #111761;
+    border: none;
+    border-radius: 6px;
 }
 
-.sidebar-ul {
-    list-style-type: none;
-    height: 100%;
-    background-color: #99a0ca;
+.image-css{
+    height: 100px;
 }
+
