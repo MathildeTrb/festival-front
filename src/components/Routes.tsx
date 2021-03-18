@@ -11,6 +11,7 @@ import Profil from "./user/Profil";
 import Register from "./user/Register";
 import Users from "./user/Users";
 import PrivateRoute from "./PrivateRoute";
+import Games from "./Games";
 
 const Routes: FC = () => {
     return (
@@ -24,7 +25,7 @@ const Routes: FC = () => {
                 <Route exact path='/login' component={Login}/>
                 <Route exact path='/register' component={Register}/>
                 <Route exact path='/allUsers' component={Users}/>
-                //TODO: créer les components
+                <Route exact path="/games" component={Games}/>
                 <Route path='*'>
                     <NotFound/>
                 </Route>

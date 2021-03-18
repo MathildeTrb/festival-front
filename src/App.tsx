@@ -1,10 +1,9 @@
-import {createContext, FC, useState} from 'react';
+import {createContext, FC} from 'react';
 import Navbar from "./components/Navbar";
 import Routes from "./components/Routes";
 import useAxios from "./utils/useAxios";
-import Sidebar from "./components/Sidebar";
 import "./css/index.css"
-import {Col, Container, Row} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 
 
 export const FestivalContext = createContext({
@@ -32,24 +31,6 @@ const App: FC = () => {
                 <Routes/>
             </FestivalContext.Provider>}
         </Container>
-        // <Container fluid>
-        //     {isPending && <div>Is loading ...</div>}
-        //     {selectedFestival &&
-        //     <FestivalContext.Provider value={value}>
-        //         <Row>
-        //             <Navbar/>
-        //         </Row>
-        //         <Row>
-        //             <Col id={'sidebar-menu'} md={1}>
-        //                 <Sidebar />
-        //             </Col>
-        //             <Col md={11}>
-        //                 <Routes/>
-        //             </Col>
-        //         </Row>
-        //     </FestivalContext.Provider>}
-        // </Container>
-
     )
 
 }

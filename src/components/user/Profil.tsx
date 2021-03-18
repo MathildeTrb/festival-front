@@ -17,7 +17,7 @@ const Profil = () => {
         }).then(res => {
             setUser(res.data)
         })
-    }, [setUser])
+    }, [setUser, token])
 
     console.log(user)
 
