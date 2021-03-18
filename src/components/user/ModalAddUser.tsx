@@ -1,8 +1,14 @@
 import {Col, Container, Modal, Row} from "react-bootstrap";
-import {useState} from "react";
-import useToken from "../../utils/useToken";
+import {FC, useState} from "react";
+import {User} from "../../utils/types";
 
-const ModalUpdateProfil = (props) => {
+type ModalAddUserProps = {
+    show: boolean;
+    onHide: () => void;
+    addAccount: (user: User) => void;
+}
+
+const ModalUpdateProfil: FC<ModalAddUserProps> = ({show, onHide, addAccount}) => {
 
 
     const [firstname, setFirstname] = useState<string>();
@@ -13,16 +19,16 @@ const ModalUpdateProfil = (props) => {
 
     function handleSubmit() {
 
-        const user = {
-            "firstname": firstname,
-            "lastname": lastname,
-            "mail": mail,
-            "password": password
+        const user : User = {
+            firstname: firstname,
+            lastname: lastname,
+            mail: mail,
+            password: password,
+            isAdmin: false
         }
 
-        props.addAccount(user)
-
-        props.onHide()
+        addAccount(user);
+        onHide();
     }
 
     const handleChange = set => event => {
@@ -31,7 +37,7 @@ const ModalUpdateProfil = (props) => {
 
     return (
         <Modal
-            {...props}
+            show={show}
             size="xl"
             aria-labelledby="contained-modal-title-vcenter"
             centered

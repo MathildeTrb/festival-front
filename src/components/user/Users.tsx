@@ -6,6 +6,7 @@ import {VscDiffAdded} from "react-icons/vsc"
 import {useState} from "react";
 import ModalAddUser from "./ModalAddUser";
 import {User} from "../../utils/types";
+import axios from "../../utils/axios";
 
 const Users = () => {
 
@@ -19,7 +20,9 @@ const Users = () => {
     }
 
     const handleCreate = (user : User) => {
-
+        axios.post("users/register", user)
+            .then(res => setLoadedUsers([...loadedUsers, res.data]))
+            .catch(err => console.log(err))
     }
 
     const handleShowModal = () => {
@@ -61,8 +64,12 @@ const Users = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <VscDiffAdded onClick={handleShowModal}/>
-                        <ModalAddUser show={modalShow} onHide={handleCloseModal} addAcount={handleCreate}/>
+                        <Col md={2}/>
+                        <Col md={8}>
+                            <VscDiffAdded onClick={handleShowModal}/>
+                            <ModalAddUser show={modalShow} onHide={handleCloseModal} addAccount={handleCreate}/>
+                        </Col>
+                        <Col md={2}/>
                     </Row>
                 </div>
 
