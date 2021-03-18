@@ -9,8 +9,10 @@ const Profil = () => {
 
     const {token, removeToken} = useToken()
 
-    const[user, setUser] = useState(null)
-    const[modalShow, setModalShow] = useState(false)
+    const [user, setUser] = useState(null)
+    const [modalShow, setModalShow] = useState(false)
+
+    const [isPending, setIsPending] = useState<boolean>(true);
 
     const history = useHistory()
 
@@ -22,31 +24,47 @@ const Profil = () => {
             }
         }).then(res => {
             setUser(res.data)
+            setIsPending(false)
         })
     }, [setUser])
 
     const deleteAccount = () => {
-        axios.delete('users',  {
+        axios.delete('users', {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + token
-            }})
+            }
+        })
             .then(res => {
-                console.log(res.data)
-                removeToken();
+                    console.log(res.data)
+                    removeToken();
                 }
             )
         history.push("/")
     }
 
+    const updateAccount = (user) => {
+
+        axios.put("users", {"user": user}, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
+        }).then( res =>
+            setUser(res.data)
+        )
+
+    }
+
     return (
         <>
+            {isPending && <p>Is loading...</p>}
             {user &&
             <article>
                 <h2>{user.firstname} {user.lastname}</h2>
                 <p>id : {user.id}</p>
                 <p>mail : {user.mail}</p>
-                <p>fonction : {user.isAdmin ? "admin"  : "organisateur" }</p>
+                <p>fonction : {user.isAdmin ? "admin" : "organisateur"}</p>
                 <button className="mon-delete-button" onClick={deleteAccount}>
                     <AiOutlineDelete/> suppression
                 </button>
@@ -57,6 +75,7 @@ const Profil = () => {
                 <ModalUpdateProfil
                     show={modalShow}
                     onHide={() => setModalShow(false)}
+                    onClick={updateAccount}
                     user={user}
                 />
 

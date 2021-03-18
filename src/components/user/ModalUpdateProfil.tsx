@@ -1,13 +1,36 @@
-import {Button, Modal} from "react-bootstrap";
+import {Col, Container, Modal, Row} from "react-bootstrap";
 import {useState} from "react";
+import useToken from "../../utils/useToken";
 
 const ModalUpdateProfil = (props) => {
 
     const previousUser = props.user;
 
+    const token = useToken();
+
     const [firstname, setFirstname] = useState(previousUser.firstname);
     const [lastname, setLastname] = useState(previousUser.lastname);
     const [mail, setMail] = useState(previousUser.mail);
+    const [password, setPassword] = useState("");
+
+    function handleSubmit() {
+
+        const savedPassword = (password === "" ? password : previousUser.password);
+
+        const user = {
+            "id" : previousUser.id,
+            "firstname": firstname,
+            "lastname": lastname,
+            "mail": mail,
+            "password": savedPassword
+        }
+        props.onClick(user)
+        props.onHide()
+    }
+
+    const handleChange = set => event => {
+        set(event.target.value)
+    }
 
     return (
         <Modal
@@ -22,15 +45,62 @@ const ModalUpdateProfil = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h4>Centered Modal</h4>
-                <p>
-                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                    dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                    consectetur ac, vestibulum at eros.
-                </p>
+                <form onSubmit={handleSubmit}>
+
+                    <Container fluid>
+                        <Row>
+                            <Col>
+                                <label>Mail : </label>
+                                <input
+                                    className="mon-input"
+                                    type="text"
+                                    required
+                                    value={mail}
+                                    onChange={handleChange(setMail)}
+                                />
+                            </Col>
+                            <Col>
+                                <label>Prénom : </label>
+                                <input
+                                    className="mon-input"
+                                    type="text"
+                                    required
+                                    value={firstname}
+                                    onChange={handleChange(setFirstname)}
+                                />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <label>Nom : </label>
+                                <input
+                                    className="mon-input"
+                                    type="text"
+                                    required
+                                    value={lastname}
+                                    onChange={handleChange(setLastname)}
+                                />
+                            </Col>
+                            <Col>
+                                <label>Mot de passe : </label>
+                                <input
+                                    className="mon-input"
+                                    type="password"
+                                    required
+                                    value={password}
+                                    onChange={handleChange(setPassword)}
+                                />
+                            </Col>
+                        </Row>
+
+                    </Container>
+
+                </form>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
+                <button className="mon-validate-button" onClick={handleSubmit}>
+                    validation
+                </button>
             </Modal.Footer>
         </Modal>
     );
