@@ -5,12 +5,13 @@ import {AiOutlineDelete} from 'react-icons/ai'
 import {BsPencilSquare} from 'react-icons/bs'
 import {useHistory} from "react-router";
 import ModalUpdateProfil from "./ModalUpdateProfil";
+import {User} from "../../utils/types";
 
 const Profil = () => {
 
     const {token, removeToken} = useToken()
 
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState<User>(null)
     const [modalShow, setModalShow] = useState(false)
 
     const [isPending, setIsPending] = useState<boolean>(true);
@@ -19,13 +20,13 @@ const Profil = () => {
 
     useEffect(() => {
         console.log(token)
-        axios.get("users/profil", {
+        axios.get<User>("users/profil", {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + token
             }
-        }).then(res => {
-            setUser(res.data)
+        }).then(({data}) => {
+            setUser(data)
             setIsPending(false)
         }).catch(err => console.log(err))
     }, [setUser, token])

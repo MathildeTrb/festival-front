@@ -23,4 +23,13 @@ const useAxios = <T>(url: string) => {
     return {data, setData, isPending, error};
 }
 
+/*const useAxiosMethods = (url: string, body: any, withToken: boolean = false) => {
+
+
+
+    const post = () => {
+        axios.post(url, body, )
+    }
+}*/
+
 export default useAxios
