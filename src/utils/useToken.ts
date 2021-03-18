@@ -25,10 +25,15 @@ const useToken = () => {
         setToken(null);
     }
 
-    /*const isLogged = () => {
+    const isLogged = () => {
 
-        const decodedToken: Token = jwtDecode(token);
-    }*/
+        try {
+            jwtDecode(token);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
 
     const isAdmin = () => {
         const decodedToken: Token = jwtDecode(token);
@@ -39,7 +44,8 @@ const useToken = () => {
         token,
         saveToken,
         removeToken,
-        isAdmin
+        isAdmin,
+        isLogged
     };
 }
 

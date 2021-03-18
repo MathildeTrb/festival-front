@@ -1,13 +1,14 @@
 import {FC, useState} from "react";
-import {IGame} from "../../utils/types";
+import {Game} from "../../utils/types";
 import EditorModal from "./EditorModal";
 import {BsPencilSquare} from "react-icons/bs";
 import {RiDeleteBin6Line} from "react-icons/ri";
 import GameUpdateModal from "./GameUpdateModal";
 import {GiRuleBook} from "react-icons/gi";
 import ValidationDeleteModal from "../ValidationDeleteModal";
+import axios from "../../utils/axios";
 
-const GameRow: FC<{ game: IGame }> = ({game}) => {
+const GameRow: FC<{ game: Game, onDelete: (game: Game) => void }> = ({game, onDelete}) => {
 
     const [showModalEditor, setShowModalEditor] = useState<boolean>(false);
     const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
@@ -22,8 +23,11 @@ const GameRow: FC<{ game: IGame }> = ({game}) => {
     }
 
     const handleDelete = () => {
-        console.log("DELETE GAME");
-        setShowModalDelete(false);
+        axios.delete(`games/${game.id}`)
+            .then(() => {
+                setShowModalDelete(false);
+                onDelete(game);
+            })
     }
 
     return (

@@ -1,4 +1,10 @@
-export interface IGame {
+export type Festival = {
+    id?: number;
+    name: string;
+    isCurrent: boolean
+}
+
+export type Game = {
     id?:number;
     name: string;
     minNumberPlayer: number;
@@ -6,18 +12,18 @@ export interface IGame {
     minYearPlayer: number;
     duration: number;
     isPrototype: boolean;
-    type: IGameType;
+    type: GameType;
     manual: string;
-    imageUrl: string;
-    editor: ICompany
+    imageUrl?: string;
+    editor: Company;
 }
 
-export interface IGameType {
+export type GameType = {
     id?: number;
     label: string
 }
 
-export interface ICompany {
+export type Company = {
     id?:string;
     name: string;
     mail: string;

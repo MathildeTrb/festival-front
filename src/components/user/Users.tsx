@@ -9,7 +9,7 @@ import {User} from "../../utils/types";
 
 const Users = () => {
 
-    const {data: loadedUsers, setData: setLoadedUsers, isPending, error} = useAxios("users")
+    const {data: loadedUsers, isPending, error, setData: setLoadedUsers} = useAxios<User[]>("users")
     const {isAdmin} = useToken()
 
     const [modalShow, setModalShow] = useState(false)

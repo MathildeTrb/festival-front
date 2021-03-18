@@ -4,19 +4,18 @@ import axios from "../../utils/axios";
 import {useHistory} from "react-router";
 import useToken from "../../utils/useToken";
 
-async function loginUser(credentials){
-    console.log(credentials)
-    return axios.post("users/login", credentials).then(res => res.data)
-}
-
 const Login = () => {
 
     const {saveToken} = useToken()
 
-    const [mail, setMail] = useState("")
-    const [password, setPassword] = useState("")
+    const [mail, setMail] = useState<string>("guillaume@email.com")
+    const [password, setPassword] = useState<string>("guigui")
 
     const history = useHistory();
+
+    const loginUser = credentials => {
+        return axios.post("users/login", credentials).then(res => res.data)
+    }
 
     const handleSubmit = async e => {
         e.preventDefault();
