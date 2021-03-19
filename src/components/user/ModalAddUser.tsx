@@ -50,7 +50,6 @@ const ModalUpdateProfil: FC<ModalAddUserProps> = ({show, onHide, addAccount}) =>
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleSubmit}>
-
                     <Container fluid>
                         <Row>
                             <Col>

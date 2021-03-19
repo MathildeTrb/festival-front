@@ -1,6 +1,8 @@
 export type Festival = {
     id?: number;
     name: string;
+    description: string;
+    imageUrl: string;
     isCurrent: boolean
 }
 
@@ -52,4 +54,12 @@ export type Contact = {
     isImportant: boolean;
     isDeleted: boolean;
     company: Company;
+}
+
+export type Space = {
+    id?: number;
+    label: string;
+    tablePrice: number;
+    meterPrice: number;
+    tableTotal: number;
 }
