@@ -10,6 +10,8 @@ import {HiOutlineInformationCircle} from 'react-icons/hi'
 import {FaGamepad, FaFileInvoiceDollar, FaList} from 'react-icons/fa'
 import {AiOutlineAudit} from 'react-icons/ai'
 import {Festival} from "../utils/types";
+import FestivalSelection from "./festival/FestivalSelection";
+
 
 
 const Navbar = () => {
@@ -32,18 +34,7 @@ const Navbar = () => {
                     <Image className="image-css" src={logo} fluid/>
                 </Col>
                 <Col md={1} className={"navbar-col"}>
-                    <Dropdown>
-                        <Dropdown.Toggle id="dropdown-basic">
-                            {selectedFestival.name}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {festivals.map((festival, index) =>
-                                <Dropdown.Item as="button" value={festival.name} key={index} eventKey={JSON.stringify(festival)} onSelect={handleChange}>
-                                    {festival.name}
-                                </Dropdown.Item>
-                            )}
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    <FestivalSelection selectedFestival={selectedFestival} festivals={festivals} handleChange={handleChange}/>
                 </Col>
                 <Col md={9} className={"navbar-col"}>
                     <Nav fill variant="tabs" defaultActiveKey="/">

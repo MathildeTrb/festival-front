@@ -38,6 +38,7 @@ const ModalUpdateProfil: FC<ModalAddUserProps> = ({show, onHide, addAccount}) =>
     return (
         <Modal
             show={show}
+            onHide={onHide}
             size="xl"
             aria-labelledby="contained-modal-title-vcenter"
             centered
@@ -49,7 +50,6 @@ const ModalUpdateProfil: FC<ModalAddUserProps> = ({show, onHide, addAccount}) =>
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleSubmit}>
-
                     <Container fluid>
                         <Row>
                             <Col>

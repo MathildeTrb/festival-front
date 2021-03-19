@@ -65,3 +65,6 @@
     cursor: pointer;
 }
 
+.vertical-align{
+    vertical-align: top;
+}
