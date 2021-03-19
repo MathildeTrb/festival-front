@@ -54,7 +54,8 @@ const GameRow: FC<{ game: Game, onDelete: (game: Game) => void }> = ({game, onDe
             </td>
             <td>
                 <RiDeleteBin6Line onClick={handleShowModal(setShowModalDelete)}/>
-                <ValidationDeleteModal show={showModalDelete} message="Êtes-vous sûr de vouloir supprimer ce jeu ?" onDelete={handleDelete} onHide={handleCloseModal(setShowModalDelete)}/>
+                <ValidationDeleteModal show={showModalDelete} message="Êtes-vous sûr de vouloir supprimer ce jeu ?"
+                                       onDelete={handleDelete} onHide={handleCloseModal(setShowModalDelete)}/>
             </td>
         </tr>
 

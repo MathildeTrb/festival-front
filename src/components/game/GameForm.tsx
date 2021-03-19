@@ -34,7 +34,7 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
         event.preventDefault();
 
         const newGame: Game = {
-            id: game ? game.id : 0,
+            id: game ? game.id : undefined,
             name,
             minNumberPlayer,
             maxNumberPlayer,
@@ -46,8 +46,6 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
             editor
         }
 
-        console.log(updateMode)
-
         const action = updateMode ? axios.put : axios.post;
 
         action("games", {
@@ -56,8 +54,6 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
             .then(() => {
                 onCreate(newGame)
             })
-
-        onCreate(newGame);
     }
 
     return (

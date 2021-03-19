@@ -5,7 +5,7 @@ export type Festival = {
 }
 
 export type Game = {
-    id?:number;
+    id?: number;
     name: string;
     minNumberPlayer: number;
     maxNumberPlayer: number;
@@ -24,11 +24,12 @@ export type GameType = {
 }
 
 export type Company = {
-    id?:string;
+    id?: string;
     name: string;
     mail: string;
     address: string;
     canBeExhibitor: boolean;
+    contacts: Contact[];
 }
 
 export type User = {
@@ -38,4 +39,17 @@ export type User = {
     mail: string;
     password: string;
     isAdmin: boolean;
+}
+
+export type Contact = {
+    id?: number;
+    firstname: string;
+    lastname: string;
+    mail: string;
+    mobilePhoneNumber: string;
+    fixPhoneNumber: string;
+    job: string;
+    isImportant: boolean;
+    isDeleted: boolean;
+    company: Company;
 }

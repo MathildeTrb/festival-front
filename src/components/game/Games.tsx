@@ -1,9 +1,11 @@
-import {createContext, FC} from "react";
+import {createContext, FC, useEffect, useState} from "react";
 import GameRow from "./GameRow";
 import {GiClick} from "react-icons/all";
 import useAxios from "../../utils/useAxios";
 import {Game} from "../../utils/types";
 import {Spinner} from "react-bootstrap";
+import GameCreateModal from "./GameCreateModal";
+import {VscDiffAdded} from "react-icons/vsc";
 
 type GameContextProps = {
     games: Game[];
@@ -16,9 +18,15 @@ const Games: FC = () => {
 
     const {data: games, isPending, setData: setGames} = useAxios<Game[]>("games");
 
+    const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
+
     const onDeleteGame = game => {
         setGames(games.filter(g => g.id !== game.id))
     }
+
+    useEffect(() => {
+        document.title = "Liste des jeux"
+    })
 
     const value = {games, setGames};
 
@@ -27,6 +35,16 @@ const Games: FC = () => {
             {isPending && <Spinner animation="border" variant="primary"/>}
             {games &&
                 <GameContext.Provider value={value}>
+
+                    <h1 className="text-center mb-5">
+                        Liste des jeux
+                    </h1>
+
+                    <div>
+                        <button type="button" className="mon-button mb-2" onClick={() => setShowModalCreate(true)}><p><VscDiffAdded/> Ajout d'un jeu</p></button>
+                        <GameCreateModal show={showModalCreate} onHide={() => setShowModalCreate(false)}/>
+                    </div>
+
                     <table className="table table-striped table-hover">
                         <thead>
                         <tr>

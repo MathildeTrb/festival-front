@@ -38,6 +38,7 @@ const ModalUpdateProfil: FC<ModalAddUserProps> = ({show, onHide, addAccount}) =>
     return (
         <Modal
             show={show}
+            onHide={onHide}
             size="xl"
             aria-labelledby="contained-modal-title-vcenter"
             centered
