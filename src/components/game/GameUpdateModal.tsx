@@ -8,8 +8,17 @@ const GameUpdateModal: FC<{show: boolean, game: Game, onHide: () => void}> = ({s
 
     const {games, setGames} = useContext(GameContext);
 
-    const updateGames = newGame => {
-        setGames([...games, newGame]);
+    const handleUpdate = (updatedGame: Game) => {
+
+        const updatedGames = [...games];
+
+        const index = updatedGames.findIndex(g => g.id === updatedGame.id)
+
+        updatedGames[index] = updatedGame
+
+        setGames(updatedGames);
+
+        onHide()
     }
 
     return (
@@ -20,7 +29,7 @@ const GameUpdateModal: FC<{show: boolean, game: Game, onHide: () => void}> = ({s
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <GameForm game={game} onCreate={updateGames}/>
+                <GameForm game={game} onCreate={handleUpdate} updateMode/>
             </Modal.Body>
         </Modal>
     )

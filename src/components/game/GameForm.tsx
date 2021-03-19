@@ -3,19 +3,20 @@ import {Company, Game, GameType} from "../../utils/types";
 import {FC, useState} from "react";
 import GameTypeSelectList from "./GameTypeSelectList";
 import axios from "../../utils/axios";
+import CompanySelectList from "../user/CompanySelectList";
 
-const GameForm: FC<{game?: Game, onCreate: (g: Game) => void}> = ({game, onCreate}) => {
+const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: boolean }> = ({game, onCreate, updateMode = false}) => {
 
-    const [name, setName] = useState<string>()
-    const [minNumberPlayer, setMinNumberPlayer] = useState<number>();
-    const [maxNumberPlayer, setMaxNumberPlayer] = useState<number>();
-    const [minYearPlayer, setMinYearPlayer] = useState<number>();
-    const [duration, setDuration] = useState<number>();
-    const [type, setType] = useState<GameType>();
+    const [name, setName] = useState<string>(game ? game.name : null)
+    const [minNumberPlayer, setMinNumberPlayer] = useState<number>(game ? game.minNumberPlayer : null);
+    const [maxNumberPlayer, setMaxNumberPlayer] = useState<number>(game ? game.maxNumberPlayer : null);
+    const [minYearPlayer, setMinYearPlayer] = useState<number>(game ? game.minYearPlayer : null);
+    const [duration, setDuration] = useState<number>(game ? game.duration : null);
+    const [type, setType] = useState<GameType>(game ? game.type : null);
     const [isPrototype, setIsPrototype] = useState<boolean>(game && game.isPrototype)
-    const [manual, setManual] = useState<string>();
-    const [image, setImage] = useState(null);
-    const [editor, setEditor] = useState<Company>();
+    const [manual, setManual] = useState<string>(game ? game.manual : null);
+    //const [image, setImage] = useState(null);
+    const [editor, setEditor] = useState<Company>(game ? game.editor : null);
 
     const handleChange = set => event => {
         set(event.target.value);
@@ -29,12 +30,11 @@ const GameForm: FC<{game?: Game, onCreate: (g: Game) => void}> = ({game, onCreat
         setIsPrototype(value => !value);
     }
 
-    const handleSubmit = action => event => {
+    const handleSubmit = event => {
         event.preventDefault();
 
-        console.log(isPrototype)
-
-       /* const newGame: Game = {
+        const newGame: Game = {
+            id: game ? game.id : 0,
             name,
             minNumberPlayer,
             maxNumberPlayer,
@@ -46,24 +46,28 @@ const GameForm: FC<{game?: Game, onCreate: (g: Game) => void}> = ({game, onCreat
             editor
         }
 
-        /!*action("games", {
+        console.log(updateMode)
+
+        const action = updateMode ? axios.put : axios.post;
+
+        action("games", {
             game: newGame
         })
             .then(() => {
                 onCreate(newGame)
-            })*!/
+            })
 
-        onCreate(newGame);*/
+        onCreate(newGame);
     }
 
     return (
-        <Form onSubmit={handleSubmit(axios.put)}>
+        <Form onSubmit={handleSubmit}>
             <Form.Group as={Row}>
                 <Form.Label column sm="3">
                     Nom
                 </Form.Label>
                 <Col sm="9">
-                    <Form.Control type="text" value={name} onChange={handleChange(setName)} defaultValue={game ? game.name : ""} />
+                    <Form.Control type="text" value={name} onChange={handleChange(setName)}/>
                 </Col>
             </Form.Group>
 
@@ -72,13 +76,13 @@ const GameForm: FC<{game?: Game, onCreate: (g: Game) => void}> = ({game, onCreat
                     Nombre de joueurs
                 </Form.Label>
                 <Col sm="1">
-                    <Form.Control type="text" defaultValue={game ? game.minNumberPlayer : ""}/>
+                    <Form.Control type="text" value={minNumberPlayer} onChange={handleChange(setMinNumberPlayer)}/>
                 </Col>
                 <Col sm="1">
                     <p className="text-center mt-2"> - </p>
                 </Col>
                 <Col sm="1">
-                    <Form.Control type="text" defaultValue={game ? game.maxNumberPlayer : ""}/>
+                    <Form.Control type="text" value={maxNumberPlayer} onChange={handleChange(setMaxNumberPlayer)}/>
                 </Col>
             </Form.Group>
 
@@ -87,16 +91,16 @@ const GameForm: FC<{game?: Game, onCreate: (g: Game) => void}> = ({game, onCreat
                     Âge minimum
                 </Form.Label>
                 <Col sm="1">
-                    <Form.Control type="text" defaultValue={game ? game.minYearPlayer : ""}/>
+                    <Form.Control type="text" value={minYearPlayer} onChange={handleChange(setMinYearPlayer)}/>
                 </Col>
             </Form.Group>
 
             <Form.Group as={Row}>
                 <Form.Label column sm="3">
-                   Durée
+                    Durée
                 </Form.Label>
                 <Col sm="1">
-                    <Form.Control type="text" defaultValue={game ? game.duration : ""}/>
+                    <Form.Control type="text" value={duration} onChange={handleChange(setDuration)}/>
                 </Col>
             </Form.Group>
 
@@ -105,7 +109,8 @@ const GameForm: FC<{game?: Game, onCreate: (g: Game) => void}> = ({game, onCreat
                     Prototype
                 </Form.Label>
                 <Col sm="1">
-                    <Button variant={isPrototype ? "success" : "danger"} onClick={inversePrototype}>{isPrototype ? "OUI" : "NON"}</Button>
+                    <Button variant={isPrototype ? "success" : "danger"}
+                            onClick={inversePrototype}>{isPrototype ? "Oui" : "Non"}</Button>
                 </Col>
             </Form.Group>
 
@@ -114,12 +119,30 @@ const GameForm: FC<{game?: Game, onCreate: (g: Game) => void}> = ({game, onCreat
                     Type
                 </Form.Label>
                 <Col sm="6">
-                    <GameTypeSelectList selected={game ? game.type.id : undefined}/>
+                    <GameTypeSelectList selected={type} handleChange={handleChangeJSON(setType)}/>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row}>
+                <Form.Label column sm="3">
+                    Editeur
+                </Form.Label>
+                <Col sm="6">
+                    <CompanySelectList selected={editor} handleChange={handleChangeJSON(setEditor)}/>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row}>
+                <Form.Label column sm="3">
+                    Lien manuel
+                </Form.Label>
+                <Col sm="6">
+                    <Form.Control type="text" value={manual} onChange={handleChange(setManual)}/>
                 </Col>
             </Form.Group>
 
             <div className="text-center">
-                <button disabled className="mon-button" type="submit">Valider</button>
+                <button className="mon-button" type="submit">Valider</button>
             </div>
         </Form>
     )
