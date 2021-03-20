@@ -32,6 +32,7 @@ export type Company = {
     address: string;
     canBeExhibitor: boolean;
     contacts: Contact[];
+    games: Game[];
 }
 
 export type User = {

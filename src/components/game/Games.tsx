@@ -6,6 +6,7 @@ import {Game} from "../../utils/types";
 import {Spinner} from "react-bootstrap";
 import GameCreateModal from "./GameCreateModal";
 import {VscDiffAdded} from "react-icons/vsc";
+import GameTypeCreateModal from "./GameTypeCreateModal";
 
 type GameContextProps = {
     games: Game[];
@@ -19,6 +20,7 @@ const Games: FC = () => {
     const {data: games, isPending, setData: setGames} = useAxios<Game[]>("games");
 
     const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
+    const [showModalGameTypeCreate, setShowModalGameTypeCreate] = useState<boolean>(false);
 
     const onDeleteGame = game => {
         setGames(games.filter(g => g.id !== game.id))
@@ -43,6 +45,9 @@ const Games: FC = () => {
                     <div>
                         <button type="button" className="mon-button mb-2" onClick={() => setShowModalCreate(true)}><p><VscDiffAdded/> Ajout d'un jeu</p></button>
                         <GameCreateModal show={showModalCreate} onHide={() => setShowModalCreate(false)}/>
+
+                        <button type="button" className="mon-validate-button mb-2" onClick={() => setShowModalGameTypeCreate(true)}><p><VscDiffAdded/> Ajout d'un type de jeu</p></button>
+                        <GameTypeCreateModal show={showModalGameTypeCreate} onHide={() => setShowModalGameTypeCreate(false)}/>
                     </div>
 
                     <table className="table table-striped table-hover">

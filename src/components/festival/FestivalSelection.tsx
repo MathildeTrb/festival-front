@@ -1,5 +1,4 @@
-import {Col, Dropdown} from "react-bootstrap";
-import {RiDeleteBin6Line} from "react-icons/ri";
+import {Dropdown} from "react-bootstrap";
 import {VscDiffAdded} from "react-icons/vsc";
 import {useState} from "react";
 import ModalAddFestival from "./ModalAddFestival";
@@ -14,7 +13,6 @@ const FestivalSelection = ({selectedFestival, festivals, handleChange}) => {
 
     const handleCloseModal = () => {
         setShowModal(value => !value)
-        console.log("show modal vaut "+ showModal)
     }
 
     return (

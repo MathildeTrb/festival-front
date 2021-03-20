@@ -15,7 +15,7 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
     const [type, setType] = useState<GameType>(game ? game.type : null);
     const [isPrototype, setIsPrototype] = useState<boolean>(game && game.isPrototype)
     const [manual, setManual] = useState<string>(game ? game.manual : null);
-    //const [image, setImage] = useState(null);
+    const [image, setImage] = useState(null);
     const [editor, setEditor] = useState<Company>(game ? game.editor : null);
 
     const handleChange = set => event => {
@@ -26,11 +26,15 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
         set(JSON.parse(event.target.value))
     }
 
+    const handleChangeImage = event => {
+        setImage(event.currentTarget.files[0])
+    }
+
     const inversePrototype = () => {
         setIsPrototype(value => !value);
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
 
         const newGame: Game = {
@@ -48,12 +52,11 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
 
         const action = updateMode ? axios.put : axios.post;
 
-        action("games", {
+        await action("games", {
             game: newGame
         })
-            .then(() => {
-                onCreate(newGame)
-            })
+
+        onCreate(newGame)
     }
 
     return (
@@ -134,6 +137,15 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
                 </Form.Label>
                 <Col sm="6">
                     <Form.Control type="text" value={manual} onChange={handleChange(setManual)}/>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row}>
+                <Form.Label column sm="3">
+                    Image
+                </Form.Label>
+                <Col sm="6">
+                    <Form.File />
                 </Col>
             </Form.Group>
 
