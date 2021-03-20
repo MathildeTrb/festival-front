@@ -3,33 +3,68 @@
 /* base styles */
 * {
     margin: 0;
-    font-family: "Quicksand";
-    color: #333;
+    font-family: "Roboto Slab", serif;
+    color: #111761;
 }
-.navbar {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    max-width: 600px;
-    margin: 0 auto;
-    border-bottom: 1px solid #f2f2f2;
+
+.navbar-col {
+    text-align: center;
+    margin: auto;
 }
-.navbar h1 {
-    color: #f1356d;
+
+#dropdown-basic {
+    background-color: #99a0ca;
+    border: 0px solid #99a0ca;
 }
-.navbar .links1 {
-    margin-left: auto;
-}
-.navbar .a {
-    margin-left: 16px;
+
+#dropdown-menu {
     text-decoration: none;
-    padding: 6px;
+    background-color: white;
+    color: #111761;
+    border: none;
 }
-.navbar .a:hover {
-    color: #f1356d;
+
+.nav-link {
+    color: #111761;
 }
-.content {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
+
+.mon-button {
+    background-color: #99a0ca;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    margin-left: 10px;
+}
+
+.mon-delete-button {
+    background-color: #e36491;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    margin-left: 10px;
+}
+
+.mon-validate-button {
+    background-color: #639d37 ;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    margin-left: 10px;
+    color: white;
+}
+
+.mon-input {
+    margin : 10px;
+}
+
+.image-css {
+    height: 100px;
+}
+
+.p-cursor:hover {
+    cursor: pointer;
+}
+
+.vertical-align{
+    vertical-align: top;
 }
