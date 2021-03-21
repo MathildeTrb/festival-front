@@ -5,27 +5,18 @@ import SpacesForm from "../space/SpacesForm";
 import axios from "../../utils/axios";
 import useToken from "../../utils/useToken";
 
-type ModalAddFestivalProps = {
-    show: boolean;
-    onHide: () => void;
-}
+const ModalAddFestival: FC<{show: boolean, onHide: () => void}> = ({show, onHide}) => {
 
-const ModalAddFestival: FC<ModalAddFestivalProps> = ({show, onHide}) => {
-
-    const [name, setName] = useState<string>();
+    const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>();
-    const url = "https://picsum.photos/500";
-    const [isCurrent, setIsCurrent] = useState(false)
-
+    const [url, setUrl] = useState<string>("https://picsum.photos/500")
+    const [isCurrent, setIsCurrent] = useState<boolean>(false)
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
 
     const {token} = useToken()
 
-    function handleSubmit() {
-
-        setIsSubmitted(true)
-        console.log(isSubmitted)
-
+    const handleChange = set => event => {
+        set(event.target.value);
     }
 
     const createFestival = (spaces : Space[]) => {
@@ -47,6 +38,8 @@ const ModalAddFestival: FC<ModalAddFestivalProps> = ({show, onHide}) => {
             }
         })
 
+
+
         console.log(festival)
         console.log(spaces)
 
@@ -54,77 +47,60 @@ const ModalAddFestival: FC<ModalAddFestivalProps> = ({show, onHide}) => {
 
     }
 
-    const handleChange = set => event => {
-        set(event.target.value)
-    }
-
-    function inverseIsCurrent() {
-        setIsCurrent(!isCurrent)
-    }
-
     return (
-        <div>
-            <Modal
-                show={show}
-                onHide={onHide}
-                size="xl"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
-                {/*TODO : problème fermeture du modal*/}
+        <div onClick={event => event.stopPropagation()}>
+            <Modal show={show} onHide={onHide} size="xl" centered>
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
+                    <Modal.Title>
                         Ajout d'un festival
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form onSubmit={handleSubmit}>
-                        <Container fluid>
-                            <Row>
-                                <Col>
-                                    <label >Nom du festival : </label>
-                                    <input
-                                        className="mon-input"
-                                        type="text"
-                                        required
-                                        value={name}
-                                        onChange={handleChange(setName)}
-                                    />
-                                </Col>
-                                <Col>
-                                    <label className="vertical-align">description : </label>
-                                    <textarea
+                    <form>
+                        <Row>
+                            <Col>
+                                <label>Nom du festival : </label>
+                                <input
+                                    type="text"
                                     className="mon-input"
+                                    value={name}
+                                    onChange={handleChange(setName)}
                                     required
+                                />
+                            </Col>
+                            <Col>
+                                <label className="vertical-align">Description : </label>
+                                <textarea
+                                    className="mon-input"
                                     value={description}
-                                    onChange={handleChange(setDescription)}>
-                                    </textarea>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <label>url affiche : </label>
-                                    <input
-                                        className="mon-input"
-                                        type="text"
-                                        required
-                                        value={url}
-                                        // onChange={handleChange(set)}
-                                    />
-                                </Col>
-                                <Col>
-                                    <label>festival courant ? </label>
-                                    <button className={isCurrent ? "mon-validate-button" : "mon-delete-button"} onClick={inverseIsCurrent}>{isCurrent ? "OUI" : "NON"}</button>
-                                </Col>
-                            </Row>
-                        </Container>
+                                    onChange={handleChange(setDescription)}
+                                    required
+                                />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <label>Url affiche : </label>
+                                <input
+                                    type="text"
+                                    className="mon-input"
+                                    value={url}
+                                    onChange={handleChange(setUrl)}
+                                    required
+                                />
+                            </Col>
+                            <Col>
+                                <label>festival courant ? </label>
+                                <button className={isCurrent ? "mon-validate-button" : "mon-delete-button"} onClick={() => setIsCurrent(!isCurrent)}>{isCurrent ? "OUI" : "NON"}</button>
+                            </Col>
+                        </Row>
                     </form>
                     <hr/>
                     <SpacesForm isSubmitted={isSubmitted} createFestival={createFestival}/>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className="mon-validate-button" onClick={handleSubmit}>
-                        validation
+                    <button className="mon-validate-button" onClick={() => setIsSubmitted(true)}>
+                        Valider
                     </button>
                 </Modal.Footer>
             </Modal>
@@ -132,4 +108,4 @@ const ModalAddFestival: FC<ModalAddFestivalProps> = ({show, onHide}) => {
     )
 }
 
-export default ModalAddFestival
+export default ModalAddFestival;

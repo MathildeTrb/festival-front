@@ -58,7 +58,7 @@ const NavbarLogged = () => {
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item >
-                                    <Link className={"nav-link"} to ="/allCompanies"> Entreprises </Link>
+                                    <Link className={"nav-link"} to ="/companies"> Entreprises </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item >

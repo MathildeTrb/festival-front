@@ -13,6 +13,7 @@ import Users from "../user/Users";
 import PrivateRoute from "./PrivateRoute";
 import Logout from "../user/Logout";
 import Games from "../game/Games";
+import Companies from "../company/Companies";
 
 const Routes: FC = () => {
     return (
@@ -28,6 +29,7 @@ const Routes: FC = () => {
                 <Route exact path='/allUsers' component={Users}/>
                 <Route exact path="/games" component={Games}/>
                 <Route exact path='/logout' component={Logout}/>
+                <Route exact pah="/companies" component={Companies}/>
                 <Route path='*'>
                     <NotFound/>
                 </Route>

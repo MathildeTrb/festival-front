@@ -40,7 +40,7 @@ const UsersRow: FC<{user: User, onDelete: (user: User) => void}> = ({user, onDel
             <td>{user.mail}</td>
             <td>{user.isAdmin ? "administrateur" : "organisateur"}</td>
             {isAdmin() && <td><RiDeleteBin6Line onClick={handleShowModal}/></td>}
-            <ValidationDeleteModal show={showModal} message={"Êtes-vous sûr de vouloir supprimer ce compte"} onDelete={deleteProfil} onHide={handleCloseModal}/>
+            <ValidationDeleteModal show={showModal} message="Êtes-vous sûr de vouloir supprimer ce compte ?" onDelete={deleteProfil} onHide={handleCloseModal}/>
         </tr>
     )
 
