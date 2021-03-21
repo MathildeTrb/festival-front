@@ -1,10 +1,12 @@
-import {createContext, FC} from 'react';
-import Navbar from "./components/Navbar";
-import Routes from "./components/Routes";
+import {createContext, FC, useEffect, useState} from 'react';
+import NavbarLogged from "./components/navbar/NavbarLogged";
+import Routes from "./components/route/Routes";
 import useAxios from "./utils/useAxios";
 import "./css/index.css"
 import {Container} from "react-bootstrap";
 import {Festival} from "./utils/types";
+import useToken from "./utils/useToken";
+import NavbarVisitor from "./components/navbar/NavbarVisitor";
 
 type FestivalContextProps = {
     selectedFestival: Festival;
@@ -15,16 +17,20 @@ export const FestivalContext = createContext<FestivalContextProps>({} as Festiva
 
 const App: FC = () => {
 
-    const {data: selectedFestival, setData: setSelectedFestival, isPending} = useAxios<Festival>("festivals/current");
+    //TODO : deal with the connexion
 
+    const {data: selectedFestival, setData: setSelectedFestival, isPending} = useAxios<Festival>("festivals/current");
     const value = {selectedFestival, setSelectedFestival}
+
+    const {isLogged} = useToken()
+    const [loggedNavbar, setLoggedNavbar] = useState(isLogged)
 
     return (
         <Container fluid>
             {isPending && <div>Is loading ...</div>}
             {selectedFestival &&
             <FestivalContext.Provider value={value}>
-                <Navbar/>
+                {loggedNavbar? <NavbarLogged/> : <NavbarVisitor/>}
                 <Routes/>
             </FestivalContext.Provider>}
         </Container>
@@ -32,4 +38,4 @@ const App: FC = () => {
 
 }
 
-export default App
+export default App;
