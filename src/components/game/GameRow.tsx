@@ -33,7 +33,7 @@ const GameRow: FC<{ game: Game, onDelete: (game: Game) => void }> = ({game, onDe
 
     return (
         <tr>
-            <td><Image fluid width={150} height={150} src="https://storage.googleapis.com/photo_element_festival/trio.png"/></td>
+            <td><Image fluid width={150} height={150} src={game.imageUrl} alt="Photo"/></td>
             <td>{game.name}</td>
             <td>
                 {game.minNumberPlayer === game.maxNumberPlayer ? `${game.minNumberPlayer}` : `${game.minNumberPlayer} - ${game.maxNumberPlayer}`}
@@ -55,8 +55,7 @@ const GameRow: FC<{ game: Game, onDelete: (game: Game) => void }> = ({game, onDe
             </td>
             <td>
                 <RiDeleteBin6Line className="p-cursor" onClick={handleShowModal(setShowModalDelete)}/>
-                <ValidationDeleteModal show={showModalDelete} message="Êtes-vous sûr de vouloir supprimer ce jeu ?"
-                                       onDelete={handleDelete} onHide={handleCloseModal(setShowModalDelete)}/>
+                <ValidationDeleteModal show={showModalDelete} message="Êtes-vous sûr de vouloir supprimer ce jeu ?" onDelete={handleDelete} onHide={handleCloseModal(setShowModalDelete)}/>
             </td>
         </tr>
 

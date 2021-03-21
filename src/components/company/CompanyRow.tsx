@@ -17,7 +17,7 @@ const CompanyRow: FC<{company: Company, onDelete: (company: Company) => void}> =
             <td>{company.name}</td>
             <td>{company.mail}</td>
             <td>{company.address}</td>
-            <td>{company.canBeExhibitor ? "Oui" : "Non"}</td>
+            <td className={company.canBeExhibitor ? "yes-cell" : "no-cell"}>{company.canBeExhibitor ? "Oui" : "Non"}</td>
             <td>
                 <TiContacts className="p-cursor" onClick={() => setShowContactsModal(true)}/>
                 <ContactsModal show={showContactsModal} onHide={() => setShowContactsModal(false)} contacts={company.contacts} companyName={company.name}/>

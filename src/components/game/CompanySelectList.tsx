@@ -9,7 +9,8 @@ const CompanySelectList: FC<{ selected: Company, handleChange: (set: any) => voi
     return (
         <div>
             {companies &&
-            <Form.Control as="select" onChange={handleChange} defaultValue={JSON.stringify(selected)}>
+            <Form.Control as="select" defaultValue={selected ? JSON.stringify(selected) : 0} onChange={handleChange}>
+                <option value={0} disabled className="option-disabled">Choisir une entreprise</option>
                 {companies.map((company, index) => <option key={index} value={JSON.stringify(company)}>{company.name}</option>)}
             </Form.Control>
             }
@@ -17,4 +18,4 @@ const CompanySelectList: FC<{ selected: Company, handleChange: (set: any) => voi
     )
 }
 
-export default CompanySelectList
+export default CompanySelectList;

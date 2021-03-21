@@ -10,7 +10,8 @@ const GameTypeSelectList: FC<{selected: GameType, handleChange: (set: any) => vo
     return (
         <div>
             {gameTypes &&
-            <Form.Control as="select" onChange={handleChange} defaultValue={JSON.stringify(selected)}>
+            <Form.Control as="select" defaultValue={selected ? JSON.stringify(selected) : 0} onChange={handleChange}>
+                <option value={0} disabled className="option-disabled">Choisir un type</option>
                 {gameTypes.map((gameType, index) => <option key={index} value={JSON.stringify(gameType)}>{gameType.label}</option>)}
             </Form.Control>
             }

@@ -26,6 +26,11 @@ const Home = () => {
             .catch(err => console.log(err.message))
     }
 
+    const handleClick = () => {
+        axios.post("games/test")
+            .then(({data}) => console.log(data))
+    }
+
     return (
         <div className="container">
             <Form onSubmit={handleSubmit}>
@@ -39,6 +44,8 @@ const Home = () => {
             </Form>
 
             {isSent && <div>Envoyé</div>}
+
+            <button type="button" onClick={handleClick}>Click</button>
         </div>
     )
 }

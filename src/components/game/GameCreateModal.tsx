@@ -15,6 +15,8 @@ const GameCreateModal: FC<{show: boolean, onHide: () => void}> = ({show, onHide}
 
         setGames(newGames);
 
+        console.log(newGames)
+
         onHide();
     }
 

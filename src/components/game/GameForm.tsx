@@ -1,9 +1,9 @@
-import {Form, Row, Col, Button} from "react-bootstrap";
+import {Form, Row, Col, Button, Alert, Spinner} from "react-bootstrap";
 import {Company, Game, GameType} from "../../utils/types";
 import {FC, useState} from "react";
 import GameTypeSelectList from "./GameTypeSelectList";
 import axios from "../../utils/axios";
-import CompanySelectList from "../user/CompanySelectList";
+import CompanySelectList from "./CompanySelectList";
 
 const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: boolean }> = ({game, onCreate, updateMode = false}) => {
 
@@ -15,11 +15,14 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
     const [type, setType] = useState<GameType>(game ? game.type : null);
     const [isPrototype, setIsPrototype] = useState<boolean>(game && game.isPrototype)
     const [manual, setManual] = useState<string>(game ? game.manual : null);
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState<File>(null);
     const [editor, setEditor] = useState<Company>(game ? game.editor : null);
 
+    const [showAlert, setShowAlert] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const handleChange = set => event => {
-        set(event.target.value);
+        set(event.currentTarget.value);
     }
 
     const handleChangeJSON = set => event => {
@@ -34,33 +37,74 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
         setIsPrototype(value => !value);
     }
 
+    const handleSubmitImage = async (): Promise<string> => {
+
+        const formData: FormData = new FormData();
+        formData.append("file", image, image.name);
+
+        return (await axios.post<string>("photos", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })).data
+
+    }
+
     const handleSubmit = async event => {
         event.preventDefault();
 
-        const newGame: Game = {
-            id: game ? game.id : undefined,
-            name,
-            minNumberPlayer,
-            maxNumberPlayer,
-            minYearPlayer,
-            duration,
-            type,
-            isPrototype,
-            manual,
-            editor
+        if (!type || !editor) {
+            setShowAlert(true);
+        }
+        else {
+
+            setIsLoading(true);
+
+            const imageUrl: string = image ? await handleSubmitImage() : null;
+
+            const newGame: Game = {
+                id: game ? game.id : undefined,
+                name,
+                minNumberPlayer,
+                maxNumberPlayer,
+                minYearPlayer,
+                duration,
+                type,
+                isPrototype,
+                manual,
+                editor,
+                imageUrl
+            }
+
+            const action = updateMode ? axios.put : axios.post;
+
+            action("games", {
+                game: newGame
+            })
+                .then(({data}) => {
+                    setIsLoading(false);
+                    onCreate(data)
+                })
+
+
         }
 
-        const action = updateMode ? axios.put : axios.post;
 
-        await action("games", {
-            game: newGame
-        })
+    }
 
-        onCreate(newGame)
+    const handleChangeCast = (set, cast) => event => {
+        set(cast(event.target.value))
     }
 
     return (
         <Form onSubmit={handleSubmit}>
+
+            <Alert show={showAlert} variant="danger" onClose={() => setShowAlert(false)} dismissible>
+                <div className="text-center">
+                    Champs manquants
+                </div>
+            </Alert>
+
             <Form.Group as={Row}>
                 <Form.Label column sm="3">
                     Nom
@@ -75,13 +119,13 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
                     Nombre de joueurs
                 </Form.Label>
                 <Col sm="1">
-                    <Form.Control type="text" value={minNumberPlayer} onChange={handleChange(setMinNumberPlayer)}/>
+                    <Form.Control type="text" value={minNumberPlayer} onChange={handleChangeCast(setMinNumberPlayer, Number)}/>
                 </Col>
                 <Col sm="1">
                     <p className="text-center mt-2"> - </p>
                 </Col>
                 <Col sm="1">
-                    <Form.Control type="text" value={maxNumberPlayer} onChange={handleChange(setMaxNumberPlayer)}/>
+                    <Form.Control type="text" value={maxNumberPlayer} onChange={event => setMaxNumberPlayer(Number(event.target.value))}/>
                 </Col>
             </Form.Group>
 
@@ -90,7 +134,7 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
                     Âge minimum
                 </Form.Label>
                 <Col sm="1">
-                    <Form.Control type="text" value={minYearPlayer} onChange={handleChange(setMinYearPlayer)}/>
+                    <Form.Control type="text" value={minYearPlayer} onChange={event => setMaxNumberPlayer(1)}/>
                 </Col>
             </Form.Group>
 
@@ -145,12 +189,13 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
                     Image
                 </Form.Label>
                 <Col sm="6">
-                    <Form.File />
+                    <Form.File onChange={handleChangeImage} label={image ? image.name : "Choisir une image"} data-browse="Parcourir" custom/>
                 </Col>
             </Form.Group>
 
             <div className="text-center">
                 <button className="mon-button" type="submit">Valider</button>
+                {isLoading && <Spinner animation="border" variant="primary"/>}
             </div>
         </Form>
     )

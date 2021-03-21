@@ -5,6 +5,7 @@ import {Spinner} from "react-bootstrap";
 import {VscDiffAdded} from "react-icons/vsc";
 import {GiClick} from "react-icons/all";
 import CompanyRow from "./CompanyRow";
+import CompanyCreateModal from "./CompanyCreateModal";
 
 type CompanyContextProps = {
     companies: Company[];
@@ -16,8 +17,6 @@ export const CompanyContext = createContext<CompanyContextProps>({} as CompanyCo
 const Companies: FC = () => {
 
     const {data: companies, isPending, setData: setCompanies} = useAxios<Company[]>("companies");
-
-    console.log(companies)
 
     const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
 
@@ -43,6 +42,7 @@ const Companies: FC = () => {
 
                     <div>
                         <button type="button" className="mon-button mb-2" onClick={() => setShowModalCreate(true)}><p><VscDiffAdded/> Ajout d'une entreprise</p></button>
+                        <CompanyCreateModal show={showModalCreate} onHide={() => setShowModalCreate(false)}/>
                     </div>
 
                     <table className="table table-striped table-hover">

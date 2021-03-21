@@ -1,5 +1,7 @@
 import {FC, useState} from "react";
 import {Col, Form, Modal, Row} from "react-bootstrap";
+import axios from "../../utils/axios";
+import {GameType} from "../../utils/types";
 
 const GameTypeCreateModal: FC<{show: boolean, onHide: () => void}> = ({show, onHide}) => {
 
@@ -8,7 +10,16 @@ const GameTypeCreateModal: FC<{show: boolean, onHide: () => void}> = ({show, onH
     const handleSubmit = event => {
         event.preventDefault();
 
-        console.log(`CREATE GAMETYPE ${label}`)
+        const gameType: GameType = {
+            label
+        }
+
+        axios.post("gameTypes", {
+            gameType
+        })
+            .then(() => {
+                onHide();
+            })
     }
 
     return (
