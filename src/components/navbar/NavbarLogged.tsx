@@ -34,7 +34,7 @@ const NavbarLogged = () => {
                     <Image className="image-css" src={logo} fluid/>
                 </Col>
                 <Col md={1} className={"navbar-col"}>
-                    <FestivalSelection selectedFestival={selectedFestival} festivals={festivals} handleChange={handleChange}/>
+                    <FestivalSelection festivals={festivals} />
                 </Col>
                 <Col md={9} className={"navbar-col"}>
                     <Nav fill variant="tabs" defaultActiveKey="/">

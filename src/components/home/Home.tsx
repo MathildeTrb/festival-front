@@ -1,5 +1,5 @@
 import {useState} from "react";
-import axios from "../utils/axios";
+import axios from "../../utils/axios";
 import {Button, Form} from "react-bootstrap";
 
 const Home = () => {
