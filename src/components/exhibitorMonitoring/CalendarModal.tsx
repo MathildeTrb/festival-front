@@ -1,7 +1,7 @@
 import Calendar from 'react-calendar'
 import "../../css/sample.css"
 import {Button, Modal} from "react-bootstrap";
-import {FC, useState} from "react";
+import {FC} from "react";
 
 const CalendarModal: FC<{ show: boolean, onHide: () => void, date: any, setDate: (any) => void, onValidate:() => void }> = ({show, onHide, date, setDate, onValidate}) => {
 

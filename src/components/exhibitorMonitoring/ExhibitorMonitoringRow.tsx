@@ -39,10 +39,6 @@ const ExhibitorMonitoringRow:
             );
         }
 
-        console.log("Date1 "+ date1);
-        console.log("Date2 "+ date2);
-        console.log("Date3 "+ date3);
-
         return (
 
             <tr>
