@@ -27,7 +27,7 @@ const ExhibitorMonitoringRow:
             exhibitorMonitoring.dateContact1 = date1;
             exhibitorMonitoring.dateContact2 = date2;
             exhibitorMonitoring.dateContact3 = date3;
-            axios.post(
+            axios.put(
                 "exhibitorMonitorings",
                 {'exhibitorMonitoring': exhibitorMonitoring},
                 {
