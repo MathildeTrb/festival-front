@@ -19,11 +19,11 @@ const CompanyRow: FC<{company: Company, onDelete: (company: Company) => void}> =
             <td>{company.address}</td>
             <td className={company.canBeExhibitor ? "yes-cell" : "no-cell"}>{company.canBeExhibitor ? "Oui" : "Non"}</td>
             <td>
-                <TiContacts className="p-cursor" onClick={() => setShowContactsModal(true)}/>
-                <ContactsModal show={showContactsModal} onHide={() => setShowContactsModal(false)} contacts={company.contacts} companyName={company.name}/>
+                <TiContacts className="p-cursor" onClick={() => setShowContactsModal(true)}/> ({company.contacts.length})
+                <ContactsModal show={showContactsModal} onHide={() => setShowContactsModal(false)} company={company}/>
             </td>
             <td>
-                <GrGamepad onClick={() => setShowGamesModal(true)}/>
+                <GrGamepad onClick={() => setShowGamesModal(true)}/> ({company.games.length})
                 <GamesModal show={showGamesModal} onHide={() => setShowGamesModal(false)} games={company.games} companyName={company.name}/>
             </td>
             <td><BsPencilSquare onClick={() => console.log(company)}/></td>

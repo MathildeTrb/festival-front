@@ -1,5 +1,5 @@
 import {FC, useState} from "react";
-import {Modal} from "react-bootstrap";
+import {Image, Modal} from "react-bootstrap";
 import {Game} from "../../utils/types";
 
 type GamesModalProps = {
@@ -11,7 +11,7 @@ type GamesModalProps = {
 
 const GamesModal: FC<GamesModalProps> = ({show, onHide, games, companyName}) => (
 
-    <Modal show={show} size="lg" onHide={onHide}>
+    <Modal show={show} size="lg" onHide={onHide} centered>
         <Modal.Header closeButton>
             <Modal.Title>
                 Jeux de {companyName}
@@ -30,7 +30,7 @@ const GamesModal: FC<GamesModalProps> = ({show, onHide, games, companyName}) => 
                 {games.map((game, index) => {
                     return (
                         <tr key={index}>
-                            <td>Photo</td>
+                            <td><Image fluid width={100} height={100} src={game.imageUrl} alt="Photo"/></td>
                             <td>{game.name}</td>
                             <td>{game.type.label}</td>
                         </tr>

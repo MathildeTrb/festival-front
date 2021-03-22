@@ -53,7 +53,6 @@ export type Contact = {
     fixPhoneNumber: string;
     job: string;
     isImportant: boolean;
-    isDeleted: boolean;
     company: Company;
 }
 
@@ -66,13 +65,13 @@ export type Space = {
 }
 
 export type ExhibitorMonitoring = {
-    exhibitor : Company;
-    festival : Festival;
-    status : ExhibitorMonitoringStatus;
+    exhibitor: Company;
+    festival: Festival;
+    status: ExhibitorMonitoringStatus;
     reservation: Reservation;
-    dateContact1 : Date;
-    dateContact2 : Date;
-    dateContact3 : Date;
+    dateContact1: Date;
+    dateContact2: Date;
+    dateContact3: Date;
 }
 
 export type ExhibitorMonitoringStatus = {
@@ -82,7 +81,7 @@ export type ExhibitorMonitoringStatus = {
 }
 
 export type Reservation = {
-    id?:number;
+    id?: number;
     needVolunteer: boolean;
     willCome: boolean;
     comment: string;
@@ -94,7 +93,7 @@ export type Reservation = {
 }
 
 export type ReservationDetails = {
-    reservation : Reservation;
+    reservation: Reservation;
     space: Space;
     tableReserved: number;
     meterReserved: number;
@@ -114,12 +113,12 @@ export type GameMonitoring = {
 }
 
 export type GameMonitoringStatus = {
-    id? : number;
+    id?: number;
     label: string;
     gameMonitorings: GameMonitoring[]
 }
 
 export type Area = {
-    id?:number;
+    id?: number;
     label: string;
 }

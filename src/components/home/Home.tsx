@@ -1,20 +1,17 @@
 import {useState} from "react";
-import Calendar from "react-calendar"
-import "../../css/sample.css"
+import {ExhibitorMonitoringStatus} from "../../utils/types";
+import ExhibitorMonitoringStatusSelectList from "../exhibitorMonitoring/ExhibitorMonitoringStatusSelectList";
 
 const Home = () => {
 
-    const [date, setDate] = useState(new Date())
-
-    const onChange = date => {
-        setDate(date)
-    }
+    const [exhibitorMonitoringStatus, setExhibitorMonitoringStatus] = useState<ExhibitorMonitoringStatus>();
 
     return (
-        <div className="container">
-            <Calendar onChange={onChange} value={date}/>
-            {console.log(date)}
-        </div>
+        <>
+            <ExhibitorMonitoringStatusSelectList handleChange={event => setExhibitorMonitoringStatus(JSON.parse(event.target.value))}/>
+
+            {exhibitorMonitoringStatus && <p>Status : {exhibitorMonitoringStatus.label}</p>}
+        </>
     )
 }
 

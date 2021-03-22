@@ -80,3 +80,7 @@
 .option-disabled {
     background-color: #99a0ca;
 }
+
+.no-cursor {
+    cursor: none;
+}

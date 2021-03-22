@@ -2,24 +2,24 @@ import {FC} from "react";
 import {Button, Modal} from "react-bootstrap";
 
 type ValidationDeleteModalProps = {
-    show: boolean,
-    message: string,
-    onDelete: () => void,
-    onHide: () => void
+    show: boolean;
+    message: string;
+    onValidate: any;
+    onHide: () => void;
 }
 
-const ValidationDeleteModal: FC<ValidationDeleteModalProps> = ({show, message, onDelete, onHide}) => (
+const ValidationModal: FC<ValidationDeleteModalProps> = ({show, message, onValidate, onHide}) => (
     <Modal show={show} onHide={onHide}>
         <Modal.Body>{message}</Modal.Body>
         <Modal.Footer>
             <Button variant="danger" onClick={onHide}>
                 Annuler
             </Button>
-            <Button variant="success" onClick={onDelete}>
+            <Button variant="success" onClick={onValidate}>
                 Valider
             </Button>
         </Modal.Footer>
     </Modal>
 )
 
-export default ValidationDeleteModal;
+export default ValidationModal;
