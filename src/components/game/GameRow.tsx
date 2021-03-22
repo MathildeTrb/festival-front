@@ -5,7 +5,7 @@ import {BsPencilSquare} from "react-icons/bs";
 import {RiDeleteBin6Line} from "react-icons/ri";
 import GameUpdateModal from "./GameUpdateModal";
 import {GiRuleBook} from "react-icons/gi";
-import ValidationDeleteModal from "../ValidationDeleteModal";
+import ValidationModal from "../ValidationModal";
 import axios from "../../utils/axios";
 import {Image} from "react-bootstrap";
 
@@ -55,7 +55,7 @@ const GameRow: FC<{ game: Game, onDelete: (game: Game) => void }> = ({game, onDe
             </td>
             <td>
                 <RiDeleteBin6Line className="p-cursor" onClick={handleShowModal(setShowModalDelete)}/>
-                <ValidationDeleteModal show={showModalDelete} message="Êtes-vous sûr de vouloir supprimer ce jeu ?" onDelete={handleDelete} onHide={handleCloseModal(setShowModalDelete)}/>
+                <ValidationModal show={showModalDelete} message="Êtes-vous sûr de vouloir supprimer ce jeu ?" onValidate={handleDelete} onHide={handleCloseModal(setShowModalDelete)}/>
             </td>
         </tr>
 

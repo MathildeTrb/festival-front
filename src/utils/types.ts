@@ -53,7 +53,6 @@ export type Contact = {
     fixPhoneNumber: string;
     job: string;
     isImportant: boolean;
-    isDeleted: boolean;
     company: Company;
 }
 
@@ -63,4 +62,9 @@ export type Space = {
     tablePrice: number;
     meterPrice: number;
     tableTotal: number;
+}
+
+export type GameMonitoringStatus = {
+    id?: number;
+    label: string;
 }
