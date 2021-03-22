@@ -1,8 +1,8 @@
+import {useContext, useState} from "react";
+import {FestivalContext} from "../../App";
 import {Dropdown} from "react-bootstrap";
 import {VscDiffAdded} from "react-icons/vsc";
-import {useContext, useState} from "react";
 import ModalAddFestival from "./ModalAddFestival";
-import {FestivalContext} from "../../App";
 
 const FestivalSelection = ({festivals}) => {
 
@@ -21,7 +21,8 @@ const FestivalSelection = ({festivals}) => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 {festivals.map((festival, index) =>
-                    <Dropdown.Item as="button" value={festival.name} key={index} eventKey={JSON.stringify(festival)} onSelect={handleChange}>
+                    <Dropdown.Item as="button" value={festival.name} key={index} eventKey={JSON.stringify(festival)}
+                                   onSelect={handleChange}>
                         {festival.name}
                     </Dropdown.Item>
                 )}

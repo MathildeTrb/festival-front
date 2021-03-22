@@ -1,23 +1,28 @@
 import {Link} from "react-router-dom";
-import "../css/index.css"
+import "../../css/index.css"
 import {Col, Dropdown, Image, Nav, NavDropdown, Row} from "react-bootstrap";
-import logo from "../pictures/logo_FDJ_FINAL_800.png"
-import useAxios from "../utils/useAxios";
+import logo from "../../pictures/logo_FDJ_FINAL_800.png"
+import useAxios from "../../utils/useAxios";
 import {useContext} from "react";
-import {FestivalContext} from "../App";
+import {FestivalContext} from "../../App";
 import {BiUser} from 'react-icons/bi'
 import {HiOutlineInformationCircle} from 'react-icons/hi'
 import {FaGamepad, FaFileInvoiceDollar, FaList} from 'react-icons/fa'
 import {AiOutlineAudit} from 'react-icons/ai'
-import {Festival} from "../utils/types";
-import FestivalSelection from "./festival/FestivalSelection";
+import {Festival} from "../../utils/types";
+import FestivalSelection from "../festival/FestivalSelection";
 
-const Navbar = () => {
+
+
+const NavbarLogged = () => {
 
     const {data: festivals, error, isPending} = useAxios<Festival[]>("festivals")
 
+    const {selectedFestival, setSelectedFestival} = useContext(FestivalContext);
 
-    const {selectedFestival} = useContext(FestivalContext);
+    const handleChange = (eventKey) => {
+        setSelectedFestival(JSON.parse(eventKey))
+    }
 
     return (
         <div>
@@ -80,4 +85,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default NavbarLogged
