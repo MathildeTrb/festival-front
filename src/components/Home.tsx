@@ -1,16 +1,14 @@
 import {useState} from "react";
-import axios from "../utils/axios";
-import {Button, Form} from "react-bootstrap";
-import GameMonitoringStatusSelectList from "./GameMonitoringStatusSelectList";
-import {GameMonitoringStatus} from "../utils/types";
+import {ExhibitorMonitoringStatus, GameMonitoringStatus} from "../utils/types";
+import ExhibitorMonitoringStatusSelectList from "./exhibitorMonitoring/ExhibitorMonitoringStatusSelectList";
 
 const Home = () => {
 
-    const [gameMonitoringStatus, setGameMonitoringStatus] = useState<GameMonitoringStatus>();
+    const [exhibitorMonitoringStatus, setExhibitorMonitoringStatus] = useState<ExhibitorMonitoringStatus>();
 
     return (
         <>
-            <GameMonitoringStatusSelectList handleChange={event => setGameMonitoringStatus(JSON.parse(event.target.value))}/>
+            <ExhibitorMonitoringStatusSelectList handleChange={event => setExhibitorMonitoringStatus(JSON.parse(event.target.value))}/>
         </>
     )
 }
