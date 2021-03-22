@@ -1,7 +1,14 @@
+import {useState} from "react";
+import ModalAddFestival from "./festival/ModalAddFestival";
+
 const ExhibitorMonitoringList = () => {
+
+    const [showModal, setShowModal] = useState<boolean>(false);
+
     return (
         <div>
-            exhibitor monitoring list
+            <button className="btn btn-primary" onClick={() => setShowModal(true)}>Créer un festival</button>
+            <ModalAddFestival show={showModal} onHide={() => setShowModal(false)}/>
         </div>
     )
 

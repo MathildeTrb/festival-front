@@ -1,12 +1,9 @@
 import {Col, Container, Modal, Row} from "react-bootstrap";
 import {useState} from "react";
-import useToken from "../../utils/useToken";
 
 const ModalUpdateProfil = (props) => {
 
     const previousUser = props.user;
-
-    const token = useToken();
 
     const [firstname, setFirstname] = useState(previousUser.firstname);
     const [lastname, setLastname] = useState(previousUser.lastname);

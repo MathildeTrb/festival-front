@@ -12,17 +12,12 @@ import {AiOutlineAudit} from 'react-icons/ai'
 import {Festival} from "../utils/types";
 import FestivalSelection from "./festival/FestivalSelection";
 
-
-
 const Navbar = () => {
 
     const {data: festivals, error, isPending} = useAxios<Festival[]>("festivals")
 
-    const {selectedFestival, setSelectedFestival} = useContext(FestivalContext);
 
-    const handleChange = (eventKey) => {
-        setSelectedFestival(JSON.parse(eventKey))
-    }
+    const {selectedFestival} = useContext(FestivalContext);
 
     return (
         <div>
@@ -34,7 +29,7 @@ const Navbar = () => {
                     <Image className="image-css" src={logo} fluid/>
                 </Col>
                 <Col md={1} className={"navbar-col"}>
-                    <FestivalSelection selectedFestival={selectedFestival} festivals={festivals} handleChange={handleChange}/>
+                    <FestivalSelection festivals={festivals} />
                 </Col>
                 <Col md={9} className={"navbar-col"}>
                     <Nav fill variant="tabs" defaultActiveKey="/">
@@ -58,7 +53,7 @@ const Navbar = () => {
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item >
-                                    <Link className={"nav-link"} to ="/allCompanies"> Entreprises </Link>
+                                    <Link className={"nav-link"} to ="/companies"> Entreprises </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item >

@@ -68,3 +68,15 @@
 .vertical-align{
     vertical-align: top;
 }
+
+.yes-cell {
+    background-color: #74b574;
+}
+
+.no-cell {
+    background-color: #dd7a7a;
+}
+
+.option-disabled {
+    background-color: #99a0ca;
+}

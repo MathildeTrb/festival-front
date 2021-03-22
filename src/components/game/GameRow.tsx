@@ -7,6 +7,7 @@ import GameUpdateModal from "./GameUpdateModal";
 import {GiRuleBook} from "react-icons/gi";
 import ValidationDeleteModal from "../ValidationDeleteModal";
 import axios from "../../utils/axios";
+import {Image} from "react-bootstrap";
 
 const GameRow: FC<{ game: Game, onDelete: (game: Game) => void }> = ({game, onDelete}) => {
 
@@ -32,7 +33,7 @@ const GameRow: FC<{ game: Game, onDelete: (game: Game) => void }> = ({game, onDe
 
     return (
         <tr>
-            <td><img src="" alt=""/></td>
+            <td><Image fluid width={150} height={150} src={game.imageUrl} alt="Photo"/></td>
             <td>{game.name}</td>
             <td>
                 {game.minNumberPlayer === game.maxNumberPlayer ? `${game.minNumberPlayer}` : `${game.minNumberPlayer} - ${game.maxNumberPlayer}`}
@@ -46,14 +47,14 @@ const GameRow: FC<{ game: Game, onDelete: (game: Game) => void }> = ({game, onDe
                 <EditorModal show={showModalEditor} editor={game.editor} onHide={handleCloseModal(setShowModalEditor)}/>
             </td>
             <td>
-                {game.manual && <GiRuleBook onClick={() => window.open(game.manual)}/>}
+                {game.manual && <GiRuleBook className="p-cursor" onClick={() => window.open(game.manual)}/>}
             </td>
             <td>
-                <BsPencilSquare onClick={handleShowModal(setShowModalUpdate)}/>
+                <BsPencilSquare className="p-cursor" onClick={handleShowModal(setShowModalUpdate)}/>
                 <GameUpdateModal show={showModalUpdate} game={game} onHide={handleCloseModal(setShowModalUpdate)}/>
             </td>
             <td>
-                <RiDeleteBin6Line onClick={handleShowModal(setShowModalDelete)}/>
+                <RiDeleteBin6Line className="p-cursor" onClick={handleShowModal(setShowModalDelete)}/>
                 <ValidationDeleteModal show={showModalDelete} message="Êtes-vous sûr de vouloir supprimer ce jeu ?" onDelete={handleDelete} onHide={handleCloseModal(setShowModalDelete)}/>
             </td>
         </tr>

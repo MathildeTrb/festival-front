@@ -1,20 +1,17 @@
-import {Col, Dropdown} from "react-bootstrap";
-import {RiDeleteBin6Line} from "react-icons/ri";
+import {Dropdown} from "react-bootstrap";
 import {VscDiffAdded} from "react-icons/vsc";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import ModalAddFestival from "./ModalAddFestival";
+import {FestivalContext} from "../../App";
 
-const FestivalSelection = ({selectedFestival, festivals, handleChange}) => {
+const FestivalSelection = ({festivals}) => {
 
     const [showModal, setShowModal] = useState<boolean>(false)
 
-    const handleShowModal = () => {
-        setShowModal(true)
-    }
+    const {selectedFestival, setSelectedFestival} = useContext(FestivalContext);
 
-    const handleCloseModal = () => {
-        setShowModal(value => !value)
-        console.log("show modal vaut "+ showModal)
+    const handleChange = (eventKey) => {
+        setSelectedFestival(JSON.parse(eventKey))
     }
 
     return (
@@ -29,9 +26,9 @@ const FestivalSelection = ({selectedFestival, festivals, handleChange}) => {
                     </Dropdown.Item>
                 )}
                 <Dropdown.Divider/>
-                <Dropdown.Item onClick={handleShowModal}>
+                <Dropdown.Item as="button" onClick={() => setShowModal(true)}>
                     <p><VscDiffAdded/> Ajouter un festival</p>
-                    <ModalAddFestival show={showModal} onHide={handleCloseModal}/>
+                    <ModalAddFestival show={showModal} onHide={() => setShowModal(false)}/>
                 </Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
