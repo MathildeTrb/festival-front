@@ -1,6 +1,6 @@
 import {FC} from "react";
-import {GameMonitoringStatus} from "../utils/types";
-import useAxios from "../utils/useAxios";
+import {GameMonitoringStatus} from "../../utils/types";
+import useAxios from "../../utils/useAxios";
 import {Form} from "react-bootstrap";
 
 const GameMonitoringStatusSelectList: FC<{selected?: GameMonitoringStatus, handleChange: (set: any) => void}> = ({selected, handleChange}) => {

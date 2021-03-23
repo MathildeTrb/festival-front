@@ -14,6 +14,9 @@ export const GameMonitoringContext = createContext<GameMonitoringsContextProps>(
 
 
 const GameMonitorings: FC = ()=> {
+
+    //const {data: gameMonitorings, isPending, setData: setGameMonitorings} = useAxios<GameMonitoring[]>("gameMonitorings")
+
     const {selectedFestival} = useContext(FestivalContext);
 
     const {
@@ -24,7 +27,8 @@ const GameMonitorings: FC = ()=> {
 
     useEffect(() => {
         document.title = "Suivi des jeux"
-    })
+        console.log("COUCOUC JE SISS LA")
+    },[gameMonitorings])
 
     const value = {gameMonitorings, setGameMonitorings}
 
@@ -49,6 +53,8 @@ const GameMonitorings: FC = ()=> {
                         <th scope="col">Qté donnée</th>
                         <th scope="col">besoin d'être retourné</th>
                         <th scope="col">Prix retour</th>
+                        <th scope="col">Modification</th>
+
                     </tr>
                     </thead>
                     <tbody>
