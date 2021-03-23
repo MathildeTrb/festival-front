@@ -2,7 +2,7 @@ import {FC} from "react";
 import {Switch, Route} from "react-router-dom";
 import Home from "./Home";
 import NotFound from "./NotFound";
-import GameMonitoringList from "./GameMonitoringList";
+import GameMonitoringList from "./gameMonitoring/GameMonitoringList";
 import ExhibitorMonitoringList from "./ExhibitorMonitoringList";
 import InvoicingList from "./InvoicingList";
 import {Container} from "react-bootstrap";
@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 import Logout from "./user/Logout";
 import Games from "./game/Games";
 import Companies from "./company/Companies";
+import GameMonitorings from "./gameMonitoring/GameMonitorings";
 
 const Routes: FC = () => {
     return (
@@ -29,7 +30,8 @@ const Routes: FC = () => {
                 <Route exact path='/allUsers' component={Users}/>
                 <Route exact path="/games" component={Games}/>
                 <Route exact path='/logout' component={Logout}/>
-                <Route exact pah="/companies" component={Companies}/>
+                <Route exact path="/companies" component={Companies}/>
+                <Route exact path="/gameMonitorings/:idFestival" component={GameMonitorings}/>
                 <Route path='*'>
                     <NotFound/>
                 </Route>

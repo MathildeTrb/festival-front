@@ -64,3 +64,62 @@ export type Space = {
     meterPrice: number;
     tableTotal: number;
 }
+
+export type GameMonitoring = {
+    game: Game;
+    reservation: Reservation;
+    quantityExposed: number;
+    quantityTombola: number;
+    quantityDonation: number;
+    isPlaced: boolean;
+    needBeingReturned: boolean;
+    returnedPrice: number;
+    status: GameMonitoringStatus;
+    area: Area;
+}
+
+export type Reservation = {
+    id?:number;
+    needVolunteer: boolean;
+    willCome: boolean;
+    comment: string;
+    mailingDate: Date;
+    paymentDate: Date;
+    reservationsDetails: ReservationDetails[];
+    exhibitorMonitoring: ExhibitorMonitoring;
+    gameMonitorings: GameMonitoring[];
+}
+
+export type GameMonitoringStatus = {
+    id?:number;
+    label: string;
+    gameMonitorings: GameMonitoring[]
+}
+
+export type Area = {
+    id?:number;
+    label: string;
+}
+
+export type ReservationDetails = {
+    reservation: Reservation;
+    space: Space;
+    tableReserved: number;
+    meterReserved; number;
+}
+
+export type ExhibitorMonitoring = {
+    exhibitor : Company;
+    festival : Festival;
+    status : ExhibitorMonitoringStatus;
+    reservation: Reservation;
+    dateContact1 : Date;
+    dateContact2 : Date;
+    dateContact3 : Date;
+}
+
+export class ExhibitorMonitoringStatus{
+    id?: number;
+    label: string;
+    exhibitorMonitorings: ExhibitorMonitoring[]
+}

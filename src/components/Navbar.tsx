@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import "../css/index.css"
-import {Col, Dropdown, Image, Nav, NavDropdown, Row} from "react-bootstrap";
+import {Col,  Image, Nav, NavDropdown, Row} from "react-bootstrap";
 import logo from "../pictures/logo_FDJ_FINAL_800.png"
 import useAxios from "../utils/useAxios";
 import {useContext} from "react";
@@ -41,7 +41,7 @@ const Navbar = () => {
                                 exposants</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
-                            <Link to={`/${selectedFestival.id}/games`} className='nav-link'> <FaGamepad/> Réservations jeux</Link>
+                            <Link to={`/gameMonitorings/${selectedFestival.id}`} className='nav-link'> <FaGamepad/> Réservations jeux</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
                             <Link to={`/${selectedFestival.id}/invoicing`} className='nav-link'> <FaFileInvoiceDollar/> Facturations du festival</Link>
