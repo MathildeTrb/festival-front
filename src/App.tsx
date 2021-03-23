@@ -23,7 +23,7 @@ const App: FC = () => {
     const value = {selectedFestival, setSelectedFestival}
 
     const {isLogged} = useToken()
-    const [loggedNavbar, setLoggedNavbar] = useState(isLogged)
+    const [loggedNavbar, setLoggedNavbar] = useState(isLogged())
 
     return (
         <Container fluid>

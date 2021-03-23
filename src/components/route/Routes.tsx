@@ -32,7 +32,7 @@ const Routes: FC = () => {
                 <Route exact pah="/companies" component={Companies}/>
                 <Route path='*'>
                     <NotFound/>
-                </Route>
+                </Route>a
             </Switch>
         </Container>
     )

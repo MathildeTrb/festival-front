@@ -15,14 +15,6 @@ const GameRow: FC<{ game: Game, onDelete: (game: Game) => void }> = ({game, onDe
     const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
     const [showModalDelete, setShowModalDelete] = useState<boolean>(false);
 
-    const handleShowModal = set => () => {
-        set(true);
-    }
-
-    const handleCloseModal = set => () => {
-        set(false);
-    }
-
     const handleDelete = () => {
         axios.delete(`games/${game.id}`)
             .then(() => {
@@ -43,19 +35,19 @@ const GameRow: FC<{ game: Game, onDelete: (game: Game) => void }> = ({game, onDe
             <td>{game.type.label}</td>
             <td>{game.isPrototype ? "Oui" : "Non"}</td>
             <td>
-                <p className="p-cursor" onClick={handleShowModal(setShowModalEditor)}>{game.editor.name}</p>
-                <EditorModal show={showModalEditor} editor={game.editor} onHide={handleCloseModal(setShowModalEditor)}/>
+                <p className="p-cursor" onClick={() => setShowModalEditor(true)}>{game.editor.name}</p>
+                <EditorModal show={showModalEditor} editor={game.editor} onHide={() => setShowModalEditor(false)}/>
             </td>
             <td>
                 {game.manual && <GiRuleBook className="p-cursor" onClick={() => window.open(game.manual)}/>}
             </td>
             <td>
-                <BsPencilSquare className="p-cursor" onClick={handleShowModal(setShowModalUpdate)}/>
-                <GameUpdateModal show={showModalUpdate} game={game} onHide={handleCloseModal(setShowModalUpdate)}/>
+                <BsPencilSquare className="p-cursor" onClick={() => setShowModalUpdate(true)}/>{game.name}
+                <GameUpdateModal show={showModalUpdate} game={game} onHide={() => setShowModalUpdate(false)}/>
             </td>
             <td>
-                <RiDeleteBin6Line className="p-cursor" onClick={handleShowModal(setShowModalDelete)}/>
-                <ValidationModal show={showModalDelete} message="Êtes-vous sûr de vouloir supprimer ce jeu ?" onValidate={handleDelete} onHide={handleCloseModal(setShowModalDelete)}/>
+                <RiDeleteBin6Line className="p-cursor" onClick={() => setShowModalDelete(true)}/>
+                <ValidationModal show={showModalDelete} message="Êtes-vous sûr de vouloir supprimer ce jeu ?" onValidate={handleDelete} onHide={() => setShowModalDelete(false)}/>
             </td>
         </tr>
 

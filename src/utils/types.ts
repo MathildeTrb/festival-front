@@ -121,4 +121,11 @@ export type GameMonitoringStatus = {
 export type Area = {
     id?: number;
     label: string;
+    gameMonitorings: GameMonitoring[];
+}
+
+export type AreaVisitor = {
+    id?: number;
+    label: string;
+    games: Game[];
 }

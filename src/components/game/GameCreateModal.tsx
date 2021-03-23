@@ -15,8 +15,6 @@ const GameCreateModal: FC<{show: boolean, onHide: () => void}> = ({show, onHide}
 
         setGames(newGames);
 
-        console.log(newGames)
-
         onHide();
     }
 
@@ -28,7 +26,7 @@ const GameCreateModal: FC<{show: boolean, onHide: () => void}> = ({show, onHide}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <GameForm onCreate={handleCreate}/>
+                <GameForm onAction={handleCreate}/>
             </Modal.Body>
         </Modal>
     )

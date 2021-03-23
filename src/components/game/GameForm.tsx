@@ -5,7 +5,7 @@ import GameTypeSelectList from "./GameTypeSelectList";
 import axios from "../../utils/axios";
 import CompanySelectList from "./CompanySelectList";
 
-const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: boolean }> = ({game, onCreate, updateMode = false}) => {
+const GameForm: FC<{ game?: Game, onAction: (g: Game) => void, updateMode?: boolean }> = ({game, onAction, updateMode = false}) => {
 
     const [name, setName] = useState<string>(game ? game.name : null)
     const [minNumberPlayer, setMinNumberPlayer] = useState<number>(game ? game.minNumberPlayer : null);
@@ -31,10 +31,6 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
 
     const handleChangeImage = event => {
         setImage(event.currentTarget.files[0])
-    }
-
-    const inversePrototype = () => {
-        setIsPrototype(value => !value);
     }
 
     const handleSubmitImage = async (): Promise<string> => {
@@ -83,17 +79,9 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
             })
                 .then(({data}) => {
                     setIsLoading(false);
-                    onCreate(data)
+                    onAction(updateMode ? newGame : data)
                 })
-
-
         }
-
-
-    }
-
-    const handleChangeCast = (set, cast) => event => {
-        set(cast(event.target.value))
     }
 
     return (
@@ -119,13 +107,13 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
                     Nombre de joueurs
                 </Form.Label>
                 <Col sm="1">
-                    <Form.Control type="text" value={minNumberPlayer} onChange={handleChangeCast(setMinNumberPlayer, Number)}/>
+                    <Form.Control type="text" value={minNumberPlayer} onChange={handleChange(setMinNumberPlayer)}/>
                 </Col>
                 <Col sm="1">
                     <p className="text-center mt-2"> - </p>
                 </Col>
                 <Col sm="1">
-                    <Form.Control type="text" value={maxNumberPlayer} onChange={event => setMaxNumberPlayer(Number(event.target.value))}/>
+                    <Form.Control type="text" value={maxNumberPlayer} onChange={handleChange(setMaxNumberPlayer)}/>
                 </Col>
             </Form.Group>
 
@@ -134,7 +122,7 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
                     Âge minimum
                 </Form.Label>
                 <Col sm="1">
-                    <Form.Control type="text" value={minYearPlayer} onChange={event => setMaxNumberPlayer(1)}/>
+                    <Form.Control type="text" value={minYearPlayer} onChange={handleChange(setMinYearPlayer)}/>
                 </Col>
             </Form.Group>
 
@@ -153,7 +141,7 @@ const GameForm: FC<{ game?: Game, onCreate: (g: Game) => void, updateMode?: bool
                 </Form.Label>
                 <Col sm="1">
                     <Button variant={isPrototype ? "success" : "danger"}
-                            onClick={inversePrototype}>{isPrototype ? "Oui" : "Non"}</Button>
+                            onClick={() => setIsPrototype(!isPrototype)}>{isPrototype ? "Oui" : "Non"}</Button>
                 </Col>
             </Form.Group>
 

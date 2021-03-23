@@ -18,7 +18,7 @@ const GameUpdateModal: FC<{show: boolean, game: Game, onHide: () => void}> = ({s
 
         setGames(updatedGames);
 
-        onHide()
+        onHide();
     }
 
     return (
@@ -29,7 +29,7 @@ const GameUpdateModal: FC<{show: boolean, game: Game, onHide: () => void}> = ({s
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <GameForm game={game} onCreate={handleUpdate} updateMode/>
+                <GameForm game={game} onAction={handleUpdate} updateMode/>
             </Modal.Body>
         </Modal>
     )
