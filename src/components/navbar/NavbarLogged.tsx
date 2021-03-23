@@ -1,23 +1,28 @@
 import {Link} from "react-router-dom";
-import "../css/index.css"
-import {Col,  Image, Nav, NavDropdown, Row} from "react-bootstrap";
-import logo from "../pictures/logo_FDJ_FINAL_800.png"
-import useAxios from "../utils/useAxios";
+import "../../css/index.css"
+import {Col, Dropdown, Image, Nav, NavDropdown, Row} from "react-bootstrap";
+import logo from "../../pictures/logo_FDJ_FINAL_800.png"
+import useAxios from "../../utils/useAxios";
 import {useContext} from "react";
-import {FestivalContext} from "../App";
+import {FestivalContext} from "../../App";
 import {BiUser} from 'react-icons/bi'
 import {HiOutlineInformationCircle} from 'react-icons/hi'
 import {FaGamepad, FaFileInvoiceDollar, FaList} from 'react-icons/fa'
 import {AiOutlineAudit} from 'react-icons/ai'
-import {Festival} from "../utils/types";
-import FestivalSelection from "./festival/FestivalSelection";
+import {Festival} from "../../utils/types";
+import FestivalSelection from "../festival/FestivalSelection";
 
-const Navbar = () => {
+
+
+const NavbarLogged = () => {
 
     const {data: festivals, error, isPending} = useAxios<Festival[]>("festivals")
 
+    const {selectedFestival, setSelectedFestival} = useContext(FestivalContext);
 
-    const {selectedFestival} = useContext(FestivalContext);
+    const handleChange = (eventKey) => {
+        setSelectedFestival(JSON.parse(eventKey))
+    }
 
     return (
         <div>
@@ -41,7 +46,7 @@ const Navbar = () => {
                                 exposants</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
-                            <Link to={`/gameMonitorings/${selectedFestival.id}`} className='nav-link'> <FaGamepad/> Réservations jeux</Link>
+                            <Link to={`/${selectedFestival.id}/gameMonitorings`} className='nav-link'> <FaGamepad/> Réservations jeux</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
                             <Link to={`/${selectedFestival.id}/invoicing`} className='nav-link'> <FaFileInvoiceDollar/> Facturations du festival</Link>
@@ -80,4 +85,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default NavbarLogged
