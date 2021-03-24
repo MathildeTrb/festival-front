@@ -21,19 +21,15 @@ const ExhibitorMonitoringList: FC = () => {
                 <thead>
                 <tr>
                     <th scope="col">Exposant</th>
-                    <th scope="col">1er contact</th>
-                    <th scope="col">2eme contact</th>
-                    <th scope="col">3eme contact</th>
-                    <th scope="col">Statue</th>
+                    <th scope="col">1<sup>er</sup> contact</th>
+                    <th scope="col">2<sup>e</sup> contact</th>
+                    <th scope="col">3<sup>e</sup> contact</th>
+                    <th scope="col">Statut</th>
                     <th scope="col">Réservation</th>
                 </tr>
                 </thead>
                 <tbody>
-                {exhibitorMonitorings.map(
-                    (exhibitorMonitoring, index) =>
-                        <ExhibitorMonitoringRow exhibitorMonitoring={exhibitorMonitoring}/>
-                )
-                }
+                {exhibitorMonitorings.map((exhibitorMonitoring, index) => <ExhibitorMonitoringRow key={index} exhibitorMonitoring={exhibitorMonitoring}/>)}
                 </tbody>
             </table>
 

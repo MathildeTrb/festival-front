@@ -7,7 +7,6 @@ import {Spinner} from "react-bootstrap";
 import GameCreateModal from "./GameCreateModal";
 import {VscDiffAdded} from "react-icons/vsc";
 import GameTypeCreateModal from "./GameTypeCreateModal";
-import axios from "../../utils/axios";
 
 type GameContextProps = {
     games: Game[];
@@ -22,44 +21,6 @@ const Games: FC = () => {
 
     const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
     const [showModalGameTypeCreate, setShowModalGameTypeCreate] = useState<boolean>(false);
-
-    const onDeleteGame = game => {
-        setGames(games.filter(g => g.id !== game.id))
-    }
-
-    /*const onCreate = (game: Game) => {
-        axios.post("games", {
-            game
-        })
-            .then(({data: newGame}) => {
-                setGames(prevState => [...prevState, newGame].sort((g1, g2) => g1.name.localeCompare(g2.name)))
-            })
-    }*/
-
-    const onUpdate = (game: Game) => {
-
-        axios.put("games", {
-            game
-        })
-            .then(({data: updatedGame}) => {
-                const updatedGames = [...games];
-
-                const index = updatedGames.findIndex(g => g.id === updatedGame.id)
-
-                updatedGames[index] = updatedGame
-
-                setGames(updatedGames);
-            })
-
-
-    }
-
-    const onDelete = (game: Game) => {
-        axios.delete(`games/${game.id}`)
-            .then(() => {
-                setGames(games.filter(g => g.id !== game.id))
-            })
-    }
 
     useEffect(() => {
         document.title = "Liste des jeux"
@@ -105,7 +66,7 @@ const Games: FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {games.map((game, index) => <GameRow key={index} game={game} onDelete={onDelete}/>)}
+                    {games.map((game, index) => <GameRow key={index} game={game}/>)}
                     </tbody>
                 </table>
             </GameContext.Provider>

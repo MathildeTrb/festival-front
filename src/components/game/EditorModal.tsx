@@ -18,7 +18,7 @@ const EditorModal: FC<{show: boolean, editor: Company, onHide: () => void}> = ({
                     <strong>Adresse :</strong> {editor.address}
                 </div>
                 <div>
-                    <strong>Peut-être exposant ?</strong> {editor.canBeExhibitor ? "Oui" : "Non"}
+                    <strong>Exposant potentiel :</strong> {editor.canBeExhibitor ? "Oui" : "Non"}
                 </div>
             </Modal.Body>
         </Modal>

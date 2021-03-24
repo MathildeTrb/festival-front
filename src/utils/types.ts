@@ -31,8 +31,8 @@ export type Company = {
     mail: string;
     address: string;
     canBeExhibitor: boolean;
-    contacts: Contact[];
-    games: Game[];
+    contacts?: Contact[];
+    games?: Game[];
 }
 
 export type User = {

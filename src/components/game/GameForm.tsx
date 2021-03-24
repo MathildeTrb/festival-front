@@ -4,6 +4,7 @@ import {FC, useState} from "react";
 import GameTypeSelectList from "./GameTypeSelectList";
 import axios from "../../utils/axios";
 import CompanySelectList from "./CompanySelectList";
+import {useAxiosPhoto} from "../../utils/useAxiosPhoto";
 
 const GameForm: FC<{ game?: Game, onAction: (g: Game) => void, updateMode?: boolean }> = ({game, onAction, updateMode = false}) => {
 
@@ -21,6 +22,8 @@ const GameForm: FC<{ game?: Game, onAction: (g: Game) => void, updateMode?: bool
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    const {upload} = useAxiosPhoto();
+
     const handleChange = set => event => {
         set(event.currentTarget.value);
     }
@@ -33,19 +36,6 @@ const GameForm: FC<{ game?: Game, onAction: (g: Game) => void, updateMode?: bool
         setImage(event.currentTarget.files[0])
     }
 
-    const handleSubmitImage = async (): Promise<string> => {
-
-        const formData: FormData = new FormData();
-        formData.append("file", image, image.name);
-
-        return (await axios.post<string>("photos", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-        })).data
-
-    }
-
     const handleSubmit = async event => {
         event.preventDefault();
 
@@ -56,7 +46,7 @@ const GameForm: FC<{ game?: Game, onAction: (g: Game) => void, updateMode?: bool
 
             setIsLoading(true);
 
-            const imageUrl: string = image ? await handleSubmitImage() : null;
+            const imageUrl: string = image ? await upload(image) : null;
 
             const newGame: Game = {
                 id: game ? game.id : undefined,

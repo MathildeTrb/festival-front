@@ -21,26 +21,6 @@ const Companies: FC = () => {
 
     const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
 
-    const onCreate = (company: Company) => {
-        axios.post("companies", {
-            company
-        })
-            .then(({data: newCompany}) => {
-
-                const updatedCompanies = [...companies, newCompany];
-                updatedCompanies.sort((c1, c2) => c1.name.localeCompare(c2.name))
-
-                setCompanies(updatedCompanies);
-
-                setShowModalCreate(false);
-            })
-    }
-
-
-    const onDeleteCompany = (company: Company) => {
-        console.log(company)
-    }
-
     useEffect(() => {
         document.title = "Liste des entreprises";
     })
@@ -77,8 +57,7 @@ const Companies: FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {companies.map((company, index) => <CompanyRow key={index} company={company}
-                                                                   onDelete={onDeleteCompany}/>)}
+                    {companies.map((company, index) => <CompanyRow key={index} company={company}/>)}
                     </tbody>
                 </table>
 

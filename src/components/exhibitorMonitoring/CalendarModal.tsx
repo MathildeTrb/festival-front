@@ -1,9 +1,9 @@
 import Calendar from 'react-calendar'
 import "../../css/sample.css"
-import {Button, Modal} from "react-bootstrap";
+import {Button, Col, Modal, Row} from "react-bootstrap";
 import {FC} from "react";
 
-const CalendarModal: FC<{ show: boolean, onHide: () => void, date: any, setDate: (any) => void, onValidate:() => void }> = ({show, onHide, date, setDate, onValidate}) => {
+const CalendarModal: FC<{ show: boolean, onHide: () => void, date: Date, setDate: (any) => void, onValidate:() => void }> = ({show, onHide, date, setDate, onValidate}) => {
 
     const onChange = date => {
         const newDate = new Date(new Date(date).setHours(6))
@@ -29,8 +29,16 @@ const CalendarModal: FC<{ show: boolean, onHide: () => void, date: any, setDate:
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Calendar value={date} onChange={onChange}/>
-                {"date séléctionnée" + date ? date.toString() : "pas de date"}
+                <Row>
+                    <Col/>
+                    <Col><Calendar value={date} onChange={onChange}/></Col>
+                    <Col/>
+                </Row>
+                <Row>
+                    <Col/>
+                    <Col className="text-center"><strong>Date sélectionnée :</strong> {date ? date.toLocaleDateString() : "Pas de date"}</Col>
+                    <Col/>
+                </Row>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={onClick}>valider</Button>
