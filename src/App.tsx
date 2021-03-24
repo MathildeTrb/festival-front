@@ -1,12 +1,10 @@
-import {createContext, FC, useContext, useEffect, useState} from 'react';
-import NavbarLogged from "./components/navbar/NavbarLogged";
+import {createContext, FC, useState} from 'react';
 import Routes from "./components/route/Routes";
 import useAxios from "./utils/useAxios";
 import "./css/index.css"
 import {Container} from "react-bootstrap";
-import {Festival, User} from "./utils/types";
+import {Festival} from "./utils/types";
 import useToken from "./utils/useToken";
-import NavbarVisitor from "./components/navbar/NavbarVisitor";
 import GeneralNavbar from "./components/navbar/GeneralNavbar";
 
 type FestivalContextProps = {
