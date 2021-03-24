@@ -14,6 +14,7 @@ import Games from "../game/Games";
 import Companies from "../company/Companies";
 import GameMonitorings from "../gameMonitoring/GameMonitorings";
 import Invoices from "../invoice/Invoices";
+import ExhibitorDashboard from "../exhibitorMonitoring/dashboard/ExhibitorDashboard";
 
 const Routes: FC = () => {
     return (
@@ -30,6 +31,7 @@ const Routes: FC = () => {
                 <Route exact path='/logout' component={Logout}/>
                 <Route exact path="/companies" component={Companies}/>
                 <Route exact path="/:idFestival/gameMonitorings" component={GameMonitorings}/>
+                <Route exact path="/dashboard/:idExhibitor" component={ExhibitorDashboard}/>
                 <Route path='*'>
                     <NotFound/>
                 </Route>a

@@ -3,6 +3,7 @@ import {Reservation} from "../../utils/types";
 import {ImCalendar} from "react-icons/im";
 import CalendarModal from "../exhibitorMonitoring/CalendarModal";
 import axios from "../../utils/axios";
+import {Link} from "react-router-dom";
 
 const InvoiceRow: FC<{reservation: Reservation}> = ({reservation}) => {
 
@@ -27,7 +28,7 @@ const InvoiceRow: FC<{reservation: Reservation}> = ({reservation}) => {
 
     return (
         <tr>
-            <td>{reservation.exhibitorMonitoring.exhibitor.name}</td>
+            <td><Link to={`/dashboard/${reservation.exhibitorMonitoring.exhibitor.id}`}>{reservation.exhibitorMonitoring.exhibitor.name}</Link></td>
             <td>{amount} €</td>
             <td>{amount - reservation.discount} €</td>
             <td>
