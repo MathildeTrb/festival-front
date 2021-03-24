@@ -1,19 +1,27 @@
-import {createContext, FC, useEffect, useState} from 'react';
+import {createContext, FC, useContext, useEffect, useState} from 'react';
 import NavbarLogged from "./components/navbar/NavbarLogged";
 import Routes from "./components/route/Routes";
 import useAxios from "./utils/useAxios";
 import "./css/index.css"
 import {Container} from "react-bootstrap";
-import {Festival} from "./utils/types";
+import {Festival, User} from "./utils/types";
 import useToken from "./utils/useToken";
 import NavbarVisitor from "./components/navbar/NavbarVisitor";
+import GeneralNavbar from "./components/navbar/GeneralNavbar";
 
 type FestivalContextProps = {
     selectedFestival: Festival;
     setSelectedFestival: (festival: Festival) => void;
 }
-
 export const FestivalContext = createContext<FestivalContextProps>({} as FestivalContextProps);
+
+type AuthContextProps = {
+    isLogged: boolean;
+    setIsLogged: (bool: boolean) => void;
+}
+export const AuthContext = createContext<AuthContextProps>({
+
+} as AuthContextProps)
 
 const App: FC = () => {
 
@@ -23,17 +31,18 @@ const App: FC = () => {
     const value = {selectedFestival, setSelectedFestival}
 
     const {isLogged} = useToken()
-    const [loggedNavbar, setLoggedNavbar] = useState(isLogged)
-
-    console.log("coucou je suis le front")
+    const [isLoggedAuthContext, setIsLoggedAuthContext] = useState<boolean>(isLogged())
+    const authContextValue = {isLogged : isLoggedAuthContext, setIsLogged : setIsLoggedAuthContext}
 
     return (
         <Container fluid>
             {isPending && <div>Is loading ...</div>}
             {selectedFestival &&
             <FestivalContext.Provider value={value}>
-                {loggedNavbar? <NavbarLogged/> : <NavbarVisitor/>}
-                <Routes/>
+                <AuthContext.Provider value={authContextValue}>
+                    <GeneralNavbar/>
+                    <Routes/>
+                </AuthContext.Provider>
             </FestivalContext.Provider>}
         </Container>
     )

@@ -1,5 +1,6 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import jwtDecode from "jwt-decode";
+import {AuthContext} from "../App";
 
 interface Token {
     id: number,
@@ -7,6 +8,8 @@ interface Token {
 }
 
 const useToken = () => {
+
+    const{isLogged : authIsLogged, setIsLogged : setAuthIsLogged} = useContext(AuthContext)
 
     const getToken = (): string => {
         const tokenString: string = localStorage.getItem("token");
@@ -18,11 +21,13 @@ const useToken = () => {
     const saveToken = userToken => {
         localStorage.setItem("token", JSON.stringify(userToken));
         setToken(userToken.token);
+        setAuthIsLogged(true);
     }
 
     const removeToken = () => {
         localStorage.removeItem("token");
         setToken(null);
+        setAuthIsLogged(false)
     }
 
     const isLogged = () => {
