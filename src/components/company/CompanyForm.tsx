@@ -3,12 +3,12 @@ import {Company} from "../../utils/types";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import axios from "../../utils/axios";
 
-const CompanyForm: FC<{company?: Company, onAction: (company: Company) => void, updateMode?: boolean}> = ({company, onAction, updateMode}) => {
+const CompanyForm: FC<{company?: Company, onAction: (c: Company) => void, updateMode?: boolean}> = ({company, onAction, updateMode}) => {
 
     const [name, setName] = useState<string>(company ? company.name : "");
     const [mail, setMail] = useState<string>(company ? company.mail : "");
     const [address, setAddress] = useState<string>(company ? company.address : "");
-    const [canBeExhibitor, setCanBeExhibitor] = useState<boolean>(false);
+    const [canBeExhibitor, setCanBeExhibitor] = useState<boolean>(company && company.canBeExhibitor);
 
     const handleChange = set => event => {
         set(event.target.value)
@@ -22,7 +22,9 @@ const CompanyForm: FC<{company?: Company, onAction: (company: Company) => void, 
             name,
             mail,
             address,
-            canBeExhibitor
+            canBeExhibitor,
+            contacts: company ? company.contacts : undefined,
+            games: company ? company.games : undefined
         }
 
         const action = updateMode ? axios.put : axios.post;
@@ -33,6 +35,7 @@ const CompanyForm: FC<{company?: Company, onAction: (company: Company) => void, 
             .then(({data}) => {
                 onAction(updateMode ? newCompany : data);
             })
+            .catch(err => console.log(err.message))
     }
 
     return (

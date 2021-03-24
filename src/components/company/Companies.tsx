@@ -6,11 +6,10 @@ import {VscDiffAdded} from "react-icons/vsc";
 import {GiClick} from "react-icons/all";
 import CompanyRow from "./CompanyRow";
 import CompanyCreateModal from "./CompanyCreateModal";
-import axios from "../../utils/axios";
 
 type CompanyContextProps = {
     companies: Company[];
-    setCompanies: (companies: Company[]) => void;
+    setCompanies: (companies?: Company[]) => void;
 }
 
 export const CompanyContext = createContext<CompanyContextProps>({} as CompanyContextProps);

@@ -10,10 +10,17 @@ const CompanyCreateModal: FC<{show: boolean, onHide: () => void}> = ({show, onHi
 
     const handleCreate = (company: Company) => {
 
+        company.contacts = [];
+        company.games = [];
+
+        console.log("create", company)
+
         const newCompanies = [...companies, company];
         newCompanies.sort((c1, c2) => c1.name.localeCompare(c2.name));
 
-        setCompanies(companies);
+        setCompanies(newCompanies);
+
+        console.log("J'ajoute au companies déjà existantes")
 
         onHide();
     }

@@ -49,7 +49,7 @@ const NavbarLogged = () => {
                             <Link to={`/${selectedFestival.id}/gameMonitorings`} className='nav-link'> <FaGamepad/> Réservations jeux</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
-                            <Link to={`/${selectedFestival.id}/invoicing`} className='nav-link'> <FaFileInvoiceDollar/> Facturations du festival</Link>
+                            <Link to="/invoices" className='nav-link'> <FaFileInvoiceDollar/> Facturations du festival</Link>
                         </Nav.Item>
                         <Nav.Item>
                             <NavDropdown title={<> <FaList/> Informations générales </>} id="basic-nav-dropdown">

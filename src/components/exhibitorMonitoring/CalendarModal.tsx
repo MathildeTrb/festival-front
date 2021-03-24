@@ -3,7 +3,7 @@ import "../../css/sample.css"
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import {FC} from "react";
 
-const CalendarModal: FC<{ show: boolean, onHide: () => void, date: Date, setDate: (any) => void, onValidate:() => void }> = ({show, onHide, date, setDate, onValidate}) => {
+const CalendarModal: FC<{ title: string, show: boolean, onHide: () => void, date: Date, setDate: (any) => void, onValidate:() => void }> = ({ title, show, onHide, date, setDate, onValidate}) => {
 
     const onChange = date => {
         const newDate = new Date(new Date(date).setHours(6))
@@ -25,7 +25,7 @@ const CalendarModal: FC<{ show: boolean, onHide: () => void, date: Date, setDate
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Sélection d'une date de contact
+                    {title}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -41,7 +41,7 @@ const CalendarModal: FC<{ show: boolean, onHide: () => void, date: Date, setDate
                 </Row>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={onClick}>valider</Button>
+                <Button type="button" onClick={onClick}>Valider</Button>
             </Modal.Footer>
         </Modal>
     )

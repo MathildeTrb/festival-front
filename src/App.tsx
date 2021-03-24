@@ -32,7 +32,8 @@ const App: FC = () => {
             {isPending && <div>Is loading ...</div>}
             {selectedFestival &&
             <FestivalContext.Provider value={value}>
-                {loggedNavbar? <NavbarLogged/> : <NavbarVisitor/>}
+                {/*{loggedNavbar? <NavbarLogged/> : <NavbarVisitor/>}*/}
+                <NavbarLogged/>
                 <Routes/>
             </FestivalContext.Provider>}
         </Container>

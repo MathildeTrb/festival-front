@@ -3,7 +3,7 @@ import {Form} from "react-bootstrap";
 import {FC} from "react";
 import {GameType} from "../../utils/types";
 
-const GameTypeSelectList: FC<{ selected: GameType, handleChange: (set: any) => void}> = ({selected, handleChange}) => {
+const GameTypeSelectList: FC<{ selected?: GameType, handleChange: (set: any) => void}> = ({selected, handleChange}) => {
 
     const {data: gameTypes} = useAxios<GameType[]>("gameTypes");
 

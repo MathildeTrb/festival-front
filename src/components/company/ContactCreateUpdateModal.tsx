@@ -13,7 +13,7 @@ type ContactCreateUpdateModalProps = {
 
 const ContactCreateUpdateModal: FC<ContactCreateUpdateModalProps> = ({show, onHide, onAction, company, contact, updateMode = false}) => {
 
-    const [lastname, setLastname] = useState<string>(contact ? contact.lastname : "");
+    /*const [lastname, setLastname] = useState<string>(contact ? contact.lastname : "");
     const [firstname, setFirstname] = useState<string>(contact ? contact.firstname : "");
     const [mail, setMail] = useState<string>(contact ? contact.mail : "");
     const [isImportant, setIsImportant] = useState<boolean>(contact ? contact.isImportant : false);
@@ -128,7 +128,9 @@ const ContactCreateUpdateModal: FC<ContactCreateUpdateModalProps> = ({show, onHi
                 </Form>
             </Modal.Body>
         </Modal>
-    )
+    )*/
+
+    return <div>test</div>
 }
 
 export default ContactCreateUpdateModal;

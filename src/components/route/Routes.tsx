@@ -3,7 +3,6 @@ import {Switch, Route} from "react-router-dom";
 import Home from "../home/Home";
 import NotFound from "../NotFound";
 import ExhibitorMonitoringList from "../exhibitorMonitoring/ExhibitorMonitoringList";
-import InvoicingList from "../InvoicingList";
 import {Container} from "react-bootstrap";
 import Login from "../user/Login";
 import Profil from "../user/Profil";
@@ -14,6 +13,7 @@ import Logout from "../user/Logout";
 import Games from "../game/Games";
 import Companies from "../company/Companies";
 import GameMonitorings from "../gameMonitoring/GameMonitorings";
+import Invoices from "../invoice/Invoices";
 
 const Routes: FC = () => {
     return (
@@ -21,7 +21,7 @@ const Routes: FC = () => {
             <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route exact path='/:idFestival/exhibitors' component={ExhibitorMonitoringList}/>
-                <Route exact path='/:idFestival/invoicing' component={InvoicingList}/>
+                <Route exact path="/invoices" component={Invoices}/>
                 <PrivateRoute exact path='/profil' component={Profil}/>
                 <Route exact path='/login' component={Login}/>
                 <Route exact path='/register' component={Register}/>
