@@ -9,13 +9,10 @@ const GameCreateModal: FC<{show: boolean, onHide: () => void}> = ({show, onHide}
     const {games, setGames} = useContext(GameContext);
 
     const handleCreate = (game: Game) => {
-        const newGames = [...games];
-        newGames.push(game);
+        const newGames = [...games, game];
         newGames.sort(((g1, g2) => g1.name.localeCompare(g2.name)))
 
         setGames(newGames);
-
-        console.log(newGames)
 
         onHide();
     }
@@ -28,7 +25,7 @@ const GameCreateModal: FC<{show: boolean, onHide: () => void}> = ({show, onHide}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <GameForm onCreate={handleCreate}/>
+                <GameForm onAction={handleCreate}/>
             </Modal.Body>
         </Modal>
     )

@@ -22,10 +22,6 @@ const Games: FC = () => {
     const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
     const [showModalGameTypeCreate, setShowModalGameTypeCreate] = useState<boolean>(false);
 
-    const onDeleteGame = game => {
-        setGames(games.filter(g => g.id !== game.id))
-    }
-
     useEffect(() => {
         document.title = "Liste des jeux"
     })
@@ -36,41 +32,44 @@ const Games: FC = () => {
         <div>
             {isPending && <Spinner animation="border" variant="primary"/>}
             {games &&
-                <GameContext.Provider value={value}>
+            <GameContext.Provider value={value}>
+                <h1 className="text-center mb-5">
+                    Liste des jeux
+                </h1>
 
-                    <h1 className="text-center mb-5">
-                        Liste des jeux
-                    </h1>
+                <div>
+                    <button type="button" className="mon-button mb-2" onClick={() => setShowModalCreate(true)}><p>
+                        <VscDiffAdded/> Ajout d'un jeu</p></button>
+                    <GameCreateModal show={showModalCreate} onHide={() => setShowModalCreate(false)}/>
 
-                    <div>
-                        <button type="button" className="mon-button mb-2" onClick={() => setShowModalCreate(true)}><p><VscDiffAdded/> Ajout d'un jeu</p></button>
-                        <GameCreateModal show={showModalCreate} onHide={() => setShowModalCreate(false)}/>
+                    <button type="button" className="mon-validate-button mb-2"
+                            onClick={() => setShowModalGameTypeCreate(true)}><p><VscDiffAdded/> Ajout d'un type de jeu
+                    </p></button>
+                    <GameTypeCreateModal show={showModalGameTypeCreate}
+                                         onHide={() => setShowModalGameTypeCreate(false)}/>
+                </div>
 
-                        <button type="button" className="mon-validate-button mb-2" onClick={() => setShowModalGameTypeCreate(true)}><p><VscDiffAdded/> Ajout d'un type de jeu</p></button>
-                        <GameTypeCreateModal show={showModalGameTypeCreate} onHide={() => setShowModalGameTypeCreate(false)}/>
-                    </div>
-
-                    <table className="table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">Photo</th>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Nombre de joueurs</th>
-                            <th scope="col">Âge minimum</th>
-                            <th scope="col">Durée</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Prototype</th>
-                            <th scope="col">Editeur <GiClick/></th>
-                            <th scope="col"/>
-                            <th scope="col"/>
-                            <th scope="col"/>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {games.map((game, index) => <GameRow key={index} game={game} onDelete={onDeleteGame}/>)}
-                        </tbody>
-                    </table>
-                </GameContext.Provider>
+                <table className="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Nombre de joueurs</th>
+                        <th scope="col">Âge minimum</th>
+                        <th scope="col">Durée</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Prototype</th>
+                        <th scope="col">Editeur <GiClick/></th>
+                        <th scope="col"/>
+                        <th scope="col"/>
+                        <th scope="col"/>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {games.map((game, index) => <GameRow key={index} game={game}/>)}
+                    </tbody>
+                </table>
+            </GameContext.Provider>
 
             }
         </div>

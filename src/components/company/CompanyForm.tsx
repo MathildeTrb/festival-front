@@ -1,12 +1,13 @@
 import {FC, useState} from "react";
 import {Company} from "../../utils/types";
 import {Button, Col, Form, Row} from "react-bootstrap";
+import axios from "../../utils/axios";
 
-const CompanyForm: FC<{company?: Company, onCreate: (c: Company) => void, updateMode?: boolean}> = ({company, onCreate, updateMode}) => {
+const CompanyForm: FC<{company?: Company, onAction: (company: Company) => void, updateMode?: boolean}> = ({company, onAction, updateMode}) => {
 
-    const [name, setName] = useState<string>(company ? company.name : null);
-    const [mail, setMail] = useState<string>(company ? company.mail : null);
-    const [address, setAddress] = useState<string>(company ? company.address : null);
+    const [name, setName] = useState<string>(company ? company.name : "");
+    const [mail, setMail] = useState<string>(company ? company.mail : "");
+    const [address, setAddress] = useState<string>(company ? company.address : "");
     const [canBeExhibitor, setCanBeExhibitor] = useState<boolean>(false);
 
     const handleChange = set => event => {
@@ -16,7 +17,22 @@ const CompanyForm: FC<{company?: Company, onCreate: (c: Company) => void, update
     const handleSubmit = event => {
         event.preventDefault();
 
-        console.log("CREATE company")
+        const newCompany: Company = {
+            id: company ? company.id : undefined,
+            name,
+            mail,
+            address,
+            canBeExhibitor
+        }
+
+        const action = updateMode ? axios.put : axios.post;
+
+        action("companies", {
+            company: newCompany
+        })
+            .then(({data}) => {
+                onAction(updateMode ? newCompany : data);
+            })
     }
 
     return (
@@ -53,7 +69,7 @@ const CompanyForm: FC<{company?: Company, onCreate: (c: Company) => void, update
                     Exposant potentiel
                 </Form.Label>
                 <Col sm="9">
-                    <Button variant={canBeExhibitor ? "success" : "danger"} onClick={() => setCanBeExhibitor(!canBeExhibitor)}>{canBeExhibitor ? "Oui" : "Non"}</Button>
+                    <button type="button" className={canBeExhibitor ? "mon-validate-button" : "mon-delete-button"} onClick={() => setCanBeExhibitor(!canBeExhibitor)}>{canBeExhibitor ? "Oui" : "Non"}</button>
                 </Col>
             </Form.Group>
 

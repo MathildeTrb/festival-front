@@ -32,8 +32,8 @@ export type Company = {
     mail: string;
     address: string;
     canBeExhibitor: boolean;
-    contacts: Contact[];
-    games: Game[];
+    contacts?: Contact[];
+    games?: Game[];
 }
 
 export type User = {
@@ -123,4 +123,11 @@ export type GameMonitoringStatus = {
 export type Area = {
     id?: number;
     label: string;
+    gameMonitorings: GameMonitoring[];
+}
+
+export type AreaVisitor = {
+    id?: number;
+    label: string;
+    games: Game[];
 }

@@ -46,28 +46,26 @@ const ExhibitorMonitoringRow:
             <tr>
                 <td>{exhibitorMonitoring.exhibitor.name}</td>
                 <td>
-                    <ImCalendar onClick={() => setShowModal1(true)}/>
+                    <ImCalendar onClick={() => setShowModal1(true)}/> {exhibitorMonitoring.dateContact1 ? new Date(exhibitorMonitoring.dateContact1).toLocaleDateString() : <>Pas de 1<sup>er</sup> contact</>}
                     <CalendarModal show={showModal1} onHide={() => setShowModal1(false)} date={date1} setDate={setDate1}
                                    onValidate={onValidate}/>
-                    {exhibitorMonitoring.dateContact1 ? new Date(exhibitorMonitoring.dateContact1).toLocaleDateString() : " pas de 1er contact"}
                 </td>
                 <td>
-                    <ImCalendar onClick={() => setShowModal2(true)}/>
+                    <ImCalendar onClick={() => setShowModal2(true)}/> {exhibitorMonitoring.dateContact2 ? new Date(exhibitorMonitoring.dateContact2).toLocaleDateString() : <>Pas de 2<sup>e</sup> contact</>}
                     <CalendarModal show={showModal2} onHide={() => setShowModal2(false)} date={date2} setDate={setDate2}
                                    onValidate={onValidate}/>
-                    {exhibitorMonitoring.dateContact2 ? new Date(exhibitorMonitoring.dateContact2).toLocaleDateString() : " pas de 2nd contact"}
+
                 </td>
                 <td>
-                    <ImCalendar onClick={() => setShowModal3(true)}/>
+                    <ImCalendar onClick={() => setShowModal3(true)}/> {exhibitorMonitoring.dateContact3 ? new Date(exhibitorMonitoring.dateContact3).toLocaleDateString() : <>Pas de 3<sup>e</sup> contact</>}
                     <CalendarModal show={showModal3} onHide={() => setShowModal3(false)} date={date3} setDate={setDate3}
                                    onValidate={onValidate}/>
-                    {exhibitorMonitoring.dateContact3 ? new Date(exhibitorMonitoring.dateContact3).toLocaleDateString() : " pas de 3e contact"}
                 </td>
                 <td>
                     <ExhibitorMonitoringStatusSelectList exhibitorMonitoring={exhibitorMonitoring} setShowModal={setShowModalStatus} exhibitorMonitoringStatusTab={exhibitorMonitoringStatusTab}/>
                     <ModalCreateReservation show={showModalStatus} onHide={() => setShowModalStatus(false)} exhibitorMonitoring={exhibitorMonitoring}/>
                 </td>
-                <td>{exhibitorMonitoring.reservation ? exhibitorMonitoring.reservation.id : "pas de reservation"}</td>
+                <td>{exhibitorMonitoring.reservation ? exhibitorMonitoring.reservation.id : "Pas de reservation"}</td>
             </tr>
 
         )

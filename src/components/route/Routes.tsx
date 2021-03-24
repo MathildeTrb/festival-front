@@ -32,7 +32,7 @@ const Routes: FC = () => {
                 <Route exact path="/:idFestival/gameMonitorings" component={GameMonitorings}/>
                 <Route path='*'>
                     <NotFound/>
-                </Route>
+                </Route>a
             </Switch>
         </Container>
     )

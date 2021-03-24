@@ -24,7 +24,7 @@ const ContactsModal: FC<ContactsModalProps> = ({show, onHide, company}) => {
 
     const onCreate = (contact: Contact) => {
 
-        axios.post("/contacts", {
+        axios.post("contacts", {
             contact
         })
             .then(({data: newContact}) => {
@@ -37,7 +37,7 @@ const ContactsModal: FC<ContactsModalProps> = ({show, onHide, company}) => {
 
     const onUpdate = (contact: Contact) => {
 
-        axios.put("/contacts", {
+        axios.put("contacts", {
             contact
         })
             .then(({data: updatedContact}) => {

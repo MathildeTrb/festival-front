@@ -8,18 +8,25 @@ type ValidationDeleteModalProps = {
     onHide: () => void;
 }
 
-const ValidationModal: FC<ValidationDeleteModalProps> = ({show, message, onValidate, onHide}) => (
-    <Modal show={show} onHide={onHide}>
-        <Modal.Body>{message}</Modal.Body>
-        <Modal.Footer>
-            <Button variant="danger" onClick={onHide}>
-                Annuler
-            </Button>
-            <Button variant="success" onClick={onValidate}>
-                Valider
-            </Button>
-        </Modal.Footer>
-    </Modal>
-)
+const ValidationModal: FC<ValidationDeleteModalProps> = ({show, message, onValidate, onHide}) => {
+
+    const onClick = () => {
+        onValidate();
+        onHide();
+    }
+    return (
+        <Modal show={show} onHide={onHide}>
+            <Modal.Body>{message}</Modal.Body>
+            <Modal.Footer>
+                <Button variant="danger" onClick={onHide}>
+                    Annuler
+                </Button>
+                <Button variant="success" onClick={onClick}>
+                    Valider
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    )
+}
 
 export default ValidationModal;
