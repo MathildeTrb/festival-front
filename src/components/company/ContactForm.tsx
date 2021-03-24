@@ -103,7 +103,7 @@ const ContactForm: FC<{contact?: Contact, company: Company, onAction: (c: Contac
                     Important
                 </Form.Label>
                 <Col sm="9">
-                    <Button variant={isImportant ? "success" : "danger"} onClick={() => setIsImportant(!isImportant)}>{isImportant ? "Oui" : "Non"}</Button>
+                    <Button type="button" variant={isImportant ? "success" : "danger"} onClick={() => setIsImportant(!isImportant)}>{isImportant ? "Oui" : "Non"}</Button>
                 </Col>
             </Form.Group>
 
