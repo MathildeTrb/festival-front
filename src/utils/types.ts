@@ -3,7 +3,8 @@ export type Festival = {
     name: string;
     description: string;
     imageUrl: string;
-    isCurrent: boolean
+    isCurrent: boolean;
+    spaces?: Space[];
 }
 
 export type Game = {
@@ -85,16 +86,17 @@ export type Reservation = {
     needVolunteer: boolean;
     willCome: boolean;
     comment: string;
-    mailingDate: Date;
-    paymentDate: Date;
+    discount: number;
+    mailingDate?: Date;
+    paymentDate?: Date;
     reservationsDetails: ReservationDetails[];
     exhibitorMonitoring: ExhibitorMonitoring;
-    gameMonitorings: GameMonitoring[];
+    gameMonitorings?: GameMonitoring[];
 }
 
 export type ReservationDetails = {
-    reservation: Reservation;
-    space: Space;
+    reservation?: Reservation;
+    space?: Space;
     tableReserved: number;
     meterReserved: number;
 }

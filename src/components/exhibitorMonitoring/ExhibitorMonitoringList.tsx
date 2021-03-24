@@ -1,6 +1,6 @@
 import useAxios from "../../utils/useAxios";
-import {ExhibitorMonitoring, Game} from "../../utils/types";
-import {FC, useContext} from "react";
+import {ExhibitorMonitoring, ExhibitorMonitoringStatus, Game} from "../../utils/types";
+import {FC, useContext, useState} from "react";
 import {FestivalContext} from "../../App";
 import {Spinner} from "react-bootstrap";
 import ExhibitorMonitoringRow from "./ExhibitorMonitoringRow";

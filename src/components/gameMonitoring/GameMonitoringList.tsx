@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {FestivalContext} from "../App";
+import {FestivalContext} from "../../App";
 
 const GameMonitoringList = () => {
 

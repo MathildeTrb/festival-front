@@ -23,8 +23,6 @@ const Login = () => {
             mail,
             password
         });
-        console.log("je suis dans login : token = ")
-        console.log(token)
         saveToken(token.accessToken)
         if (!history.location.state){
             history.push("/")

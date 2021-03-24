@@ -38,11 +38,6 @@ const ModalAddFestival: FC<{show: boolean, onHide: () => void}> = ({show, onHide
             }
         })
 
-
-
-        console.log(festival)
-        console.log(spaces)
-
         onHide();
 
     }
@@ -91,7 +86,7 @@ const ModalAddFestival: FC<{show: boolean, onHide: () => void}> = ({show, onHide
                             </Col>
                             <Col>
                                 <label>festival courant ? </label>
-                                <button className={isCurrent ? "mon-validate-button" : "mon-delete-button"} onClick={() => setIsCurrent(!isCurrent)}>{isCurrent ? "OUI" : "NON"}</button>
+                                <button type="button" className={isCurrent ? "mon-validate-button" : "mon-delete-button"} onClick={() => setIsCurrent(!isCurrent)}>{isCurrent ? "OUI" : "NON"}</button>
                             </Col>
                         </Row>
                     </form>

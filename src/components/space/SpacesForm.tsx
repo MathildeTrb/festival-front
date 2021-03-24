@@ -15,10 +15,8 @@ const SpacesForm: FC<SpacesFormProps> = ({isSubmitted, createFestival}) => {
     const [space3, setSpace3] = useState<Space>()
 
     useEffect(() => {
-        console.log("je suis dans le use effect SPACES")
         if (space1 && space2 && space3){
             const spaces : Space[] = [space1, space2, space3]
-            console.log(spaces)
             createFestival(spaces)
         }
     }, [space1, space2, space3])

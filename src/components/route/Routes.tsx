@@ -2,7 +2,6 @@ import {FC} from "react";
 import {Switch, Route} from "react-router-dom";
 import Home from "../home/Home";
 import NotFound from "../NotFound";
-import GameMonitoringList from "../GameMonitoringList";
 import ExhibitorMonitoringList from "../exhibitorMonitoring/ExhibitorMonitoringList";
 import InvoicingList from "../InvoicingList";
 import {Container} from "react-bootstrap";
@@ -14,13 +13,13 @@ import PrivateRoute from "./PrivateRoute";
 import Logout from "../user/Logout";
 import Games from "../game/Games";
 import Companies from "../company/Companies";
+import GameMonitorings from "../gameMonitoring/GameMonitorings";
 
 const Routes: FC = () => {
     return (
         <Container fluid>
             <Switch>
                 <Route exact path="/" component={Home}/>
-                <Route exact path="/:idFestival/games" component={GameMonitoringList}/>
                 <Route exact path='/:idFestival/exhibitors' component={ExhibitorMonitoringList}/>
                 <Route exact path='/:idFestival/invoicing' component={InvoicingList}/>
                 <PrivateRoute exact path='/profil' component={Profil}/>
@@ -29,7 +28,8 @@ const Routes: FC = () => {
                 <Route exact path='/allUsers' component={Users}/>
                 <Route exact path="/games" component={Games}/>
                 <Route exact path='/logout' component={Logout}/>
-                <Route exact pah="/companies" component={Companies}/>
+                <Route exact path="/companies" component={Companies}/>
+                <Route exact path="/:idFestival/gameMonitorings" component={GameMonitorings}/>
                 <Route path='*'>
                     <NotFound/>
                 </Route>a
