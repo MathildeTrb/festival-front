@@ -6,7 +6,6 @@ const FestivalList = ({festivals}) => {
 
     const handleChange = event => {
         setFestival(event.target.value)
-        console.log(festival)
     }
 
     return (

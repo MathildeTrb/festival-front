@@ -14,7 +14,6 @@ const SpaceForm = ({onSubmit, isSubmitted}) => {
     }
 
     useEffect(() => {
-        console.log("Je suis dans le use effect SPACE")
         if (isSubmitted){
             const space : Space = {
                 label,
@@ -22,7 +21,6 @@ const SpaceForm = ({onSubmit, isSubmitted}) => {
                 meterPrice,
                 tableTotal : tableNumber
             }
-            console.log(space)
             onSubmit(space)
         }
     }, [isSubmitted])

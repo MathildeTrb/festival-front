@@ -19,7 +19,6 @@ const Profil = () => {
     const history = useHistory()
 
     useEffect(() => {
-        console.log(token)
         axios.get<User>("users/profil", {
             headers: {
                 "Content-Type": "application/json",
@@ -59,7 +58,6 @@ const Profil = () => {
     }
 
     const updatePassword = (passwordManaged) => {
-        console.log(passwordManaged)
         axios.put("users/password", {"passwordManaged": passwordManaged},{
             headers: {
                 "Content-Type": "application/json",

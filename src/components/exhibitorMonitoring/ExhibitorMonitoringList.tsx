@@ -1,6 +1,6 @@
 import useAxios from "../../utils/useAxios";
-import {ExhibitorMonitoring, Game} from "../../utils/types";
-import {FC, useContext} from "react";
+import {ExhibitorMonitoring, ExhibitorMonitoringStatus, Game} from "../../utils/types";
+import {FC, useContext, useState} from "react";
 import {FestivalContext} from "../../App";
 import {Spinner} from "react-bootstrap";
 import ExhibitorMonitoringRow from "./ExhibitorMonitoringRow";
@@ -24,7 +24,7 @@ const ExhibitorMonitoringList: FC = () => {
                     <th scope="col">1er contact</th>
                     <th scope="col">2eme contact</th>
                     <th scope="col">3eme contact</th>
-                    <th scope="col">Statue</th>
+                    <th scope="col">Statut</th>
                     <th scope="col">Réservation</th>
                 </tr>
                 </thead>

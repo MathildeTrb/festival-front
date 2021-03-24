@@ -1,21 +1,58 @@
-import {FC} from "react";
-import {ExhibitorMonitoringStatus} from "../../utils/types";
-import useAxios from "../../utils/useAxios";
-import {Form} from "react-bootstrap";
+import {ExhibitorMonitoring, ExhibitorMonitoringStatus} from "../../utils/types";
+import {FC, useEffect, useState} from "react";
+import Select from 'react-select'
+import axios from "../../utils/axios";
 
-const ExhibitorMonitoringStatusSelectList: FC<{selected?: ExhibitorMonitoringStatus, handleChange: (set: any) => void}> = ({selected, handleChange}) => {
+type Option = {
+    value: string;
+    label: string
+}
 
-    const {data: exhibitorMonitoringStatusTab} = useAxios<ExhibitorMonitoringStatus[]>("exhibitorMonitoringStatus");
+const ExhibitorMonitoringStatusSelectList: FC<{ exhibitorMonitoring: ExhibitorMonitoring, setShowModal: (boolean) => void, exhibitorMonitoringStatusTab: ExhibitorMonitoringStatus[] }> =
+    ({
+         exhibitorMonitoring,
+         setShowModal,
+         exhibitorMonitoringStatusTab
+    }) => {
+
+    const options: Option[] = []
+
+    const defaultValue: Option = {
+        value: JSON.stringify(exhibitorMonitoring.status),
+        label: exhibitorMonitoring.status.label
+    }
+
+    useEffect(() => {
+        if (exhibitorMonitoringStatusTab) {
+            exhibitorMonitoringStatusTab.forEach(exhibitorMonitoringStatus => {
+                options.push({
+                    value: JSON.stringify(exhibitorMonitoringStatus),
+                    label: exhibitorMonitoringStatus.label
+                })
+            })
+        }
+    }, [exhibitorMonitoringStatusTab, options])
+
+    const handleChange = (selectedOption: Option) => {
+        const status = JSON.parse(selectedOption.value)
+        exhibitorMonitoring.status = status
+        axios.put("exhibitorMonitorings/status",
+            {'exhibitorMonitoring': exhibitorMonitoring}
+            )
+        if (status.id === 6){
+            setShowModal(true)
+        }
+    }
+
     return (
-        <>
-            {exhibitorMonitoringStatusTab &&
-            <Form.Control as="select" defaultValue={selected ? JSON.stringify(selected) : 0} onChange={handleChange}>
-                <option value={0} disabled className="option-disabled">Choisir un status</option>
-                {exhibitorMonitoringStatusTab.map((exhibitorMonitoringStatus, index) => <option key={index} value={JSON.stringify(exhibitorMonitoringStatus)}>{exhibitorMonitoringStatus.label}</option>)}
-            </Form.Control>
-            }
-        </>
+        <div>
+            <Select
+                defaultValue={defaultValue}
+                onChange={handleChange}
+                options={options}
+            />
+        </div>
     )
 }
 
-export default ExhibitorMonitoringStatusSelectList;
+export default ExhibitorMonitoringStatusSelectList

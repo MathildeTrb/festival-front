@@ -25,6 +25,8 @@ const App: FC = () => {
     const {isLogged} = useToken()
     const [loggedNavbar, setLoggedNavbar] = useState(isLogged)
 
+    console.log("coucou je suis le front")
+
     return (
         <Container fluid>
             {isPending && <div>Is loading ...</div>}

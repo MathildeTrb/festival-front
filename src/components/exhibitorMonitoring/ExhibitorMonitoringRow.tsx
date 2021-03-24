@@ -1,5 +1,5 @@
 import {Dispatch, FC, SetStateAction, useState} from "react";
-import {ExhibitorMonitoring} from "../../utils/types";
+import {ExhibitorMonitoring, ExhibitorMonitoringStatus} from "../../utils/types";
 import {ImCalendar} from "react-icons/im"
 import Calendar from "react-calendar"
 import "../../css/sample.css"
@@ -7,11 +7,12 @@ import CalendarModal from "./CalendarModal";
 import axios from "../../utils/axios";
 import useToken from "../../utils/useToken";
 import useAxios from "../../utils/useAxios";
+import ExhibitorMonitoringStatusSelectList from "./ExhibitorMonitoringStatusSelectList";
+import ModalCreateReservation from "../reservation/ModalCreateReservation";
 
 
 const ExhibitorMonitoringRow:
-    FC<{ exhibitorMonitoring: ExhibitorMonitoring }> =
-    ({exhibitorMonitoring}) => {
+    FC<{ exhibitorMonitoring: ExhibitorMonitoring }> = ({exhibitorMonitoring}) => {
 
         const {token} = useToken();
 
@@ -23,19 +24,20 @@ const ExhibitorMonitoringRow:
         const [showModal2, setShowModal2] = useState<boolean>(false);
         const [showModal3, setShowModal3] = useState<boolean>(false);
 
+        const [showModalStatus, setShowModalStatus] = useState<boolean>(false);
+
+        const {data: exhibitorMonitoringStatusTab} = useAxios<ExhibitorMonitoringStatus[]>("exhibitorMonitoringStatus")
+
         const onValidate = async () => {
             exhibitorMonitoring.dateContact1 = date1;
             exhibitorMonitoring.dateContact2 = date2;
             exhibitorMonitoring.dateContact3 = date3;
+            if(exhibitorMonitoring.status.label === "Pas contacté"){
+                exhibitorMonitoring.status = exhibitorMonitoringStatusTab.filter(e => e.label === "En discussion")[0]
+            }
             axios.put(
-                "exhibitorMonitorings",
-                {'exhibitorMonitoring': exhibitorMonitoring},
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token
-                    }
-                }
+                "exhibitorMonitorings/date",
+                {'exhibitorMonitoring': exhibitorMonitoring}
             );
         }
 
@@ -61,8 +63,11 @@ const ExhibitorMonitoringRow:
                                    onValidate={onValidate}/>
                     {exhibitorMonitoring.dateContact3 ? new Date(exhibitorMonitoring.dateContact3).toLocaleDateString() : " pas de 3e contact"}
                 </td>
-                <td>{exhibitorMonitoring.status.label}</td>
-                <td>{exhibitorMonitoring.reservation ? exhibitorMonitoring.reservation.id : "pas de réservation"}</td>
+                <td>
+                    <ExhibitorMonitoringStatusSelectList exhibitorMonitoring={exhibitorMonitoring} setShowModal={setShowModalStatus} exhibitorMonitoringStatusTab={exhibitorMonitoringStatusTab}/>
+                    <ModalCreateReservation show={showModalStatus} onHide={() => setShowModalStatus(false)} exhibitorMonitoring={exhibitorMonitoring}/>
+                </td>
+                <td>{exhibitorMonitoring.reservation ? exhibitorMonitoring.reservation.id : "pas de reservation"}</td>
             </tr>
 
         )

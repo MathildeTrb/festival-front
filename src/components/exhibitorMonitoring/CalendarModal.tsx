@@ -30,7 +30,7 @@ const CalendarModal: FC<{ show: boolean, onHide: () => void, date: any, setDate:
             </Modal.Header>
             <Modal.Body>
                 <Calendar value={date} onChange={onChange}/>
-                {"date séléctionnée" + date ? date.toString() : "pas de date"}
+                {/*"date séléctionnée" + date ? date.toString() : "pas de date"*/}
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={onClick}>valider</Button>
