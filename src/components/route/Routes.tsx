@@ -24,12 +24,12 @@ const Routes: FC = () => {
                 <Route exact path="/invoices" component={Invoices}/>
                 <PrivateRoute exact path='/profil' component={Profil}/>
                 <Route exact path='/login' component={Login}/>
-                <Route exact path='/register' component={Register}/>
-                <Route exact path='/allUsers' component={Users}/>
-                <Route exact path="/games" component={Games}/>
+                <PrivateRoute exact path='/register' component={Register}/>
+                <PrivateRoute exact path='/allUsers' component={Users}/>
+                <PrivateRoute exact path="/games" component={Games}/>
                 <Route exact path='/logout' component={Logout}/>
-                <Route exact path="/companies" component={Companies}/>
-                <Route exact path="/:idFestival/gameMonitorings" component={GameMonitorings}/>
+                <PrivateRoute exact path="/companies" component={Companies}/>
+                <PrivateRoute exact path="/:idFestival/gameMonitorings" component={GameMonitorings}/>
                 <Route path='*'>
                     <NotFound/>
                 </Route>a
