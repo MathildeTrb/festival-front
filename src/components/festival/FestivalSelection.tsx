@@ -4,7 +4,7 @@ import {Dropdown} from "react-bootstrap";
 import {VscDiffAdded} from "react-icons/vsc";
 import ModalAddFestival from "./ModalAddFestival";
 
-const FestivalSelection = ({festivals}) => {
+const FestivalSelection = ({festivals, setFestivals}) => {
 
     const [showModal, setShowModal] = useState<boolean>(false)
 
@@ -29,7 +29,7 @@ const FestivalSelection = ({festivals}) => {
                 <Dropdown.Divider/>
                 <Dropdown.Item as="button" onClick={() => setShowModal(true)}>
                     <p><VscDiffAdded/> Ajouter un festival</p>
-                    <ModalAddFestival show={showModal} onHide={() => setShowModal(false)}/>
+                    <ModalAddFestival show={showModal} onHide={() => setShowModal(false)} setFestivals={setFestivals} festivals={festivals}/>
                 </Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>

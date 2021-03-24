@@ -16,13 +16,9 @@ import FestivalSelection from "../festival/FestivalSelection";
 
 const NavbarLogged = () => {
 
-    const {data: festivals, error, isPending} = useAxios<Festival[]>("festivals")
+    const {data: festivals, setData: setFestivals, error, isPending} = useAxios<Festival[]>("festivals")
 
-    const {selectedFestival, setSelectedFestival} = useContext(FestivalContext);
-
-    const handleChange = (eventKey) => {
-        setSelectedFestival(JSON.parse(eventKey))
-    }
+    const {selectedFestival} = useContext(FestivalContext);
 
     return (
         <div>
@@ -34,7 +30,7 @@ const NavbarLogged = () => {
                     <Image className="image-css" src={logo} fluid/>
                 </Col>
                 <Col md={1} className={"navbar-col"}>
-                    <FestivalSelection festivals={festivals} />
+                    <FestivalSelection festivals={festivals} setFestivals={setFestivals}/>
                 </Col>
                 <Col md={9} className={"navbar-col"}>
                     <Nav fill variant="tabs" defaultActiveKey="/">
