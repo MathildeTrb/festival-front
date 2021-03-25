@@ -4,12 +4,13 @@ import {BsPencilSquare} from "react-icons/bs";
 import {RiDeleteBin6Line} from "react-icons/ri";
 import {TiContacts} from "react-icons/ti";
 import {GrGamepad} from "react-icons/gr";
-import ContactsModal from "./ContactsModal";
+import OldContactsModal from "./OldContactsModal";
 import GamesModal from "./GamesModal";
 import axios from "../../utils/axios";
 import {CompanyContext} from "./Companies";
 import CompanyUpdateModal from "./CompanyUpdateModal";
 import ValidationModal from "../ValidationModal";
+import ContactsModal from "./ContactsModal";
 
 const CompanyRow: FC<{ company: Company }> = ({company}) => {
 
@@ -36,7 +37,7 @@ const CompanyRow: FC<{ company: Company }> = ({company}) => {
             <td className={company.canBeExhibitor ? "yes-cell" : "no-cell"}>{company.canBeExhibitor ? "Oui" : "Non"}</td>
             <td>
                 <TiContacts className="p-cursor" onClick={() => setShowModalContacts(true)}/> ({company.contacts.length})
-                <ContactsModal show={showModalContacts} onHide={() => setShowModalContacts(false)} company={company}/>
+                <ContactsModal company={company} show={showModalContacts} onHide={() => setShowModalContacts(false)}/>
             </td>
             <td>
                 <GrGamepad onClick={() => setShowModalGames(true)}/> ({company.games.length})

@@ -84,3 +84,11 @@
 .no-cursor {
     cursor: none;
 }
+
+.thead-blue {
+    background-color: #99a0ca;
+}
+
+.td-red {
+    background-color: #f69bbd;
+}

@@ -29,7 +29,7 @@ const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMo
             willCome,
             comment,
             discount,
-            reservationsDetails: reservationDetailsTab,
+            reservationDetails: reservationDetailsTab,
             exhibitorMonitoring,
         }
 

@@ -47,18 +47,18 @@ const ExhibitorMonitoringRow:
                 <td>{exhibitorMonitoring.exhibitor.name}</td>
                 <td>
                     <ImCalendar onClick={() => setShowModal1(true)}/> {exhibitorMonitoring.dateContact1 ? new Date(exhibitorMonitoring.dateContact1).toLocaleDateString() : <>Pas de 1<sup>er</sup> contact</>}
-                    <CalendarModal show={showModal1} onHide={() => setShowModal1(false)} date={date1} setDate={setDate1}
+                    <CalendarModal title="Sélection de la date du premier contact" show={showModal1} onHide={() => setShowModal1(false)} date={date1} setDate={setDate1}
                                    onValidate={onValidate}/>
                 </td>
                 <td>
                     <ImCalendar onClick={() => setShowModal2(true)}/> {exhibitorMonitoring.dateContact2 ? new Date(exhibitorMonitoring.dateContact2).toLocaleDateString() : <>Pas de 2<sup>e</sup> contact</>}
-                    <CalendarModal show={showModal2} onHide={() => setShowModal2(false)} date={date2} setDate={setDate2}
+                    <CalendarModal title="Sélection de la date du deuxième contact" show={showModal2} onHide={() => setShowModal2(false)} date={date2} setDate={setDate2}
                                    onValidate={onValidate}/>
 
                 </td>
                 <td>
                     <ImCalendar onClick={() => setShowModal3(true)}/> {exhibitorMonitoring.dateContact3 ? new Date(exhibitorMonitoring.dateContact3).toLocaleDateString() : <>Pas de 3<sup>e</sup> contact</>}
-                    <CalendarModal show={showModal3} onHide={() => setShowModal3(false)} date={date3} setDate={setDate3}
+                    <CalendarModal title="Sélection de la date du troisième contact" show={showModal3} onHide={() => setShowModal3(false)} date={date3} setDate={setDate3}
                                    onValidate={onValidate}/>
                 </td>
                 <td>

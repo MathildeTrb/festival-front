@@ -89,7 +89,7 @@ export type Reservation = {
     discount: number;
     mailingDate?: Date;
     paymentDate?: Date;
-    reservationsDetails: ReservationDetails[];
+    reservationDetails: ReservationDetails[];
     exhibitorMonitoring: ExhibitorMonitoring;
     gameMonitorings?: GameMonitoring[];
 }

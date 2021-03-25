@@ -3,7 +3,7 @@ import "../../css/index.css"
 import {Col, Dropdown, Image, Nav, NavDropdown, Row} from "react-bootstrap";
 import logo from "../../pictures/logo_FDJ_FINAL_800.png"
 import useAxios from "../../utils/useAxios";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {FestivalContext} from "../../App";
 import {BiUser} from 'react-icons/bi'
 import {HiOutlineInformationCircle} from 'react-icons/hi'
@@ -11,6 +11,7 @@ import {FaGamepad, FaFileInvoiceDollar, FaList} from 'react-icons/fa'
 import {AiOutlineAudit} from 'react-icons/ai'
 import {Festival} from "../../utils/types";
 import FestivalSelection from "../festival/FestivalSelection";
+import useToken from "../../utils/useToken";
 
 
 
@@ -20,11 +21,16 @@ const NavbarLogged = () => {
 
     const {selectedFestival} = useContext(FestivalContext);
 
+    const {isLogged} = useToken()
+    const [loggedNavbar, setLoggedNavbar] = useState(isLogged())
+
     return (
+
+
         <div>
             {isPending && <div>loading... </div>}
             {error && <div>{error}</div>}
-            {festivals && selectedFestival &&
+            {festivals && selectedFestival && loggedNavbar &&
             <Row>
                 <Col md={2}>
                     <Image className="image-css" src={logo} fluid/>
@@ -45,7 +51,7 @@ const NavbarLogged = () => {
                             <Link to={`/${selectedFestival.id}/gameMonitorings`} className='nav-link'> <FaGamepad/> Réservations jeux</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
-                            <Link to={`/${selectedFestival.id}/invoicing`} className='nav-link'> <FaFileInvoiceDollar/> Facturations du festival</Link>
+                            <Link to="/invoices" className='nav-link'> <FaFileInvoiceDollar/> Facturations du festival</Link>
                         </Nav.Item>
                         <Nav.Item>
                             <NavDropdown title={<> <FaList/> Informations générales </>} id="basic-nav-dropdown">
