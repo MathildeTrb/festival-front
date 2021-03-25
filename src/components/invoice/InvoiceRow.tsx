@@ -4,6 +4,8 @@ import {ImCalendar} from "react-icons/im";
 import CalendarModal from "../exhibitorMonitoring/CalendarModal";
 import axios from "../../utils/axios";
 import {Link} from "react-router-dom";
+import {Button} from "react-bootstrap";
+import pdf from "../../utils/PDF";
 
 const InvoiceRow: FC<{reservation: Reservation}> = ({reservation}) => {
 
@@ -38,6 +40,9 @@ const InvoiceRow: FC<{reservation: Reservation}> = ({reservation}) => {
             <td>
                 <ImCalendar onClick={() => setShowModalPaymentDate(true)}/> {reservation.paymentDate ? new Date(reservation.paymentDate).toLocaleDateString() : "Pas de date"}
                 <CalendarModal title="Sélection de la date de paiement" show={showModalPaymentDate} onHide={() => setShowModalPaymentDate(false)} date={paymentDate} setDate={setPaymentDate} onValidate={onValidate}/>
+            </td>
+            <td>
+                <Button variant="primary" onClick={() => pdf.demoFromHTML(reservation)}>Générer PDF</Button>
             </td>
         </tr>
     )
