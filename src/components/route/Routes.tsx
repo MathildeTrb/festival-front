@@ -14,6 +14,7 @@ import Games from "../game/Games";
 import Companies from "../company/Companies";
 import GameMonitorings from "../gameMonitoring/GameMonitorings";
 import Invoices from "../invoice/Invoices";
+import ExhibitorDashboard from "../exhibitorMonitoring/dashboard/ExhibitorDashboard";
 
 const Routes: FC = () => {
     return (
@@ -24,12 +25,13 @@ const Routes: FC = () => {
                 <Route exact path="/invoices" component={Invoices}/>
                 <PrivateRoute exact path='/profil' component={Profil}/>
                 <Route exact path='/login' component={Login}/>
-                <PrivateRoute exact path='/register' component={Register}/>
-                <PrivateRoute exact path='/allUsers' component={Users}/>
-                <PrivateRoute exact path="/games" component={Games}/>
+                <Route exact path='/register' component={Register}/>
+                <Route exact path='/allUsers' component={Users}/>
+                <Route exact path="/games" component={Games}/>
                 <Route exact path='/logout' component={Logout}/>
-                <PrivateRoute exact path="/companies" component={Companies}/>
-                <PrivateRoute exact path="/:idFestival/gameMonitorings" component={GameMonitorings}/>
+                <Route exact path="/companies" component={Companies}/>
+                <Route exact path="/:idFestival/gameMonitorings" component={GameMonitorings}/>
+                <Route exact path="/dashboard/:idExhibitor" component={ExhibitorDashboard}/>
                 <Route path='*'>
                     <NotFound/>
                 </Route>a
