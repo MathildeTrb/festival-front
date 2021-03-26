@@ -1,8 +1,11 @@
-import {createContext, Dispatch, FC, SetStateAction, useEffect} from "react";
+import {createContext, Dispatch, FC, SetStateAction, useEffect, useState} from "react";
 import useAxios from "../../utils/useAxios";
 import {Festival} from "../../utils/types";
-import {Spinner} from "react-bootstrap";
+import {Col, Spinner} from "react-bootstrap";
 import FestivalRow from "./FestivalRow";
+import {VscDiffAdded} from "react-icons/vsc";
+import CompanyCreateModal from "../company/CompanyCreateModal";
+import ModalAddFestival from "./ModalAddFestival";
 
 type FestivalContextProps = {
     festivals: Festival[];
@@ -14,6 +17,8 @@ export const FestivalContext = createContext<FestivalContextProps>({} as Festiva
 const Festivals: FC = () => {
 
     const {data: festivals, isPending, setData: setFestivals} = useAxios<Festival[]>("festivals");
+
+    const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
 
     useEffect(() =>{
         document.title = "Liste des festivals"
@@ -30,7 +35,11 @@ const Festivals: FC = () => {
                     Liste des festivals
                 </h1>
 
-                <table className="table table-striped">
+                <button type="button" className="mon-button mb-2" onClick={() => setShowModalCreate(true)}><p>
+                    <VscDiffAdded/> Ajout d'un festival</p></button>
+                <ModalAddFestival show={showModalCreate} onHide={() => setShowModalCreate(false)} setFestivals={setFestivals} festivals={festivals}/>
+
+                <table className="table">
                     <thead>
                     <tr>
                         <th scope="col">Photo</th>
@@ -43,7 +52,9 @@ const Festivals: FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {festivals.map((festival, index) => <FestivalRow key={index} festival={festival}/>)}
+                    {festivals
+                        .sort((f1, f2) => new Date(f1.creationDate).getTime() - new Date(f2.creationDate).getTime())
+                        .map((festival, index) => <FestivalRow key={index} festival={festival}/>)}
                     </tbody>
                 </table>
             </FestivalContext.Provider>

@@ -7,6 +7,7 @@ export type Festival = {
     creationDate?: Date;
     spaces?: Space[];
     areas?: Area[];
+    exhibitorMonitorings?: ExhibitorMonitoring[];
 }
 
 export type Game = {
@@ -65,6 +66,7 @@ export type Space = {
     tablePrice: number;
     meterPrice: number;
     tableTotal: number;
+    tableRemaining?: number;
 }
 
 export type ExhibitorMonitoring = {
@@ -125,7 +127,8 @@ export type GameMonitoringStatus = {
 export type Area = {
     id?: number;
     label: string;
-    gameMonitorings: GameMonitoring[];
+    festival: Festival;
+    gameMonitorings?: GameMonitoring[];
 }
 
 export type AreaVisitor = {

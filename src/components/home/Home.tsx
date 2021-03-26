@@ -31,9 +31,6 @@ const Home = () => {
 
             Text {text}
 
-            <AreaList/>
-
-
         </div>
     )
 }

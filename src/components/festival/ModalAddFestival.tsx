@@ -39,6 +39,11 @@ const ModalAddFestival: FC<{show: boolean, onHide: () => void, setFestivals:(fes
             }
         })).data
 
+        spaces.forEach(space => space.tableRemaining = space.tableTotal);
+
+        newFestival.spaces = [...spaces];
+        newFestival.areas = []
+
         setFestivals([...festivals, newFestival])
         onHide();
 
