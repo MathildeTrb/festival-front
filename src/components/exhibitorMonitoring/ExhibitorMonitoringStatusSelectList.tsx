@@ -39,7 +39,7 @@ const ExhibitorMonitoringStatusSelectList: FC<{ exhibitorMonitoring: ExhibitorMo
         axios.put("exhibitorMonitorings/status",
             {'exhibitorMonitoring': exhibitorMonitoring}
             )
-        if (status.id === 6){
+        if (status.label === "Présence confirmée" && !exhibitorMonitoring.reservation){
             setShowModal(true)
         }
     }

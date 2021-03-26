@@ -30,6 +30,7 @@ const Invoices: FC = () => {
                         <th scope="col">Montant (après remise)</th>
                         <th scope="col">Date d'envoi</th>
                         <th scope="col">Date de paiement</th>
+                        <th scope={"col"}>Facture</th>
                     </tr>
                     </thead>
                     <tbody>

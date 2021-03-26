@@ -1,15 +1,10 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
-import {FC, useContext, useState} from "react";
-import {FestivalContext} from "../../App";
-import FormDetailsReservation from "./FormDetailsReservation";
+import {FC, useState} from "react";
 import {ExhibitorMonitoring, Reservation, ReservationDetails} from "../../utils/types";
 import FormDetailsReservations from "./FormDetailsReservations";
 import axios from "../../utils/axios";
-import {log} from "util";
 
 const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMonitoring: ExhibitorMonitoring}> = ({show, onHide, exhibitorMonitoring}) => {
-
-    const {selectedFestival} = useContext(FestivalContext);
 
     const [needVolunteer, setNeedVolunter] = useState<boolean>(false)
     const [willCome, setWillCome] = useState<boolean>(false)

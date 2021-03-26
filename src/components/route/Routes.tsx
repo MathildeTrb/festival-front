@@ -36,7 +36,7 @@ const Routes: FC = () => {
                 <Route exact path="/dashboard/:idExhibitor" component={ExhibitorDashboard}/>
                 <Route path='*'>
                     <NotFound/>
-                </Route>a
+                </Route>
             </Switch>
         </Container>
     )

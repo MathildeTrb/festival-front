@@ -1,11 +1,12 @@
 import {Festival, Space} from "../../utils/types";
 import {FC, useState} from "react";
-import {Col, Container, Form, Modal, Row} from "react-bootstrap";
+import {Col, Modal, Row} from "react-bootstrap";
 import SpacesForm from "../space/SpacesForm";
 import axios from "../../utils/axios";
 import useToken from "../../utils/useToken";
 
-const ModalAddFestival: FC<{show: boolean, onHide: () => void}> = ({show, onHide}) => {
+
+const ModalAddFestival: FC<{show: boolean, onHide: () => void, setFestivals:(festivals:Festival[]) => void, festivals: Festival[]}> = ({show, onHide, setFestivals, festivals}) => {
 
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>();
@@ -19,16 +20,16 @@ const ModalAddFestival: FC<{show: boolean, onHide: () => void}> = ({show, onHide
         set(event.target.value);
     }
 
-    const createFestival = (spaces : Space[]) => {
+    const createFestival = async (spaces: Space[]) => {
 
-        const festival : Festival = {
+        const festival: Festival = {
             name,
             description,
             imageUrl: url,
             isCurrent,
         }
 
-        axios.post("festivals", {
+        const newFestival = (await axios.post<Festival>("festivals", {
             festival,
             spaces
         }, {
@@ -36,8 +37,9 @@ const ModalAddFestival: FC<{show: boolean, onHide: () => void}> = ({show, onHide
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + token
             }
-        })
+        })).data
 
+        setFestivals([...festivals, newFestival])
         onHide();
 
     }

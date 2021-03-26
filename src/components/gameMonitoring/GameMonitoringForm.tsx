@@ -1,6 +1,6 @@
 import {Area, GameMonitoring, GameMonitoringStatus} from "../../utils/types";
 import {FC, useContext, useState} from "react";
-import {Alert, Button, Col, Form, Row, Spinner} from "react-bootstrap";
+import {Alert, Button, CardImg, Col, Form, Row, Spinner} from "react-bootstrap";
 import GameMonitoringStatusSelectList from "./GameMonitoringStatusSelectList";
 import {FaRadiation} from "react-icons/all";
 import AreaSelectList from "./AreaSelectList";
@@ -79,7 +79,7 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
                 <Form.Label column sm="3">
                     Statut du jeu
                 </Form.Label>
-                <Col sm={"9"}>
+                <Col sm={"6"}>
                     <GameMonitoringStatusSelectList selected={status} handleChange={handleChangeJSON(setStatus)}/>
                 </Col>
             </Form.Group>
@@ -88,13 +88,16 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
                 <Form.Label column sm="4">
                     <AreaSelectList selected={area} handleChange={handleChangeJSON(setArea)}/>
                 </Form.Label>
+                <Form.Label column sm="3">
+                    Sélection de la zone
+                </Form.Label>
             </Form.Group>
 
             <Form.Group as={Row}>
                 <Form.Label column sm="3">
                     Placé ?
                 </Form.Label>
-                <Col sm="8">
+                <Col sm="2">
                     <Button variant={isPlaced ? "success" : "danger"}
                     onClick={inversePlaced}>{isPlaced ? "Oui" : "Non"}</Button>
                 </Col>
@@ -109,8 +112,8 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
                     </Form.Control>
                 </Col>
 
-            </Form.Group>
 
+            </Form.Group>
             <Form.Group as={Row}>
                 <Form.Label column sm="3">
                     Quantité Tombola
