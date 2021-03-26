@@ -92,3 +92,20 @@
 .td-red {
     background-color: #f69bbd;
 }
+
+.button-design {
+    border: none;
+    border-radius: 7px;
+}
+
+.icon-bg-color-yes {
+    background-color: #74b574;
+}
+
+.icon-bg-color-no {
+    background-color: #f69bbd;
+}
+
+.tr-blue {
+    background-color: #99a0ca;
+}

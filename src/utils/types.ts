@@ -4,7 +4,9 @@ export type Festival = {
     description: string;
     imageUrl: string;
     isCurrent: boolean;
+    creationDate?: Date;
     spaces?: Space[];
+    areas?: Area[];
 }
 
 export type Game = {

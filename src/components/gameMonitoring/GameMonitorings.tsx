@@ -27,8 +27,7 @@ const GameMonitorings: FC = ()=> {
 
     useEffect(() => {
         document.title = "Suivi des jeux"
-        console.log("COUCOUC JE SISS LA")
-    },[gameMonitorings])
+    })
 
     const value = {gameMonitorings, setGameMonitorings}
 
@@ -44,16 +43,16 @@ const GameMonitorings: FC = ()=> {
                 <table className="table table-striped table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">Jeux</th>
+                        <th scope="col">Nom du jeu</th>
+                        <th scope="col">Exposant</th>
                         <th scope="col">Statut</th>
                         <th scope="col">Placé</th>
                         <th scope="col">Zone</th>
-                        <th scope="col">Qté exposée</th>
-                        <th scope="col">Qté tombola</th>
-                        <th scope="col">Qté donnée</th>
-                        <th scope="col">besoin d'être retourné</th>
-                        <th scope="col">Prix retour</th>
-                        <th scope="col">Modification</th>
+                        <th scope="col">Quantité exposée</th>
+                        <th scope="col">Quantité tombola</th>
+                        <th scope="col">Quantité donnée</th>
+                        <th scope="col">Besoin d'être retourné</th>
+                        <th scope="col"/>
 
                     </tr>
                     </thead>
