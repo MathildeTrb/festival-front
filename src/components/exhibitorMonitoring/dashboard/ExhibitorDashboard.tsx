@@ -37,7 +37,7 @@ const ExhibitorDashboard: FC = () => {
                 <Row>
                     <Col>5</Col>
                     <Col>
-                        <ExhibitorGameMonitorings gamesMonitorings={exhibitorMonitoring.reservation.gameMonitorings}/>
+                        <ExhibitorGameMonitorings exhibitorMonitoring={exhibitorMonitoring}/>
                     </Col>
                 </Row>
             </Container>

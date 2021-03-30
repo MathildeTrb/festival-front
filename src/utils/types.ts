@@ -129,6 +129,7 @@ export type Area = {
     label: string;
     festival: Festival;
     gameMonitorings?: GameMonitoring[];
+    games?: Game[];
 }
 
 export type AreaVisitor = {

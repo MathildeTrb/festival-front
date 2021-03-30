@@ -10,6 +10,7 @@ import ExhibitorMonitoringStatusSelectList from "./ExhibitorMonitoringStatusSele
 import ModalCreateReservation from "../reservation/ModalCreateReservation";
 import {HiOutlineDocumentSearch} from "react-icons/hi"
 import ModalDetailsReservation from "../reservation/ModalDetailsReservation";
+import {Link} from "react-router-dom";
 
 
 const ExhibitorMonitoringRow:
@@ -47,7 +48,7 @@ const ExhibitorMonitoringRow:
     return (
 
         <tr>
-            <td>{exhibitorMonitoring.exhibitor.name}</td>
+            <td><Link to={`/dashboard/${exhibitorMonitoring.exhibitor.id}`}>{exhibitorMonitoring.exhibitor.name}</Link></td>
             <td>
                 <ImCalendar
                     onClick={() => setShowModal1(true)}/> {exhibitorMonitoring.dateContact1 ? new Date(exhibitorMonitoring.dateContact1).toLocaleDateString() : <>Pas

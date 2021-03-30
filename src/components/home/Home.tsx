@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Hint} from "react-autocomplete-hint";
 import useAxios from "../../utils/useAxios";
-import {Company} from "../../utils/types";
+import {Company, Festival} from "../../utils/types";
 import {IHintOption} from "react-autocomplete-hint/dist/src/IHintOption";
 import AreaList from "../area/AreaList";
 
@@ -10,6 +10,8 @@ const Home = () => {
 
     const {data: companies, isPending} = useAxios<Company[]>("companies");
 
+    const {data: currentFestival} = useAxios<Festival>("festivals/current/games")
+
     const handleChange = event => {
         console.log(event)
         setText(event.target.value)
@@ -17,7 +19,10 @@ const Home = () => {
 
     return (
         <div>
-            {isPending && <div>Chargement...</div>}
+            {currentFestival &&
+            <p>{currentFestival.areas.map(area => <p>{area.label} : {area.games.length}</p>)}</p>
+            }
+            {/*{isPending && <div>Chargement...</div>}
             {companies &&
             <Hint options={companies.map<IHintOption>(company => {
                 return {
@@ -29,7 +34,7 @@ const Home = () => {
             </Hint>
             }
 
-            Text {text}
+            Text {text}*/}
 
         </div>
     )
