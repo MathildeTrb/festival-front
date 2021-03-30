@@ -27,7 +27,6 @@ const GameMonitorings: FC = ()=> {
 
     useEffect(() => {
         document.title = "Suivi des jeux"
-        console.log("COUCOUC JE SISS LA")
     },[gameMonitorings])
 
     const value = {gameMonitorings, setGameMonitorings}
