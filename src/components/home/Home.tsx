@@ -1,14 +1,15 @@
 import InfoReservation from "../infoReservation/InfoReservation";
-import ListContactedNoAnswer from "./listContactedNoAnswer";
-import ListGamesNotReceived from "./listGameNotReceived";
-import ListGamesNotPlaced from "./listGamesNotPlaced";
-import ProgressionPeopleContacted from "./progressionPeopleContacted";
-import ProgressionGamesReceived from "./progressionGamesReceived";
-import ProgressionGamesNotPlaced from "./progressionGamesNotPlaced";
+import ListContactedNoAnswer from "./ListContactedNoAnswer";
+import ListGamesNotReceived from "./ListGameNotReceived";
+import ListGamesNotPlaced from "./ListGamesNotPlaced";
+import ProgressionPeopleContacted from "./ProgressionPeopleContacted";
+import ProgressionGamesReceived from "./ProgressionGamesReceived";
+import ProgressionGamesNotPlaced from "./ProgressionGamesNotPlaced";
 const Home = () => {
 
     return (
         <div>
+            <InfoReservation></InfoReservation>
 
             <ListGamesNotReceived/>
 

@@ -1,5 +1,5 @@
 import useAxios from "../../utils/useAxios";
-import {Festival, Game} from "../../utils/types";
+import {Game} from "../../utils/types";
 import {useContext} from "react";
 import {FestivalContext} from "../../App";
 import {ProgressBar, Spinner} from "react-bootstrap";

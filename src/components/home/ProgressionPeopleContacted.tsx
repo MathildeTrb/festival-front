@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {FestivalContext} from "../../App";
 import useAxios from "../../utils/useAxios";
-import {ExhibitorMonitoring, Festival} from "../../utils/types";
+import {ExhibitorMonitoring} from "../../utils/types";
 import {ProgressBar, Spinner} from "react-bootstrap";
 
 

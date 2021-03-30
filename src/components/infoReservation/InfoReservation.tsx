@@ -2,7 +2,6 @@ import useAxios from "../../utils/useAxios";
 import {FestivalContext} from "../../App";
 import {ExhibitorMonitoring} from "../../utils/types";
 import {useContext} from "react";
-import {Grid} from "@material-ui/core";
 import {Card, Spinner} from "react-bootstrap";
 
 
@@ -14,12 +13,11 @@ const InfoReservation = () => {
     const {data: reservationConfirmedTab,isPending } = useAxios<ExhibitorMonitoring[]>("exhibitorMonitorings/festival/"+selectedFestival.id);
     console.log(reservationConfirmedTab)
 
-
     return(
         <>
             {isPending && <Spinner animation="border" variant="primary"/>}
             {reservationConfirmedTab &&
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '20rem' }}>
                 <Card.Body>
                     <Card.Title>Nombre d'exposants</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{"" + reservationConfirmedTab.length}</Card.Subtitle>

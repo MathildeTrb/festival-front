@@ -1,7 +1,6 @@
-import {makeStyles} from "@material-ui/core/styles";
 import React, {createContext, FC, useContext} from "react";
 import useAxios from "../../utils/useAxios";
-import {Festival, GameMonitoring} from "../../utils/types";
+import {Festival} from "../../utils/types";
 import {FestivalContext} from "../../App";
 import {Card, ListGroup, Spinner} from "react-bootstrap";
 
@@ -11,22 +10,13 @@ type GamesNotPlacedProps = {
     setGamesNotPlacedTab: (festivals?: Festival[]) => void
 }
 
-export const GameMonitoringContext = createContext<GamesNotPlacedProps>({} as GamesNotPlacedProps)
 
 const ListGamesNotPlaced: FC = () =>{
 
-    const useStyles = makeStyles((theme) => ({
-        root:{
-            width:'100%',
-            maxWidth: 360,
-            backgroundColor: theme.palette.background.paper,
-        },
-    }))
     const {selectedFestival} = useContext(FestivalContext);
 
-    const {data: GamesNotPlacedTab, isPending, setData :setGamesNotPlacedTab} = useAxios<Festival>(`festivals/${selectedFestival.id}/GamesNotPlaced`)
+    const {data: GamesNotPlacedTab, isPending} = useAxios<Festival>(`festivals/${selectedFestival.id}/GamesNotPlaced`)
 
-    const classes = useStyles();
 
     return(
         <div>
