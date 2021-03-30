@@ -7,7 +7,7 @@ const GameTypeCreateModal: FC<{show: boolean, onHide: () => void}> = ({show, onH
 
     const [label, setLabel] = useState<string>();
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
 
         const gameType: GameType = {

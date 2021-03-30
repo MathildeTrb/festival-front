@@ -11,6 +11,7 @@ import Users from "../user/Users";
 import PrivateRoute from "./PrivateRoute";
 import Logout from "../user/Logout";
 import Games from "../game/Games";
+import Festivals from "../festival/Festivals";
 import Companies from "../company/Companies";
 import GameMonitorings from "../gameMonitoring/GameMonitorings";
 import Invoices from "../invoice/Invoices";
@@ -28,6 +29,7 @@ const Routes: FC = () => {
                 <Route exact path='/register' component={Register}/>
                 <Route exact path='/allUsers' component={Users}/>
                 <Route exact path="/games" component={Games}/>
+                <Route exact path="/festivals" component={Festivals}/>
                 <Route exact path='/logout' component={Logout}/>
                 <Route exact path="/companies" component={Companies}/>
                 <Route exact path="/:idFestival/gameMonitorings" component={GameMonitorings}/>

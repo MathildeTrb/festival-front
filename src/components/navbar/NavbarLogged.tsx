@@ -66,6 +66,10 @@ const NavbarLogged = () => {
                                 <NavDropdown.Item >
                                     <Link className={"nav-link"} to ="/allUsers"> Bénévoles </Link>
                                 </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item >
+                                    <Link className={"nav-link"} to ="/festivals"> Festivals </Link>
+                                </NavDropdown.Item>
                             </NavDropdown>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>

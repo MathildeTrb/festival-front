@@ -39,11 +39,16 @@ const CompanyRow: FC<{ company: Company }> = ({company}) => {
                 <TiContacts className="p-cursor" onClick={() => setShowModalContacts(true)}/> ({company.contacts.length})
                 <ContactsModal company={company} show={showModalContacts} onHide={() => setShowModalContacts(false)}/>
             </td>
-            <td>
-                <GrGamepad onClick={() => setShowModalGames(true)}/> ({company.games.length})
-                <GamesModal show={showModalGames} onHide={() => setShowModalGames(false)} games={company.games}
-                            companyName={company.name}/>
-            </td>
+            {
+                company.games.length > 0 ?
+                    <td>
+                        <GrGamepad onClick={() => setShowModalGames(true)}/> ({company.games.length})
+                        <GamesModal show={showModalGames} onHide={() => setShowModalGames(false)} games={company.games}
+                                    companyName={company.name}/>
+                    </td>
+                    :
+                    <td/>
+            }
             <td>
                 <BsPencilSquare className="p-cursor" onClick={() => setShowModalUpdate(true)}/>
                 <CompanyUpdateModal show={showModalUpdate} company={company} onHide={() => setShowModalUpdate(false)}/>

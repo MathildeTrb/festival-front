@@ -19,7 +19,6 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
     const [isPlaced, setIsPlaced] = useState<boolean>(gameMonitoring ? gameMonitoring.isPlaced:null)
 
     const [showAlert, setShowAlert] = useState<boolean>(false);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const {selectedFestival, setSelectedFestival} = useContext(FestivalContext);
 
@@ -29,8 +28,6 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
             setShowAlert(true)
         }
         else{
-            setIsLoading(true);
-
             const newGameMonitoring: GameMonitoring = {
                 game : gameMonitoring.game,
                 reservation : gameMonitoring.reservation,
@@ -51,7 +48,6 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
                 gameMonitoring: newGameMonitoring
             })
                 .then(({data}) => {
-                    setIsLoading(false);
                     onCreate(updateMode ? newGameMonitoring : data)
                 })
         }
@@ -89,12 +85,12 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
             </Form.Group>
 
             <Form.Group as={Row}>
+                <Form.Label column sm="4">
+                    <AreaSelectList selected={area} handleChange={handleChangeJSON(setArea)}/>
+                </Form.Label>
                 <Form.Label column sm="3">
                     Sélection de la zone
                 </Form.Label>
-                <Col sm="6">
-                    <AreaSelectList selected={area} handleChange={handleChangeJSON(setArea)}></AreaSelectList>
-                </Col>
             </Form.Group>
 
             <Form.Group as={Row}>
@@ -143,7 +139,7 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
                     Doit être retourné ?
                 </Form.Label>
                 <Col sm="1">
-                    <Button variant={needBeingReturned ? "success" : "danger"}
+                    <Button type="button" variant={needBeingReturned ? "success" : "danger"}
                             onClick={inverse}>{needBeingReturned ? "Oui" : "Non"}</Button>
                 </Col>
             </Form.Group>
@@ -160,7 +156,6 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
 
             <div className="text-center">
                 <button className="mon-button" type="submit">Valider</button>
-                {isLoading && <Spinner animation="border" variant="primary"/>}
             </div>
 
         </Form>
