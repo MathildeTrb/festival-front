@@ -1,25 +1,30 @@
 import {FC, useContext, useEffect, useState} from "react";
 import {ReservationDetails, Space} from "../../utils/types";
 import {Col, Row} from "react-bootstrap";
+import {ReservationContext} from "./ModalCreateReservation";
 
-const FormDetailsReservation: FC<{ isSubmitted: boolean, onSubmit:(ReservationDetails) => void, space: Space}> = ({isSubmitted, onSubmit, space}) => {
+const FormDetailsReservation: FC<{ isSubmitted: boolean, onSubmit:(reservationDetails : ReservationDetails) => void, space: Space}> = ({isSubmitted, onSubmit, space}) => {
 
     const [tableReserved, setTableReserved] = useState<number>(0)
     const [meterReserved, setMeterReserved] = useState<number>(0)
+
+    const {setReservationDetails} = useContext(ReservationContext);
 
     const handleChange = set => event => {
         set(event.target.value)
     }
 
     useEffect(() => {
-        const reservationDetail : ReservationDetails = {
-            tableReserved,
-            meterReserved,
-            space
+        if (isSubmitted){
+            const reservationDetail : ReservationDetails = {
+                tableReserved,
+                meterReserved,
+                space
+            }
+            console.log("J'ai créé une réservationDetails")
+            setReservationDetails(prevState => [...prevState, reservationDetail])
         }
-        console.log("J'ai créé une réservationDetails")
-        console.log(reservationDetail)
-        onSubmit(reservationDetail)
+
     }, [isSubmitted])
 
     return (
