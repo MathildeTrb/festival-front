@@ -4,8 +4,7 @@ import {Festival} from "../../utils/types";
 import {Col, Spinner} from "react-bootstrap";
 import FestivalRow from "./FestivalRow";
 import {VscDiffAdded} from "react-icons/vsc";
-import CompanyCreateModal from "../company/CompanyCreateModal";
-import ModalAddFestival from "./ModalAddFestival";
+import ModalHandleFestival from "./ModalHandleFestival";
 
 type FestivalContextProps = {
     festivals: Festival[];
@@ -26,6 +25,10 @@ const Festivals: FC = () => {
 
     const value = {festivals, setFestivals};
 
+    const onChange = (newFestival : Festival) => {
+        setFestivals([...festivals, newFestival])
+    }
+
     return (
         <div>
             {isPending && <Spinner animation="border" variant="primary"/>}
@@ -37,7 +40,7 @@ const Festivals: FC = () => {
 
                 <button type="button" className="mon-button mb-2" onClick={() => setShowModalCreate(true)}><p>
                     <VscDiffAdded/> Ajout d'un festival</p></button>
-                <ModalAddFestival show={showModalCreate} onHide={() => setShowModalCreate(false)} setFestivals={setFestivals} festivals={festivals}/>
+                <ModalHandleFestival title={"ajout d'un festival"} show={showModalCreate} onHide={() => setShowModalCreate(false)} onChange={onChange}/>
 
                 <table className="table">
                     <thead>
@@ -49,6 +52,7 @@ const Festivals: FC = () => {
                         <th scope="col">Date de création</th>
                         <th scope="col">Espaces</th>
                         <th scope="col">Zones</th>
+                        <th scope="col">Modifier Festival</th>
                     </tr>
                     </thead>
                     <tbody>

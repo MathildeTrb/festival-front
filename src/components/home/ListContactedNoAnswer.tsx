@@ -1,10 +1,8 @@
-import {makeStyles} from "@material-ui/core/styles";
 import React, {createContext, FC, useContext} from "react";
 import useAxios from "../../utils/useAxios";
 import { ExhibitorMonitoring} from "../../utils/types";
 import {FestivalContext} from "../../App";
 import {Button, Card, ListGroup, Spinner} from "react-bootstrap";
-import {List, ListItem, ListItemText} from "@material-ui/core";
 
 type PeopleContactedNoAnswerProps = {
     peopleContactedNoAnswerTab: ExhibitorMonitoring[];
@@ -15,20 +13,9 @@ export const ExhibitorMonitoringContext = createContext<PeopleContactedNoAnswerP
 
 const ListContactedNoAnswer: FC = () =>{
 
-
-    const useStyles = makeStyles((theme) => ({
-        root:{
-            width:'100%',
-            maxWidth: 360,
-            backgroundColor: theme.palette.background.paper,
-        },
-    }))
     const {selectedFestival} = useContext(FestivalContext);
 
     const {data: peopleContactedNoAnswerTab, isPending, setData :setPeopleContactedNoAnswerTab} = useAxios<ExhibitorMonitoring[]>(`/exhibitorMonitorings/festival/${selectedFestival.id}/peopleContactedNoAnswer`)
-
-    const classes = useStyles();
-
 
     const value = {peopleContactedNoAnswerTab, setPeopleContactedNoAnswerTab}
 
