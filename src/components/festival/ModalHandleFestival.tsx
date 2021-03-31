@@ -62,9 +62,6 @@ const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: 
 
         await axios.put("festivals", {festival: constructedFestival})
 
-        console.log("CONSTRUCTED FESTIVAL")
-        console.log(constructedFestival)
-
         constructedFestival.areas = festival.areas;
         constructedFestival.spaces = festival.spaces;
         constructedFestival.creationDate = festival.creationDate;

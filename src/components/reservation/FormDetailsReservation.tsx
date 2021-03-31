@@ -2,7 +2,7 @@ import {FC, useContext, useEffect, useState} from "react";
 import {ReservationDetails, Space} from "../../utils/types";
 import {Col, Row} from "react-bootstrap";
 
-const FormDetailsReservation: FC<{ isSubmitted: boolean, onSubmit:(ReservationDetails) => void,space: Space }> = ({isSubmitted, onSubmit, space}) => {
+const FormDetailsReservation: FC<{ isSubmitted: boolean, onSubmit:(ReservationDetails) => void, space: Space}> = ({isSubmitted, onSubmit, space}) => {
 
     const [tableReserved, setTableReserved] = useState<number>(0)
     const [meterReserved, setMeterReserved] = useState<number>(0)
@@ -17,6 +17,8 @@ const FormDetailsReservation: FC<{ isSubmitted: boolean, onSubmit:(ReservationDe
             meterReserved,
             space
         }
+        console.log("J'ai créé une réservationDetails")
+        console.log(reservationDetail)
         onSubmit(reservationDetail)
     }, [isSubmitted])
 

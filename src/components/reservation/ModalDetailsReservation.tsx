@@ -1,6 +1,7 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import {FC, useState} from "react";
 import {Reservation} from "../../utils/types";
+import {useAxios} from "../../utils/axios-hooks";
 
 
 const ModalDetailsReservation: FC<{show: boolean, onHide: () => void, reservation: Reservation}> = ({show, onHide, reservation}) => {
@@ -56,20 +57,6 @@ const ModalDetailsReservation: FC<{show: boolean, onHide: () => void, reservatio
                                     <p>L'exposant se déplacera</p>:
                                     <p>L'exposant ne se déplacera pas</p>
                             }
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <p>
-                                {
-                                    reservation.comment ?
-                                        reservation.comment :
-                                        "Pas de commentaire"
-                                }
-                            </p>
-                        </Col>
-                        <Col>
-
                         </Col>
                     </Row>
                 </form>
