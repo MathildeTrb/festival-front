@@ -15,12 +15,12 @@ const ListContactedNoAnswer: FC = () =>{
 
     const {selectedFestival} = useContext(FestivalContext);
 
-    const {data: peopleContactedNoAnswerTab, isPending, setData :setPeopleContactedNoAnswerTab} = useAxios<ExhibitorMonitoring[]>(`/exhibitorMonitorings/festival/${selectedFestival.id}/peopleContactedNoAnswer`)
+    const {data: peopleContactedNoAnswerTab, isPending, setData :setPeopleContactedNoAnswerTab} = useAxios<ExhibitorMonitoring[]>(`exhibitorMonitorings/festival/${selectedFestival.id}/peopleContactedNoAnswer`)
 
 
     const value = {peopleContactedNoAnswerTab, setPeopleContactedNoAnswerTab}
 
-    return(
+    return (
         <div>
             {isPending && <Spinner animation="border" variant="primary"/>}
             {peopleContactedNoAnswerTab &&

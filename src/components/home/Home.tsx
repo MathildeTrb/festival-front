@@ -5,11 +5,12 @@ import ListGamesNotPlaced from "./ListGamesNotPlaced";
 import ProgressionPeopleContacted from "./ProgressionPeopleContacted";
 import ProgressionGamesReceived from "./ProgressionGamesReceived";
 import ProgressionGamesNotPlaced from "./ProgressionGamesNotPlaced";
+
 const Home = () => {
 
     return (
         <div>
-            <InfoReservation></InfoReservation>
+            <InfoReservation/>
 
             <ListGamesNotReceived/>
 
@@ -21,7 +22,7 @@ const Home = () => {
 
             <ProgressionGamesReceived/>
 
-            <ProgressionGamesNotPlaced></ProgressionGamesNotPlaced>
+            <ProgressionGamesNotPlaced/>
 
         </div>
 

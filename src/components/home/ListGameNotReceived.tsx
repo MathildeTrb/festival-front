@@ -1,4 +1,3 @@
-import {makeStyles} from "@material-ui/core/styles";
 import React, {createContext, FC, useContext} from "react";
 import useAxios from "../../utils/useAxios";
 import {Festival, GameMonitoring} from "../../utils/types";
@@ -15,19 +14,9 @@ export const GameMonitoringContext = createContext<GamesNotReceivedProps>({} as 
 
 const ListGamesNotReceived: FC = () =>{
 
-
-    const useStyles = makeStyles((theme) => ({
-        root:{
-            width:'100%',
-            maxWidth: 360,
-            backgroundColor: theme.palette.background.paper,
-        },
-    }))
     const {selectedFestival} = useContext(FestivalContext);
 
     const {data: GamesNotReceivedTab, isPending, setData :setGamesNotReceivedTab} = useAxios<Festival>(`festivals/${selectedFestival.id}/GamesNotReceived`)
-
-    const classes = useStyles();
 
     return(
         <div>

@@ -73,6 +73,7 @@ export type ExhibitorMonitoring = {
     exhibitor: Company;
     festival: Festival;
     status: ExhibitorMonitoringStatus;
+    comment: string;
     reservation: Reservation;
     dateContact1: Date;
     dateContact2: Date;
@@ -89,7 +90,6 @@ export type Reservation = {
     id?: number;
     needVolunteer: boolean;
     willCome: boolean;
-    comment: string;
     discount: number;
     mailingDate?: Date;
     paymentDate?: Date;

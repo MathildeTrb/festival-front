@@ -8,7 +8,6 @@ const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMo
 
     const [needVolunteer, setNeedVolunter] = useState<boolean>(false)
     const [willCome, setWillCome] = useState<boolean>(false)
-    const [comment, setComment] = useState<string>(null)
     const [discount, setDiscount] = useState<number>(0)
 
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
@@ -22,7 +21,6 @@ const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMo
         const reservation: Reservation = {
             needVolunteer,
             willCome,
-            comment,
             discount,
             reservationDetails: reservationDetailsTab,
             exhibitorMonitoring,
@@ -65,14 +63,6 @@ const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMo
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
-                            <label>Commentaires de le réservation : </label>
-                            <textarea
-                                className="mon-input"
-                                value={comment}
-                                onChange={handleChange(setComment)}
-                            />
-                        </Col>
                         <Col>
                             <label>Remise sur la réservation : </label>
                             <input

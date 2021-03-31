@@ -7,6 +7,7 @@ import useAxios from "../../../utils/useAxios";
 import {ExhibitorMonitoring} from "../../../utils/types";
 import {FestivalContext} from "../../../App";
 import ExhibitorGameMonitorings from "./ExhibitorGameMonitorings";
+import ExhibitorDetails from "./ExhibitorDetails";
 
 const ExhibitorDashboard: FC = () => {
 
@@ -35,7 +36,9 @@ const ExhibitorDashboard: FC = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>5</Col>
+                    <Col>
+                        <ExhibitorDetails exhibitorMonitoring={exhibitorMonitoring}/>
+                    </Col>
                     <Col>
                         <ExhibitorGameMonitorings exhibitorMonitoring={exhibitorMonitoring}/>
                     </Col>
@@ -46,4 +49,4 @@ const ExhibitorDashboard: FC = () => {
     )
 }
 
-export default ExhibitorDashboard;
+export default ExhibitorDashboard

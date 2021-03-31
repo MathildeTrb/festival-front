@@ -60,13 +60,6 @@ const ModalDetailsReservation: FC<{show: boolean, onHide: () => void, reservatio
                     </Row>
                     <Row>
                         <Col>
-                            <p>
-                                {
-                                    reservation.comment ?
-                                        reservation.comment :
-                                        "Pas de commentaire"
-                                }
-                            </p>
                         </Col>
                         <Col>
 

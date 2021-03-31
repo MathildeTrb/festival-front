@@ -11,12 +11,13 @@ import ModalCreateReservation from "../reservation/ModalCreateReservation";
 import {HiOutlineDocumentSearch} from "react-icons/hi"
 import ModalDetailsReservation from "../reservation/ModalDetailsReservation";
 import {Link} from "react-router-dom";
+import {BsPencilSquare} from "react-icons/bs";
 
 
 const ExhibitorMonitoringRow:
     FC<{ exhibitorMonitoring: ExhibitorMonitoring }> = ({exhibitorMonitoring}) => {
 
-    const {token} = useToken();
+    console.log(exhibitorMonitoring.reservation)
 
     const [date1, setDate1] = useState<Date>(exhibitorMonitoring.dateContact1 ? new Date(exhibitorMonitoring.dateContact1) : null);
     const [date2, setDate2] = useState<Date>(exhibitorMonitoring.dateContact2 ? new Date(exhibitorMonitoring.dateContact2) : null);
@@ -29,6 +30,8 @@ const ExhibitorMonitoringRow:
     const [showModalStatus, setShowModalStatus] = useState<boolean>(false);
 
     const [showDetailsReservation, setShowDetailsReservation] = useState<boolean>(false);
+
+    const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
 
     const {data: exhibitorMonitoringStatusTab} = useAxios<ExhibitorMonitoringStatus[]>("exhibitorMonitoringStatus")
 
@@ -74,6 +77,9 @@ const ExhibitorMonitoringRow:
                                onHide={() => setShowModal3(false)} date={date3} setDate={setDate3}
                                onValidate={onValidate}/>
             </td>
+            <td className="sc">
+                {exhibitorMonitoring.comment ? exhibitorMonitoring.comment : "Pas de commentaire"}
+            </td>
             <td>
                 <ExhibitorMonitoringStatusSelectList exhibitorMonitoring={exhibitorMonitoring}
                                                      setShowModal={setShowModalStatus}
@@ -90,6 +96,11 @@ const ExhibitorMonitoringRow:
                 </>
                 :
                 "Pas de reservation"}</td>
+            <td>
+                <BsPencilSquare className="p-cursor" onClick={() => setShowModalUpdate(true)}/>
+
+
+            </td>
         </tr>
 
     )
