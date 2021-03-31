@@ -2,7 +2,8 @@ import {useContext, useState} from "react";
 import {FestivalContext} from "../../App";
 import {Dropdown} from "react-bootstrap";
 import {VscDiffAdded} from "react-icons/vsc";
-import ModalAddFestival from "./ModalAddFestival";
+import ModalHandleFestival from "./ModalHandleFestival";
+import {Festival} from "../../utils/types";
 
 const FestivalSelection = ({festivals, setFestivals}) => {
 
@@ -12,6 +13,10 @@ const FestivalSelection = ({festivals, setFestivals}) => {
 
     const handleChange = (eventKey) => {
         setSelectedFestival(JSON.parse(eventKey))
+    }
+
+    const handleAdd = (newFestival: Festival) => {
+        setFestivals([...festivals, newFestival])
     }
 
     return (
@@ -29,7 +34,7 @@ const FestivalSelection = ({festivals, setFestivals}) => {
                 <Dropdown.Divider/>
                 <Dropdown.Item as="button" onClick={() => setShowModal(true)}>
                     <p><VscDiffAdded/> Ajouter un festival</p>
-                    <ModalAddFestival show={showModal} onHide={() => setShowModal(false)} setFestivals={setFestivals} festivals={festivals}/>
+                    <ModalHandleFestival title={"ajout d'un festival"} show={showModal} onHide={() => setShowModal(false)} onChange={handleAdd} />
                 </Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>

@@ -1,11 +1,9 @@
-import {FC, useState} from "react";
+import {FC} from "react";
 import {Modal} from "react-bootstrap";
 import {Festival} from "../../utils/types";
+import {RiDeleteBin6Line} from "react-icons/ri";
 
 const SpacesModal: FC<{ show: boolean, onHide: () => void, festival: Festival }> = ({show, onHide, festival}) => {
-
-    const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
-
     return (
         <Modal show={show} onHide={onHide} size="xl" centered>
             <Modal.Header closeButton>
@@ -24,7 +22,7 @@ const SpacesModal: FC<{ show: boolean, onHide: () => void, festival: Festival }>
                         <th scope="col">Prix mètre</th>
                         <th scope="col">Nombre total tables</th>
                         <th scope="col">Nombre de tables restantes</th>
-                        <th scope="col"/>
+                        <th scope="col">Suppression</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -36,7 +34,7 @@ const SpacesModal: FC<{ show: boolean, onHide: () => void, festival: Festival }>
                                 <td>{space.meterPrice} €</td>
                                 <td>{space.tableTotal}</td>
                                 <td>{space.tableRemaining}</td>
-                                <td></td>
+                                <td>{RiDeleteBin6Line}</td>
                             </tr>
                         )
                     })
