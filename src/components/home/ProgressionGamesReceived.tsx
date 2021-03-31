@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {FestivalContext} from "../../App";
 import useAxios from "../../utils/useAxios";
-import {ExhibitorMonitoring, Festival, Game, GameMonitoring} from "../../utils/types";
+import { Game, GameMonitoring} from "../../utils/types";
 import {ProgressBar, Spinner} from "react-bootstrap";
 
 const ProgressionGamesReceived = () => {
