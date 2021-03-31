@@ -4,6 +4,7 @@ import {ListGroup, Modal, Row, Col, Form, Button, Accordion, Card, ListGroupItem
 import {useAxiosMethods} from "../../utils/axios-hooks";
 import AreaCard from "../area/AreaCard";
 import GameTableVisitor from "../area/GameTableVisitor";
+import {BsPencilSquare} from "react-icons/bs";
 
 const AreasModal: FC<{ show: boolean, onHide: () => void, festival: Festival }> = ({show, onHide, festival}) => {
 
@@ -41,7 +42,14 @@ const AreasModal: FC<{ show: boolean, onHide: () => void, festival: Festival }> 
                         {festival.areas.map((area, index) => {
                             return (
                                 <ListGroup.Item key={index}>
-                                    {area.label}
+                                    <Row>
+                                        <Col>
+                                            {area.label}
+                                        </Col>
+                                        <Col>
+                                            <BsPencilSquare/>
+                                        </Col>
+                                    </Row>
                                 </ListGroup.Item>
                             )
                         })}
