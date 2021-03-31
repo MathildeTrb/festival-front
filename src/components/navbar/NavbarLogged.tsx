@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom";
-import "../../css/index.css"
-import {Col, Dropdown, Image, Nav, NavDropdown, Row} from "react-bootstrap";
+import {Col, Image, Nav, NavDropdown, Row} from "react-bootstrap";
 import logo from "../../pictures/logo_FDJ_FINAL_800.png"
 import useAxios from "../../utils/useAxios";
 import {useContext, useState} from "react";
@@ -12,8 +11,6 @@ import {AiOutlineAudit} from 'react-icons/ai'
 import {Festival} from "../../utils/types";
 import FestivalSelection from "../festival/FestivalSelection";
 import useToken from "../../utils/useToken";
-
-
 
 const NavbarLogged = () => {
 

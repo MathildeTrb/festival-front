@@ -12,12 +12,11 @@ import {HiOutlineDocumentSearch} from "react-icons/hi"
 import ModalDetailsReservation from "../reservation/ModalDetailsReservation";
 import {Link} from "react-router-dom";
 import {BsPencilSquare} from "react-icons/bs";
+import ExhibitorMonitoringUpdateModal from "./ExhibitorMonitoringUpdateModal";
 
 
 const ExhibitorMonitoringRow:
     FC<{ exhibitorMonitoring: ExhibitorMonitoring }> = ({exhibitorMonitoring}) => {
-
-    console.log(exhibitorMonitoring.reservation)
 
     const [date1, setDate1] = useState<Date>(exhibitorMonitoring.dateContact1 ? new Date(exhibitorMonitoring.dateContact1) : null);
     const [date2, setDate2] = useState<Date>(exhibitorMonitoring.dateContact2 ? new Date(exhibitorMonitoring.dateContact2) : null);
@@ -77,7 +76,7 @@ const ExhibitorMonitoringRow:
                                onHide={() => setShowModal3(false)} date={date3} setDate={setDate3}
                                onValidate={onValidate}/>
             </td>
-            <td className="sc">
+            <td>
                 {exhibitorMonitoring.comment ? exhibitorMonitoring.comment : "Pas de commentaire"}
             </td>
             <td>
@@ -98,8 +97,7 @@ const ExhibitorMonitoringRow:
                 "Pas de reservation"}</td>
             <td>
                 <BsPencilSquare className="p-cursor" onClick={() => setShowModalUpdate(true)}/>
-
-
+                <ExhibitorMonitoringUpdateModal show={showModalUpdate} onHide={() => setShowModalUpdate(false)} exhibitorMonitoring={exhibitorMonitoring}/>
             </td>
         </tr>
 

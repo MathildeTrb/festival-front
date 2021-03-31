@@ -4,7 +4,6 @@ import {BsPencilSquare} from "react-icons/bs";
 import {RiDeleteBin6Line} from "react-icons/ri";
 import {TiContacts} from "react-icons/ti";
 import {GrGamepad} from "react-icons/gr";
-import OldContactsModal from "./OldContactsModal";
 import GamesModal from "./GamesModal";
 import axios from "../../utils/axios";
 import {CompanyContext} from "./Companies";

@@ -22,7 +22,7 @@ const ContactsModal: FC<{company: Company, show: boolean, onHide: () => void}> =
 
     useEffect(() => {
         company.contacts = contacts;
-    }, [contacts])
+    }, [contacts, company])
 
     return (
         <ContactContext.Provider value={value}>

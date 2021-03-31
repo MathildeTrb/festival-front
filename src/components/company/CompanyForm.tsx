@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import {Company} from "../../utils/types";
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Col, Form, Row} from "react-bootstrap";
 import axios from "../../utils/axios";
 
 const CompanyForm: FC<{company?: Company, onAction: (c: Company) => void, updateMode?: boolean}> = ({company, onAction, updateMode}) => {

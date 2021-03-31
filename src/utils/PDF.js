@@ -1,4 +1,3 @@
-import React from "react";
 import * as jsPDF from 'jspdf'
 
 function PDF(props) {

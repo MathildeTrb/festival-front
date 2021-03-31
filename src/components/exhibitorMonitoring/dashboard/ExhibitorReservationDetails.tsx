@@ -1,11 +1,15 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import {ExhibitorMonitoring} from "../../../utils/types";
 import {Row, Col} from "react-bootstrap";
 import {ImCalendar} from "react-icons/im";
+import {BsPencilSquare} from "react-icons/bs";
+import ModalCreateReservation from "../../reservation/ModalCreateReservation";
 
 const ExhibitorReservationDetails: FC<{ exhibitorMonitoring: ExhibitorMonitoring }> = ({exhibitorMonitoring}) => {
 
     let totalPrice: number = 0;
+
+    const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
 
     return (
         <div>
@@ -15,7 +19,10 @@ const ExhibitorReservationDetails: FC<{ exhibitorMonitoring: ExhibitorMonitoring
                 <table className="table table-hover table-bordered">
                     <thead className="thead-blue">
                     <tr>
-                        <th scope="col">Espace</th>
+                        <th scope="col">
+                            Espace <BsPencilSquare className="p-cursor" onClick={() => setShowModalUpdate(true)}/>
+                            <ModalCreateReservation show={showModalUpdate} onHide={() => setShowModalUpdate(false)} exhibitorMonitoring={exhibitorMonitoring}/>
+                        </th>
                         <th scope="col">Nombre de tables</th>
                         <th scope="col">Nombre de m<sup>2</sup></th>
                         <th scope="col">Prix calculé</th>

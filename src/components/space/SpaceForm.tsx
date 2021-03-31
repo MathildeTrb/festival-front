@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
-import {Col, Container, Form, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {Space} from "../../utils/types";
 
 const SpaceForm = ({onSubmit, isSubmitted}) => {
-    
+
     const [label, setLabel] = useState<string>()
     const [tablePrice, setTablePrice] = useState<number>()
     const [tableNumber, setTableNumber] = useState<number>()

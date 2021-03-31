@@ -109,3 +109,7 @@
 .tr-blue {
     background-color: #99a0ca;
 }
+
+.td-scrollable {
+    overflow: scroll;
+}
