@@ -12,7 +12,6 @@ const GameMonitoringCreateModal: FC<{show: boolean, onHide: () => void}> = ({sho
 
         const newGameMonitorings: GameMonitoring[] = [...gameMonitorings, gameMonitoring];
         newGameMonitorings.sort((gm1, gm2) => gm1.reservation.exhibitorMonitoring.exhibitor.name.localeCompare(gm2.reservation.exhibitorMonitoring.exhibitor.name))
-
         setGameMonitorings(newGameMonitorings);
 
         onHide();

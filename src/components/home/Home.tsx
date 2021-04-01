@@ -11,6 +11,14 @@ const Home = () => {
     return (
         <div>
             <Container>
+                <ProgressionPeopleContacted/>
+
+                <ProgressionGamesReceived/>
+
+                <ProgressionGamesNotPlaced></ProgressionGamesNotPlaced>
+            </Container>
+
+            <Container>
                 <Row>
                     <InfoReservation></InfoReservation>
 
@@ -21,13 +29,6 @@ const Home = () => {
                     <ListContactedNoAnswer/>
                 </Row>
 
-            </Container>
-            <Container>
-                <ProgressionPeopleContacted/>
-
-                <ProgressionGamesReceived/>
-
-                <ProgressionGamesNotPlaced></ProgressionGamesNotPlaced>
             </Container>
 
 

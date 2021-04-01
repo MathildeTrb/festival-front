@@ -4,32 +4,32 @@ import { ExhibitorMonitoring} from "../../utils/types";
 import {FestivalContext} from "../../App";
 import {Button, Card, ListGroup, Spinner} from "react-bootstrap";
 
-type PeopleContactedNoAnswerProps = {
-    peopleContactedNoAnswerTab: ExhibitorMonitoring[];
-    setPeopleContactedNoAnswerTab: (exhibitorMonitorings?: ExhibitorMonitoring[]) => void
+type exhibitorMonitoringProps = {
+    exhibitorMonitoringTab: ExhibitorMonitoring[];
+    setexhibitorMonitoringTab: (exhibitorMonitorings?: ExhibitorMonitoring[]) => void
 }
 
-export const ExhibitorMonitoringContext = createContext<PeopleContactedNoAnswerProps>({} as PeopleContactedNoAnswerProps)
+export const ExhibitorMonitoringContext = createContext<exhibitorMonitoringProps>({} as exhibitorMonitoringProps)
 
 const ListContactedNoAnswer: FC = () =>{
 
     const {selectedFestival} = useContext(FestivalContext);
 
-    const {data: peopleContactedNoAnswerTab, isPending, setData :setPeopleContactedNoAnswerTab} = useAxios<ExhibitorMonitoring[]>(`/exhibitorMonitorings/festival/${selectedFestival.id}/peopleContactedNoAnswer`)
+    const {data: exhibitorMonitoringTab, isPending, setData :setexhibitorMonitoringTab} = useAxios<ExhibitorMonitoring[]>(`/exhibitorMonitorings/festival/${selectedFestival.id}/exhibitorMonitoring`)
 
-    const value = {peopleContactedNoAnswerTab, setPeopleContactedNoAnswerTab}
+    const value = {exhibitorMonitoringTab, setexhibitorMonitoringTab}
 
     return(
         <div>
             {isPending && <Spinner animation="border" variant="primary"/>}
-            {peopleContactedNoAnswerTab &&
+            {exhibitorMonitoringTab &&
             <Card style={{width: '20rem', marginTop:'2rem'}}>
                 <h4>Exposant(s) contacté(s) mais sans réponse</h4>
                 <ExhibitorMonitoringContext.Provider value={value}>
                     <ListGroup variant="flush">
-                        {peopleContactedNoAnswerTab.map((peopleContactedNoAnswer, index) => {
+                        {exhibitorMonitoringTab.map((exhibitorMonitoring, index) => {
                             return (
-                                <ListGroup.Item>{peopleContactedNoAnswer.exhibitor.name}</ListGroup.Item>
+                                <ListGroup.Item>{exhibitorMonitoring.exhibitor.name}</ListGroup.Item>
                             )
                         })}
                     </ListGroup>

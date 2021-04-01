@@ -12,9 +12,10 @@ const ExhibitorMonitoringList: FC = () => {
         data: exhibitorMonitorings,
         isPending
     } = useAxios<ExhibitorMonitoring[]>("exhibitorMonitorings/" + selectedFestival.id)
+    
 
     return (
-        <div>
+        <>
             {isPending && <Spinner animation="border" variant="primary"/>}
             {exhibitorMonitorings &&
             <table className="table table-striped table-hover">
@@ -34,7 +35,7 @@ const ExhibitorMonitoringList: FC = () => {
             </table>
 
             }
-        </div>
+        </>
     )
 
 }
