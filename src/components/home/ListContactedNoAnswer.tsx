@@ -23,7 +23,7 @@ const ListContactedNoAnswer: FC = () =>{
         <div>
             {isPending && <Spinner animation="border" variant="primary"/>}
             {peopleContactedNoAnswerTab &&
-            <Card style={{width: '18rem', marginTop:'2rem'}}>
+            <Card style={{width: '20rem', marginTop:'2rem'}}>
                 <h4>Exposant(s) contacté(s) mais sans réponse</h4>
                 <ExhibitorMonitoringContext.Provider value={value}>
                     <ListGroup variant="flush">

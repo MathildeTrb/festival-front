@@ -14,9 +14,20 @@ import {Link} from "react-router-dom";
 import {BsPencilSquare} from "react-icons/bs";
 import ExhibitorMonitoringUpdateModal from "./ExhibitorMonitoringUpdateModal";
 
+type Option = {
+    value: string;
+    label: string
+}
 
 const ExhibitorMonitoringRow:
     FC<{ exhibitorMonitoring: ExhibitorMonitoring }> = ({exhibitorMonitoring}) => {
+
+    const {token} = useToken();
+
+    const [status, setStatus] = useState<Option>({
+        value: JSON.stringify(exhibitorMonitoring.status),
+        label: exhibitorMonitoring.status.label
+    })
 
     const [date1, setDate1] = useState<Date>(exhibitorMonitoring.dateContact1 ? new Date(exhibitorMonitoring.dateContact1) : null);
     const [date2, setDate2] = useState<Date>(exhibitorMonitoring.dateContact2 ? new Date(exhibitorMonitoring.dateContact2) : null);
@@ -80,9 +91,12 @@ const ExhibitorMonitoringRow:
                 {exhibitorMonitoring.comment ? exhibitorMonitoring.comment : "Pas de commentaire"}
             </td>
             <td>
+                {exhibitorMonitoring.status.label}
                 <ExhibitorMonitoringStatusSelectList exhibitorMonitoring={exhibitorMonitoring}
                                                      setShowModal={setShowModalStatus}
-                                                     exhibitorMonitoringStatusTab={exhibitorMonitoringStatusTab}/>
+                                                     exhibitorMonitoringStatusTab={exhibitorMonitoringStatusTab}
+                                                     status={status}
+                />
                 <ModalCreateReservation show={showModalStatus} onHide={() => setShowModalStatus(false)}
                                         exhibitorMonitoring={exhibitorMonitoring}/>
             </td>

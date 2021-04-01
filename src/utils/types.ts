@@ -67,6 +67,7 @@ export type Space = {
     meterPrice: number;
     tableTotal: number;
     tableRemaining?: number;
+    festival?: Festival;
 }
 
 export type ExhibitorMonitoring = {
@@ -83,7 +84,7 @@ export type ExhibitorMonitoring = {
 export type ExhibitorMonitoringStatus = {
     id?: number;
     label: string;
-    exhibitorMonitorings: ExhibitorMonitoring[]
+    exhibitorMonitorings?: ExhibitorMonitoring[]
 }
 
 export type Reservation = {

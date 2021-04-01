@@ -33,7 +33,7 @@ const FestivalRow: FC<{festival: Festival}> = ({festival}) => {
                 <div className="p-cursor" onClick={() => setShowModalSpaces(true)}>
                     {festival.spaces.length} espace{festival.spaces.length > 1 ? "s" : ""}
                 </div>
-                <SpacesModal show={showModalSpaces} onHide={() => setShowModalSpaces(false)} festival={festival}/>
+                <SpacesModal show={showModalSpaces} onHide={() => setShowModalSpaces(false)} festival={festival} />
             </td>
             <td>
                 <div className="p-cursor" onClick={() => setShowModalAreas(true)}>
