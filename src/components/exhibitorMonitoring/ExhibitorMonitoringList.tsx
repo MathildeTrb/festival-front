@@ -16,6 +16,7 @@ const ExhibitorMonitoringList: FC = () => {
         setData: setExhibitorMonitorings,
         isPending
     } = useAxios<ExhibitorMonitoring[]>("exhibitorMonitorings/" + selectedFestival.id)
+    
 
     useEffect(() => {
         document.title = "Suivi des exposants";
@@ -45,7 +46,7 @@ const ExhibitorMonitoringList: FC = () => {
     }
 
     return (
-        <div>
+        <>
             {isPending && <Spinner animation="border" variant="primary"/>}
             {exhibitorMonitorings &&
 
@@ -78,7 +79,7 @@ const ExhibitorMonitoringList: FC = () => {
             </>
 
             }
-        </div>
+        </>
     )
 
 }

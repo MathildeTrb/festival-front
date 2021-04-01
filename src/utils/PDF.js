@@ -31,14 +31,15 @@ function PDF(props) {
     }
     return(
         `<div id="Post">
-            <h1>Exposant : ${props.exhibitorMonitoring.exhibitor.name}</h1>
+            <h2>Facture</h2>
+            <h3>Exposant : ${props.exhibitorMonitoring.exhibitor.name}</h3>
             <Table striped bordered hover size={"xl"}>
                 <thead>
                 <tr>
                     <th></th>
-                    <th>Nb tables</th>
+                    <th>tables</th>
                     <th>Prix table</th>
-                    <th>Nb m2</th>
+                    <th>m2</th>
                     <th>Prix m2</th>
                     <th>Total</th>
                 </tr>
