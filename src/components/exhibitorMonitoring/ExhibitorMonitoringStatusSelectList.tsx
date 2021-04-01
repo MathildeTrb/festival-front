@@ -8,11 +8,11 @@ type Option = {
     label: string
 }
 
-const ExhibitorMonitoringStatusSelectList: FC<{ exhibitorMonitoring: ExhibitorMonitoring, setShowModal: (boolean) => void, exhibitorMonitoringStatusTab: ExhibitorMonitoringStatus[] }> =
-    ({
+const ExhibitorMonitoringStatusSelectList: FC<{ exhibitorMonitoring: ExhibitorMonitoring, setShowModal: (boolean) => void, exhibitorMonitoringStatusTab: ExhibitorMonitoringStatus[], status: ExhibitorMonitoringStatus }> = ({
          exhibitorMonitoring,
          setShowModal,
-         exhibitorMonitoringStatusTab
+         exhibitorMonitoringStatusTab,
+        status
     }) => {
 
     const options: Option[] = []
@@ -31,7 +31,7 @@ const ExhibitorMonitoringStatusSelectList: FC<{ exhibitorMonitoring: ExhibitorMo
                 })
             })
         }
-    }, [exhibitorMonitoringStatusTab, options])
+    }, [exhibitorMonitoring, exhibitorMonitoringStatusTab, options])
 
     const handleChange = (selectedOption: Option) => {
         const status = JSON.parse(selectedOption.value)
@@ -47,7 +47,7 @@ const ExhibitorMonitoringStatusSelectList: FC<{ exhibitorMonitoring: ExhibitorMo
     return (
         <div>
             <Select
-                defaultValue={defaultValue}
+                defaultValue={status}
                 onChange={handleChange}
                 options={options}
             />

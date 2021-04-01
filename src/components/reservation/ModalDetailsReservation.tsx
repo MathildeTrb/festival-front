@@ -1,5 +1,5 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
-import {FC, useState} from "react";
+import {FC} from "react";
 import {Reservation} from "../../utils/types";
 
 
@@ -7,13 +7,11 @@ const ModalDetailsReservation: FC<{show: boolean, onHide: () => void, reservatio
 
     const amount: number = reservation.reservationDetails
         .map<number>((reservationDetail) => reservationDetail.meterReserved * reservationDetail.space.meterPrice + reservationDetail.tableReserved * reservationDetail.space.tablePrice)
-        .reduce((total, currentValue) => total + currentValue,0);
+        .reduce((total, currentValue) => total + currentValue, 0);
 
     const amountReturnedGames: number = reservation.gameMonitorings
         .map<number>((gameMonitoring) => gameMonitoring.returnedPrice)
-        .reduce((total, currentValue) => total + currentValue,0)
-
-    const[showModalCreate, setShowModalCreate] = useState<boolean>(false)
+        .reduce((total, currentValue) => total + currentValue, 0)
 
     return (
         <Modal

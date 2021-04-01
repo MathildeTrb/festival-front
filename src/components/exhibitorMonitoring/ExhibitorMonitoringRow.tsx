@@ -11,11 +11,20 @@ import ModalCreateReservation from "../reservation/ModalCreateReservation";
 import {HiOutlineDocumentSearch} from "react-icons/hi"
 import ModalDetailsReservation from "../reservation/ModalDetailsReservation";
 
+type Option = {
+    value: string;
+    label: string
+}
 
 const ExhibitorMonitoringRow:
     FC<{ exhibitorMonitoring: ExhibitorMonitoring }> = ({exhibitorMonitoring}) => {
 
     const {token} = useToken();
+
+    const [status, setStatus] = useState<Option>({
+        value: JSON.stringify(exhibitorMonitoring.status),
+        label: exhibitorMonitoring.status.label
+    })
 
     const [date1, setDate1] = useState<Date>(exhibitorMonitoring.dateContact1 ? new Date(exhibitorMonitoring.dateContact1) : null);
     const [date2, setDate2] = useState<Date>(exhibitorMonitoring.dateContact2 ? new Date(exhibitorMonitoring.dateContact2) : null);
@@ -74,9 +83,12 @@ const ExhibitorMonitoringRow:
                                onValidate={onValidate}/>
             </td>
             <td>
+                {exhibitorMonitoring.status.label}
                 <ExhibitorMonitoringStatusSelectList exhibitorMonitoring={exhibitorMonitoring}
                                                      setShowModal={setShowModalStatus}
-                                                     exhibitorMonitoringStatusTab={exhibitorMonitoringStatusTab}/>
+                                                     exhibitorMonitoringStatusTab={exhibitorMonitoringStatusTab}
+                                                     status={status}
+                />
                 <ModalCreateReservation show={showModalStatus} onHide={() => setShowModalStatus(false)}
                                         exhibitorMonitoring={exhibitorMonitoring}/>
             </td>
