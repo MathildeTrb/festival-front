@@ -84,7 +84,7 @@ export type ExhibitorMonitoring = {
 export type ExhibitorMonitoringStatus = {
     id?: number;
     label: string;
-    exhibitorMonitorings: ExhibitorMonitoring[]
+    exhibitorMonitorings?: ExhibitorMonitoring[]
 }
 
 export type Reservation = {
