@@ -22,7 +22,7 @@ const ListGamesNotPlaced: FC = () =>{
         <div>
             {isPending && <Spinner animation="border" variant="primary"/>}
             {GamesNotPlacedTab &&
-            <Card style={{width: '18rem', marginTop:'2rem'}}>
+            <Card style={{width: '20rem', marginTop:'2rem'}}>
                 <h4>Liste jeu(x) non placé(s)</h4>
                 {console.log(GamesNotPlacedTab)}
                 <ListGroup>

@@ -5,23 +5,32 @@ import ListGamesNotPlaced from "./ListGamesNotPlaced";
 import ProgressionPeopleContacted from "./ProgressionPeopleContacted";
 import ProgressionGamesReceived from "./ProgressionGamesReceived";
 import ProgressionGamesNotPlaced from "./ProgressionGamesNotPlaced";
+import {Container, Row} from "react-bootstrap";
 const Home = () => {
 
     return (
         <div>
-            <InfoReservation></InfoReservation>
+            <Container>
+                <Row>
+                    <InfoReservation></InfoReservation>
 
-            <ListGamesNotReceived/>
+                    <ListGamesNotReceived/>
 
-            <ListGamesNotPlaced/>
+                    <ListGamesNotPlaced/>
 
-            <ListContactedNoAnswer/>
+                    <ListContactedNoAnswer/>
+                </Row>
 
-            <ProgressionPeopleContacted/>
+            </Container>
+            <Container>
+                <ProgressionPeopleContacted/>
 
-            <ProgressionGamesReceived/>
+                <ProgressionGamesReceived/>
 
-            <ProgressionGamesNotPlaced></ProgressionGamesNotPlaced>
+                <ProgressionGamesNotPlaced></ProgressionGamesNotPlaced>
+            </Container>
+
+
 
         </div>
 

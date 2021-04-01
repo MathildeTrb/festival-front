@@ -1,7 +1,6 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
-import {FC, useState} from "react";
+import {FC} from "react";
 import {Reservation} from "../../utils/types";
-import {useAxios} from "../../utils/axios-hooks";
 
 
 const ModalDetailsReservation: FC<{show: boolean, onHide: () => void, reservation: Reservation}> = ({show, onHide, reservation}) => {
