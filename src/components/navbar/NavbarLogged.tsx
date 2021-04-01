@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
-import {Col, Image, Nav, NavDropdown, Row} from "react-bootstrap";
+import "../../css/index.css"
+import {Col, Dropdown, Image, Nav, NavDropdown, Row} from "react-bootstrap";
 import logo from "../../pictures/logo_FDJ_FINAL_800.png"
 import useAxios from "../../utils/useAxios";
 import {useContext, useState} from "react";
@@ -11,6 +12,8 @@ import {AiOutlineAudit} from 'react-icons/ai'
 import {Festival} from "../../utils/types";
 import FestivalSelection from "../festival/FestivalSelection";
 import useToken from "../../utils/useToken";
+
+
 
 const NavbarLogged = () => {
 
@@ -36,51 +39,60 @@ const NavbarLogged = () => {
                     <FestivalSelection festivals={festivals} setFestivals={setFestivals}/>
                 </Col>
                 <Col md={9} className={"navbar-col"}>
-                    <Nav fill variant="tabs" defaultActiveKey="/">
-                        <Nav.Item className='nav-item'>
-                            <Link to="/" className='nav-link'><HiOutlineInformationCircle/> Informations du festival</Link>
-                        </Nav.Item>
-                        <Nav.Item className='nav-item'>
-                            <Link to="/exhibitors" className='nav-link'> <AiOutlineAudit/> Réservations
-                                exposants</Link>
-                        </Nav.Item>
-                        <Nav.Item className='nav-item'>
-                            <Link to="/gameMonitorings" className='nav-link'> <FaGamepad/> Réservations jeux</Link>
-                        </Nav.Item>
-                        <Nav.Item className='nav-item'>
-                            <Link to="/invoices" className='nav-link'> <FaFileInvoiceDollar/> Facturations du festival</Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <NavDropdown title={<> <FaList/> Informations générales </>} id="basic-nav-dropdown">
-                                <NavDropdown.Item >
-                                    <Link className={"nav-link"} to ="/games"> Jeux </Link>
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item >
-                                    <Link className={"nav-link"} to ="/companies"> Entreprises </Link>
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item >
-                                    <Link className={"nav-link"} to ="/users"> Bénévoles </Link>
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item >
-                                    <Link className={"nav-link"} to ="/festivals"> Festivals </Link>
-                                </NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav.Item>
-                        <Nav.Item className='nav-item'>
-                            <NavDropdown title={<BiUser/>} id="basic-nav-dropdown">
-                                <NavDropdown.Item>
-                                    <Link to="/profil" className='nav-link'>Profil</Link>
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item>
-                                    <Link to="/logout" className='nav-link'>Déconnexion</Link>
-                                </NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav.Item>
-                    </Nav>
+                    <Row>
+                        <Nav fill variant="tabs" defaultActiveKey="/">
+                            <Nav.Item className='nav-item'>
+                                <Link to="/" className='nav-link'><HiOutlineInformationCircle/> Informations du festival</Link>
+                            </Nav.Item>
+                            <Nav.Item className='nav-item'>
+                                <Link to={`/${selectedFestival.id}/exhibitors`} className='nav-link'> <AiOutlineAudit/> Réservations
+                                    exposants</Link>
+                            </Nav.Item>
+                            <Nav.Item className='nav-item'>
+                                <Link to={`/${selectedFestival.id}/gameMonitorings`} className='nav-link'> <FaGamepad/> Réservations jeux</Link>
+                            </Nav.Item>
+                            <Nav.Item className='nav-item'>
+                                <Link to="/invoices" className='nav-link'> <FaFileInvoiceDollar/> Facturations du festival</Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <NavDropdown title={<> <FaList/> Informations générales </>} id="basic-nav-dropdown">
+                                    <NavDropdown.Item >
+                                        <Link className={"nav-link"} to ="/games"> Jeux </Link>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item >
+                                        <Link className={"nav-link"} to ="/companies"> Entreprises </Link>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item >
+                                        <Link className={"nav-link"} to ="/allUsers"> Bénévoles </Link>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item >
+                                        <Link className={"nav-link"} to ="/festivals"> Festivals </Link>
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            </Nav.Item>
+                            <Nav.Item className='nav-item'>
+                                <NavDropdown title={<BiUser/>} id="basic-nav-dropdown">
+                                    <NavDropdown.Item>
+                                        <Link to="/profil" className='nav-link'>Profil</Link>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item>
+                                        <Link to="/logout" className='nav-link'>Déconnexion</Link>
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            </Nav.Item>
+                        </Nav>
+                    </Row>
+                    <Row>
+                        <Col md={7}/>
+                        <Col>
+                            <input type="text" value="Coucou je suis la"/>
+                            <button className="mon-validate-button">Valider</button>
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
             }
