@@ -1,9 +1,10 @@
 import {Festival, Space} from "../../utils/types";
 import {FC, useEffect, useState} from "react";
-import {Col, Modal, Row} from "react-bootstrap";
+import {Col, Form, Modal, Row} from "react-bootstrap";
 import axios from "../../utils/axios";
 import useToken from "../../utils/useToken";
 import SpaceForm from "../space/SpaceForm";
+import {useAxiosPhoto} from "../../utils/axios-hooks";
 
 const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: Festival, show: boolean, onHide: () => void, onChange: (festival: Festival) => void }> = ({
                                                                                                                                                                            updateMode =false,
@@ -15,13 +16,15 @@ const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: 
                                                                                                                                                                        }) => {
     const [name, setName] = useState<string>(festival ? festival.name : "");
     const [description, setDescription] = useState<string>(festival ? festival.description : "");
-    const [url, setUrl] = useState<string>(festival ? festival.imageUrl : "https://picsum.photos/500")
+    const [image, setImage] = useState<File>(null)
     const [isCurrent, setIsCurrent] = useState<boolean>(festival ? festival.isCurrent : false)
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
     const [numberOfSpaces, setNumberOfSpaces] = useState<number>(3)
     const [spaces, setSpaces] = useState<Space[]>([])
 
     const {token} = useToken()
+
+    const {upload} = useAxiosPhoto();
 
     const createRow = () => {
         let rows = []
@@ -41,6 +44,10 @@ const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: 
         set(event.target.value);
     }
 
+    const handleChangeImage = event => {
+        setImage(event.currentTarget.files[0])
+    }
+
     useEffect(() => {
         if (isSubmitted && (spaces.length == numberOfSpaces || updateMode)) {
             updateMode?
@@ -51,11 +58,14 @@ const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: 
     }, [isSubmitted, numberOfSpaces, spaces])
 
     const updateFestival = async () => {
+
+        const imageUrl: string = image ? await upload(image) : null;
+
         const constructedFestival: Festival = {
             id: festival.id,
             name,
             description,
-            imageUrl: url,
+            imageUrl,
             isCurrent,
         }
 
@@ -71,10 +81,12 @@ const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: 
 
     const createFestival = async () => {
 
+        const imageUrl: string = image ? await upload(image) : null;
+
         const festival: Festival = {
             name,
             description,
-            imageUrl: url,
+            imageUrl,
             isCurrent,
         }
 
@@ -105,62 +117,57 @@ const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: 
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form>
-                        <Row>
-                            <Col>
-                                <label>Nom du festival : </label>
+                    <Form>
+                        <Form.Group as={Row}>
+                            <Form.Label column sm="2">
+                                Nom
+                            </Form.Label>
+                            <Col sm="3">
                                 <input
                                     type="text"
-                                    className="mon-input"
+                                    className="form-control"
                                     value={name}
                                     onChange={handleChange(setName)}
                                     required
                                 />
                             </Col>
-                            <Col>
-                                <label className="vertical-align">Description : </label>
-                                <textarea
-                                    className="mon-input"
-                                    value={description}
-                                    onChange={handleChange(setDescription)}
-                                    required
-                                />
+                            <Col sm="1"/>
+                            <Form.Label column sm="1">
+                                Description
+                            </Form.Label>
+                            <Col sm="5">
+                                <textarea className="form-control" rows={2} value={description} onChange={handleChange(setDescription)}/>
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <label>Url affiche : </label>
-                                <input
-                                    type="text"
-                                    className="mon-input"
-                                    value={url}
-                                    onChange={handleChange(setUrl)}
-                                    required
-                                />
+                        </Form.Group>
+
+                        <Form.Group as={Row}>
+                            <Form.Label column sm="2">
+                                Affiche
+                            </Form.Label>
+                            <Col sm="3">
+                                <Form.File onChange={handleChangeImage} label={image ? image.name : "Choisir une image"} data-browse="Parcourir" custom/>
                             </Col>
+                            <Col sm="1"/>
+                            <Form.Label column sm="2">
+                                Festival courant ?
+                            </Form.Label>
                             <Col>
-                                <label>festival courant ? </label>
                                 <button type="button"
                                         className={isCurrent ? "mon-validate-button" : "mon-delete-button"}
                                         onClick={() => setIsCurrent(!isCurrent)}>{isCurrent ? "OUI" : "NON"}</button>
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <label>
-                                    nombre d'espace :
-                                </label>
-                                <input
-                                    type="int"
-                                    className="mon-input"
-                                    value={numberOfSpaces}
-                                    onChange={handleChange(setNumberOfSpaces)}
-                                    required
-                                    disabled={updateMode}
-                                />
+                        </Form.Group>
+
+                        <Form.Group as={Row}>
+                            <Form.Label column sm="2">
+                                Nombre d'espaces
+                            </Form.Label>
+                            <Col sm="3">
+                                <input type="int" className="form-control" value={numberOfSpaces} onChange={handleChange(setNumberOfSpaces)} required disabled={updateMode}/>
                             </Col>
-                        </Row>
-                    </form>
+                        </Form.Group>
+                    </Form>
+                    <hr/>
                     { !updateMode && <hr/> &&
                     createRow()}
                 </Modal.Body>
