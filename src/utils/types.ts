@@ -73,12 +73,12 @@ export type Space = {
 export type ExhibitorMonitoring = {
     exhibitor: Company;
     festival: Festival;
-    status: ExhibitorMonitoringStatus;
+    status?: ExhibitorMonitoringStatus;
     comment: string;
-    reservation: Reservation;
-    dateContact1: Date;
-    dateContact2: Date;
-    dateContact3: Date;
+    reservation?: Reservation;
+    dateContact1?: Date;
+    dateContact2?: Date;
+    dateContact3?: Date;
 }
 
 export type ExhibitorMonitoringStatus = {

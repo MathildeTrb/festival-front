@@ -5,6 +5,8 @@ import {FestivalContext} from "../../App";
 import {Col, Row, Spinner} from "react-bootstrap";
 import ExhibitorMonitoringRow from "./ExhibitorMonitoringRow";
 import {useAxiosMethods} from "../../utils/axios-hooks";
+import {VscDiffAdded} from "react-icons/vsc";
+import ExhibitorMonitoringCreateModal from "./ExhibitorMonitoringCreateModal";
 
 const ExhibitorMonitoringList: FC = () => {
 
@@ -16,7 +18,9 @@ const ExhibitorMonitoringList: FC = () => {
         setData: setExhibitorMonitorings,
         isPending
     } = useAxios<ExhibitorMonitoring[]>("exhibitorMonitorings/" + selectedFestival.id)
-    
+
+    const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
+
 
     useEffect(() => {
         document.title = "Suivi des exposants";
@@ -25,6 +29,11 @@ const ExhibitorMonitoringList: FC = () => {
     const statusConsiderateAbsent: ExhibitorMonitoringStatus = {
         id: 5,
         label: "Considéré absent"
+    }
+
+    const handleCreate = (exhibitorMonitoring: ExhibitorMonitoring) => {
+        console.log(exhibitorMonitoring)
+        setExhibitorMonitorings([...exhibitorMonitorings, exhibitorMonitoring])
     }
 
     const putConsideratedAbsent = () => {
@@ -46,16 +55,23 @@ const ExhibitorMonitoringList: FC = () => {
     }
 
     return (
-        <>
+        <div>
             {isPending && <Spinner animation="border" variant="primary"/>}
             {exhibitorMonitorings &&
 
             <>
+
+                <h1 className="text-center mb-5">
+                    Suivi des exposants du festival
+                </h1>
                 <Row>
-                    <Col md={10}/>
-                    <Col>
-                        <button className="mon-delete-button btn " onClick={putConsideratedAbsent}>Considéré absent
-                        </button>
+                    <Col sm={2}>
+                        <button type="button" className="mon-button mb-2" onClick={() => setShowModalCreate(true)}><p><VscDiffAdded/> Ajout d'un suivi</p></button>
+                        <ExhibitorMonitoringCreateModal show={showModalCreate} onHide={() => setShowModalCreate(false)} onCreate={handleCreate}/>
+                    </Col>
+                    <Col sm={8}/>
+                    <Col sm={2}>
+                        <button className="mon-delete-button mb-2" onClick={putConsideratedAbsent}>Considéré absent</button>
                     </Col>
                 </Row>
                 <table className="table table-striped table-hover">
@@ -79,7 +95,7 @@ const ExhibitorMonitoringList: FC = () => {
             </>
 
             }
-        </>
+        </div>
     )
 
 }
