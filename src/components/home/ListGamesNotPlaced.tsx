@@ -24,7 +24,6 @@ const ListGamesNotPlaced: FC = () =>{
             {GamesNotPlacedTab &&
             <Card style={{width: '18rem', marginTop:'2rem'}}>
                 <h4>Liste jeu(x) non placé(s)</h4>
-                {console.log(GamesNotPlacedTab)}
                 <ListGroup>
                     {GamesNotPlacedTab[0].areas.map((area, index) => {
                         return area.gameMonitorings.map((gameMonitoring, index) => {

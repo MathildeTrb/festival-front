@@ -27,7 +27,7 @@ const Profil = () => {
         }).then(({data}) => {
             setUser(data)
             setIsPending(false)
-        }).catch(err => console.log(err))
+        })
     }, [setUser, token])
 
     const deleteAccount = () => {
@@ -37,8 +37,7 @@ const Profil = () => {
                 "Authorization": "Bearer " + token
             }
         })
-            .then(res => {
-                    console.log(res.data)
+            .then(() => {
                     removeToken();
                 }
             )
@@ -54,7 +53,7 @@ const Profil = () => {
         }).then( res => {
             setUser(res.data)
             }
-        ).catch(err => console.log(err))
+        )
     }
 
     const updatePassword = (passwordManaged) => {
@@ -63,7 +62,7 @@ const Profil = () => {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + token
             }
-        }).then(res => console.log(res.data))
+        })
     }
 
     return (

@@ -1,4 +1,4 @@
-import {FC, useContext} from "react";
+import {FC, useContext, useEffect} from "react";
 import {Row, Col, Container, Spinner} from "react-bootstrap";
 import {useParams} from "react-router-dom";
 import ExhibitorReservationDetails from "./ExhibitorReservationDetails";
@@ -17,31 +17,36 @@ const ExhibitorDashboard: FC = () => {
 
     const {data: exhibitorMonitoring, isPending} = useAxios<ExhibitorMonitoring>(`exhibitorMonitorings/${idExhibitor}/dashboard/${selectedFestival.id}`);
 
+    useEffect(() => {
+        if (exhibitorMonitoring) {
+            document.title = `Dashboard ${exhibitorMonitoring.exhibitor.name}`
+        }
+    }, [exhibitorMonitoring])
+
     return (
         <>
             {isPending && <Spinner animation="border" variant="primary"/>}
             {exhibitorMonitoring &&
             <Container fluid>
-
-                <div className="text-center mb-4">
+                <div className="text-center mb-5">
                     <h1>{exhibitorMonitoring.exhibitor.name}</h1>
                 </div>
 
                 <Row>
                     <Col>
-                        <ExhibitorInfos exhibitor={exhibitorMonitoring.exhibitor}/>
+                        <Row className="mb-5">
+                            <ExhibitorInfos exhibitor={exhibitorMonitoring.exhibitor}/>
+                        </Row>
+                        <Row>
+                            <ExhibitorDetails exhibitorMonitoring={exhibitorMonitoring}/>
+                        </Row>
                     </Col>
                     <Col>
                         <ExhibitorReservationDetails exhibitorMonitoring={exhibitorMonitoring}/>
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
-                        <ExhibitorDetails exhibitorMonitoring={exhibitorMonitoring}/>
-                    </Col>
-                    <Col>
-                        <ExhibitorGameMonitorings exhibitorMonitoring={exhibitorMonitoring}/>
-                    </Col>
+                <Row className="mt-5">
+                    <ExhibitorGameMonitorings exhibitorMonitoring={exhibitorMonitoring}/>
                 </Row>
             </Container>
             }

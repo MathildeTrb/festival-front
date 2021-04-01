@@ -35,7 +35,6 @@ const CompanyForm: FC<{company?: Company, onAction: (c: Company) => void, update
             .then(({data}) => {
                 onAction(updateMode ? newCompany : data);
             })
-            .catch(err => console.log(err.message))
     }
 
     return (

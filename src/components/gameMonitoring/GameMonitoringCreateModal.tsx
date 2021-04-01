@@ -1,20 +1,12 @@
-import {FC, useContext} from "react";
+import {Dispatch, FC, SetStateAction, useContext} from "react";
 import {Modal} from "react-bootstrap";
 import GameMonitoringForm from "./GameMonitoringForm";
 import {GameMonitoring} from "../../utils/types";
-import {GameMonitoringContext} from "./GameMonitorings";
 
-const GameMonitoringCreateModal: FC<{show: boolean, onHide: () => void}> = ({show, onHide}) => {
-
-    const {gameMonitorings, setGameMonitorings} = useContext(GameMonitoringContext);
+const GameMonitoringCreateModal: FC<{show: boolean, onHide: () => void, onCreate?: (gameMonitoring: GameMonitoring) => void}> = ({show, onHide, onCreate }) => {
 
     const handleCreate = (gameMonitoring: GameMonitoring) => {
-
-        const newGameMonitorings: GameMonitoring[] = [...gameMonitorings, gameMonitoring];
-        newGameMonitorings.sort((gm1, gm2) => gm1.reservation.exhibitorMonitoring.exhibitor.name.localeCompare(gm2.reservation.exhibitorMonitoring.exhibitor.name))
-
-        setGameMonitorings(newGameMonitorings);
-
+        onCreate(gameMonitoring);
         onHide();
     }
 

@@ -4,23 +4,33 @@ import {GameMonitoringContext} from "./GameMonitorings";
 import {Modal} from "react-bootstrap";
 import GameMonitoringForm from "./GameMonitoringForm";
 
-const GameMonitoringUpdateModal : FC<{show: boolean, gameMonitoring: GameMonitoring, onHide: ()=> void}> = ({show, gameMonitoring, onHide}) => {
+const GameMonitoringUpdateModal : FC<{show: boolean, gameMonitoring: GameMonitoring, onHide: ()=> void, fromDashboard?: boolean}> = ({show, gameMonitoring, onHide, fromDashboard = false}) => {
 
     const {gameMonitorings, setGameMonitorings} = useContext(GameMonitoringContext);
 
     const handleUpdate = (updatedGameMonitoring: GameMonitoring) => {
-        console.log("ICIIIIIIIIIIIIIIIIIIIIIIIIIIII")
-        console.log(updatedGameMonitoring)
         const updatedGameMonitorings = [...gameMonitorings];
 
-        console.log(updatedGameMonitorings)
         const index = updatedGameMonitorings.findIndex(g => g.game === updatedGameMonitoring.game && g.reservation === updatedGameMonitoring.reservation)
-        console.log(index)
         updatedGameMonitorings[index] = updatedGameMonitoring
 
         setGameMonitorings(updatedGameMonitorings)
 
         onHide()
+    }
+
+    const handleUpdateFromDashboard = (updatedGameMonitoring: GameMonitoring) => {
+
+        gameMonitoring.quantityExposed = updatedGameMonitoring.quantityExposed;
+        gameMonitoring.quantityTombola = updatedGameMonitoring.quantityTombola;
+        gameMonitoring.quantityDonation = updatedGameMonitoring.quantityDonation;
+        gameMonitoring.status = updatedGameMonitoring.status;
+        gameMonitoring.area = updatedGameMonitoring.area;
+        gameMonitoring.isPlaced = updatedGameMonitoring.isPlaced
+        gameMonitoring.needBeingReturned = updatedGameMonitoring.needBeingReturned;
+        gameMonitoring.returnedPrice = updatedGameMonitoring.returnedPrice;
+
+        onHide();
     }
 
     return(
@@ -31,7 +41,7 @@ const GameMonitoringUpdateModal : FC<{show: boolean, gameMonitoring: GameMonitor
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <GameMonitoringForm gameMonitoring={gameMonitoring} onCreate={handleUpdate} updateMode/>
+                <GameMonitoringForm gameMonitoring={gameMonitoring} onCreate={fromDashboard ? handleUpdateFromDashboard : handleUpdate} updateMode/>
             </Modal.Body>
         </Modal>
     )

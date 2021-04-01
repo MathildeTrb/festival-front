@@ -41,11 +41,11 @@ const NavbarLogged = () => {
                             <Link to="/" className='nav-link'><HiOutlineInformationCircle/> Informations du festival</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
-                            <Link to={`/${selectedFestival.id}/exhibitors`} className='nav-link'> <AiOutlineAudit/> Réservations
+                            <Link to="/exhibitors" className='nav-link'> <AiOutlineAudit/> Réservations
                                 exposants</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
-                            <Link to={`/${selectedFestival.id}/gameMonitorings`} className='nav-link'> <FaGamepad/> Réservations jeux</Link>
+                            <Link to="/gameMonitorings" className='nav-link'> <FaGamepad/> Réservations jeux</Link>
                         </Nav.Item>
                         <Nav.Item className='nav-item'>
                             <Link to="/invoices" className='nav-link'> <FaFileInvoiceDollar/> Facturations du festival</Link>
@@ -61,7 +61,7 @@ const NavbarLogged = () => {
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item >
-                                    <Link className={"nav-link"} to ="/allUsers"> Bénévoles </Link>
+                                    <Link className={"nav-link"} to ="/users"> Bénévoles </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item >

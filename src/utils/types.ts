@@ -116,6 +116,7 @@ export type GameMonitoring = {
     returnedPrice: number;
     status: GameMonitoringStatus;
     area: Area
+    dateUpdate?: Date;
 }
 
 export type GameMonitoringStatus = {

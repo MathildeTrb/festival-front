@@ -22,7 +22,6 @@ const Users = () => {
     const handleCreate = (user : User) => {
         axios.post("users/register", user)
             .then(res => setLoadedUsers([...loadedUsers, res.data]))
-            .catch(err => console.log(err))
     }
 
     const handleShowModal = () => {

@@ -10,8 +10,6 @@ const CompanyUpdateModal: FC<{show: boolean, company: Company, onHide: () => voi
 
     const handleUpdate = (updatedCompany: Company) => {
 
-        console.log("update", updatedCompany)
-
         const updatedCompanies: Company[] = [...companies];
 
         const index = updatedCompanies.findIndex(c => c.id === updatedCompany.id);

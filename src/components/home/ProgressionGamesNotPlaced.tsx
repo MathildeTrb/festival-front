@@ -16,7 +16,6 @@ const ProgressionGamesNotPlaced = () => {
             {gamesNotPlaced && allGames &&
             <div>
                 <h5>Progression jeu(x) placé(s)</h5>
-                {console.log(gamesNotPlaced.length)}
                 <ProgressBar now={((allGames.length - gamesNotPlaced.length)/allGames.length)*100}/>
             </div>
             }

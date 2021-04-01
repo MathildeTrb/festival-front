@@ -1,9 +1,10 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
-import {createContext, Dispatch, FC, SetStateAction, useEffect, useState} from "react";
+import {createContext, Dispatch, FC, SetStateAction, useContext, useEffect, useState} from "react";
 import {ExhibitorMonitoring, Festival, Reservation, ReservationDetails} from "../../utils/types";
 import axios from "../../utils/axios";
 import useAxios from "../../utils/useAxios";
 import FormDetailsReservation from "./FormDetailsReservation";
+import {FestivalContext} from "../../App";
 
 type ReservationContextProps = {
     reservationDetails: ReservationDetails[];
@@ -12,16 +13,18 @@ type ReservationContextProps = {
 
 export const ReservationContext = createContext<ReservationContextProps>({} as ReservationContextProps)
 
-const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMonitoring: ExhibitorMonitoring}> = ({show, onHide, exhibitorMonitoring}) => {
+const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMonitoring?: ExhibitorMonitoring}> = ({show, onHide, exhibitorMonitoring}) => {
 
-    const [needVolunteer, setNeedVolunter] = useState<boolean>(false)
-    const [willCome, setWillCome] = useState<boolean>(false)
-    const [discount, setDiscount] = useState<number>(0)
-    const [reservationDetails, setReservationDetails] = useState<ReservationDetails[]>([])
+    const [needVolunteer, setNeedVolunter] = useState<boolean>(exhibitorMonitoring.reservation && exhibitorMonitoring.reservation.needVolunteer)
+    const [willCome, setWillCome] = useState<boolean>(exhibitorMonitoring.reservation && exhibitorMonitoring.reservation.willCome)
+    const [discount, setDiscount] = useState<number>(exhibitorMonitoring.reservation ? exhibitorMonitoring.reservation.discount : 0)
+    const [reservationDetails, setReservationDetails] = useState<ReservationDetails[]>(exhibitorMonitoring.reservation ? exhibitorMonitoring.reservation.reservationDetails : [])
 
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
 
-    const {data: concernedFestival, isPending} = useAxios<Festival>("festivals/"+exhibitorMonitoring.festival.id)
+    const {selectedFestival} = useContext(FestivalContext)
+
+    const {data: concernedFestival, isPending} = useAxios<Festival>("festivals/"+selectedFestival.id)
 
     const reservationContextValue = {
         reservationDetails,
@@ -33,12 +36,10 @@ const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMo
     }
 
     const onSubmit = (newReservationDetails : ReservationDetails) => {
-        console.log("ON SUBMIT", newReservationDetails)
         setReservationDetails([...reservationDetails, newReservationDetails])
     }
 
     useEffect(() => {
-        console.log(reservationDetails)
         if(isSubmitted && (concernedFestival.spaces.length === reservationDetails.length)){
             createReservation()
         }
@@ -54,7 +55,6 @@ const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMo
             exhibitorMonitoring,
         }
 
-        console.log(reservation)
 
         axios.post("reservations", {
             reservation : reservation
@@ -103,8 +103,10 @@ const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMo
                             </Col>
                         </Row>
                         {isPending && <p>je suis en train de charger</p>}
-                        {concernedFestival && concernedFestival.spaces.map(space =>
-                            <FormDetailsReservation isSubmitted={isSubmitted} onSubmit={onSubmit} space={space}/>
+                        {concernedFestival && concernedFestival.spaces
+                            .sort((s1, s2) => s1.label.localeCompare(s2.label))
+                            .map(space =>
+                            <FormDetailsReservation isSubmitted={isSubmitted} onSubmit={onSubmit} space={space} reservation={exhibitorMonitoring.reservation}/>
                         )}
                     </form>
                 </ReservationContext.Provider>

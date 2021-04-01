@@ -11,8 +11,6 @@ const AreaList: FC = () => {
 
     const {data: areas, isPending} = useAxios<AreaVisitor[]>(`areas/${selectedFestival.id}/games`)
 
-    console.log(areas)
-
     return (
         <div>
             {isPending && <Spinner animation="border" variant="primary"/>}

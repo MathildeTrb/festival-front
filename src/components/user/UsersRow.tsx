@@ -28,8 +28,6 @@ const UsersRow: FC<{user: User, onDelete: (user: User) => void}> = ({user, onDel
         }).then(() => {
             onDelete(user)
             setShowModal(false)
-        }).catch((err) => {
-            console.log(err)
         })
     }
 

@@ -1,12 +1,17 @@
 import {FC, useContext, useEffect, useState} from "react";
-import {ReservationDetails, Space} from "../../utils/types";
+import {Reservation, ReservationDetails, Space} from "../../utils/types";
 import {Col, Row} from "react-bootstrap";
 import {ReservationContext} from "./ModalCreateReservation";
 
-const FormDetailsReservation: FC<{ isSubmitted: boolean, onSubmit:(reservationDetails : ReservationDetails) => void, space: Space}> = ({isSubmitted, onSubmit, space}) => {
+const FormDetailsReservation: FC<{ isSubmitted: boolean, onSubmit:(reservationDetails : ReservationDetails) => void, space: Space, reservation?: Reservation}> = ({isSubmitted, onSubmit, space, reservation}) => {
 
-    const [tableReserved, setTableReserved] = useState<number>(0)
-    const [meterReserved, setMeterReserved] = useState<number>(0)
+    const reservationDetail: ReservationDetails = reservation ? reservation.reservationDetails
+        .filter(rd => rd.space.id === space.id)[0]
+        :
+        undefined;
+
+    const [tableReserved, setTableReserved] = useState<number>(reservationDetail ? reservationDetail.tableReserved : 0);
+    const [meterReserved, setMeterReserved] = useState<number>(reservationDetail ? reservationDetail.meterReserved : 0);
 
     const {setReservationDetails} = useContext(ReservationContext);
 
@@ -21,7 +26,6 @@ const FormDetailsReservation: FC<{ isSubmitted: boolean, onSubmit:(reservationDe
                 meterReserved,
                 space
             }
-            console.log("J'ai créé une réservationDetails")
             setReservationDetails(prevState => [...prevState, reservationDetail])
         }
 

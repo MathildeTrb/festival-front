@@ -41,7 +41,7 @@ const ExhibitorMonitoringRow:
         if (exhibitorMonitoring.status.label === "Pas contacté") {
             exhibitorMonitoring.status = exhibitorMonitoringStatusTab.filter(e => e.label === "En discussion")[0]
         }
-        axios.put(
+        await axios.put(
             "exhibitorMonitorings/date",
             {'exhibitorMonitoring': exhibitorMonitoring}
         );
@@ -53,7 +53,7 @@ const ExhibitorMonitoringRow:
             <td><Link to={`/dashboard/${exhibitorMonitoring.exhibitor.id}`}>{exhibitorMonitoring.exhibitor.name}</Link></td>
             <td>
                 <ImCalendar
-                    onClick={() => setShowModal1(true)}/> {exhibitorMonitoring.dateContact1 ? new Date(exhibitorMonitoring.dateContact1).toLocaleDateString() : <>Pas
+                    onClick={() => setShowModal1(true)} className="p-cursor"/> {exhibitorMonitoring.dateContact1 ? new Date(exhibitorMonitoring.dateContact1).toLocaleDateString() : <>Pas
                 de 1<sup>er</sup> contact</>}
                 <CalendarModal title="Sélection de la date du premier contact" show={showModal1}
                                onHide={() => setShowModal1(false)} date={date1} setDate={setDate1}
@@ -61,7 +61,7 @@ const ExhibitorMonitoringRow:
             </td>
             <td>
                 <ImCalendar
-                    onClick={() => setShowModal2(true)}/> {exhibitorMonitoring.dateContact2 ? new Date(exhibitorMonitoring.dateContact2).toLocaleDateString() : <>Pas
+                    onClick={() => setShowModal2(true)} className="p-cursor"/> {exhibitorMonitoring.dateContact2 ? new Date(exhibitorMonitoring.dateContact2).toLocaleDateString() : <>Pas
                 de 2<sup>e</sup> contact</>}
                 <CalendarModal title="Sélection de la date du deuxième contact" show={showModal2}
                                onHide={() => setShowModal2(false)} date={date2} setDate={setDate2}
@@ -70,7 +70,7 @@ const ExhibitorMonitoringRow:
             </td>
             <td>
                 <ImCalendar
-                    onClick={() => setShowModal3(true)}/> {exhibitorMonitoring.dateContact3 ? new Date(exhibitorMonitoring.dateContact3).toLocaleDateString() : <>Pas
+                    onClick={() => setShowModal3(true)} className="p-cursor"/> {exhibitorMonitoring.dateContact3 ? new Date(exhibitorMonitoring.dateContact3).toLocaleDateString() : <>Pas
                 de 3<sup>e</sup> contact</>}
                 <CalendarModal title="Sélection de la date du troisième contact" show={showModal3}
                                onHide={() => setShowModal3(false)} date={date3} setDate={setDate3}

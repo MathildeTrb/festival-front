@@ -1,18 +1,18 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import {FC, useState} from "react";
 import {Reservation} from "../../utils/types";
-import {useAxios} from "../../utils/axios-hooks";
 
 
 const ModalDetailsReservation: FC<{show: boolean, onHide: () => void, reservation: Reservation}> = ({show, onHide, reservation}) => {
 
+
     const amount: number = reservation.reservationDetails
         .map<number>((reservationDetail) => reservationDetail.meterReserved * reservationDetail.space.meterPrice + reservationDetail.tableReserved * reservationDetail.space.tablePrice)
-        .reduce((total, currentValue) => total + currentValue);
+        .reduce((total, currentValue) => total + currentValue, 0);
 
     const amountReturnedGames: number = reservation.gameMonitorings
         .map<number>((gameMonitoring) => gameMonitoring.returnedPrice)
-        .reduce((total, currentValue) => total + currentValue)
+        .reduce((total, currentValue) => total + currentValue, 0);
 
     return (
         <Modal

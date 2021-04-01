@@ -1,36 +1,54 @@
-import {Area, GameMonitoring, GameMonitoringStatus} from "../../utils/types";
-import {FC, useContext, useState} from "react";
+import {Area, Game, GameMonitoring, GameMonitoringStatus} from "../../utils/types";
+import {FC, useContext, useEffect, useState} from "react";
 import {Alert, Button, CardImg, Col, Form, Row, Spinner} from "react-bootstrap";
 import GameMonitoringStatusSelectList from "./GameMonitoringStatusSelectList";
 import {FaRadiation} from "react-icons/all";
 import AreaSelectList from "./AreaSelectList";
 import axios from "../../utils/axios";
 import {FestivalContext} from "../../App";
+import {Hint} from "react-autocomplete-hint";
+import {useAxios} from "../../utils/axios-hooks";
+import {IHintOption} from "react-autocomplete-hint/dist/src/IHintOption";
+import {ExhibitorMonitoringContext} from "../exhibitorMonitoring/dashboard/ExhibitorGameMonitorings";
 
-const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : GameMonitoring) => void, updateMode?: boolean}> = ({gameMonitoring, onCreate, updateMode=false}) => {
+const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gm : GameMonitoring) => void, updateMode?: boolean}> = ({gameMonitoring, onCreate, updateMode=false}) => {
 
     const [status, setStatus] = useState<GameMonitoringStatus>(gameMonitoring ? gameMonitoring.status : null)
     const [area, setArea] = useState<Area>(gameMonitoring ? gameMonitoring.area : null)
-    const [quantityExposed, setQuantityExposed] = useState<number>(gameMonitoring ? gameMonitoring.quantityExposed : null)
-    const [quantityTombola, setQuantityTombola] = useState<number>(gameMonitoring ? gameMonitoring.quantityTombola : null)
-    const [quantityDonation, setQuantityDonation] = useState<number>(gameMonitoring ? gameMonitoring.quantityDonation : null)
-    const [needBeingReturned, setNeedBeingReturned] = useState<boolean>(gameMonitoring ? gameMonitoring.needBeingReturned: null)
-    const [returnedPrice, setReturnedPrice] = useState<number>(gameMonitoring ? gameMonitoring.returnedPrice:null)
-    const [isPlaced, setIsPlaced] = useState<boolean>(gameMonitoring ? gameMonitoring.isPlaced:null)
+    const [quantityExposed, setQuantityExposed] = useState<number>(gameMonitoring ? gameMonitoring.quantityExposed : 0)
+    const [quantityTombola, setQuantityTombola] = useState<number>(gameMonitoring ? gameMonitoring.quantityTombola : 0)
+    const [quantityDonation, setQuantityDonation] = useState<number>(gameMonitoring ? gameMonitoring.quantityDonation : 0)
+    const [needBeingReturned, setNeedBeingReturned] = useState<boolean>(gameMonitoring && gameMonitoring.needBeingReturned)
+    const [returnedPrice, setReturnedPrice] = useState<number>(gameMonitoring ? gameMonitoring.returnedPrice : 0)
+    const [isPlaced, setIsPlaced] = useState<boolean>(gameMonitoring && gameMonitoring.isPlaced)
+
+    const [nameGame, setNameGame] = useState<string>("");
 
     const [showAlert, setShowAlert] = useState<boolean>(false);
+    const [showAlertGame, setShowAlertGame] = useState<boolean>(false);
 
-    const {selectedFestival, setSelectedFestival} = useContext(FestivalContext);
+    const {data: games} = useAxios<Game[]>("games");
+
+    const {exhibitorMonitoring} = useContext(ExhibitorMonitoringContext);
 
     const handleSubmit = async event => {
-        event.preventDefault()
-        if(!status || !area ){
+
+        event.preventDefault();
+
+        const game: Game = games.find(g => g.name.toLowerCase() === nameGame.toLowerCase());
+
+        if (!game) {
+            setShowAlertGame(true)
+        }
+
+        if(!status || !area){
             setShowAlert(true)
         }
-        else{
+        else {
+
             const newGameMonitoring: GameMonitoring = {
-                game : gameMonitoring.game,
-                reservation : gameMonitoring.reservation,
+                game : updateMode ? gameMonitoring.game : game,
+                reservation : updateMode ? gameMonitoring.reservation : exhibitorMonitoring.reservation,
                 quantityTombola,
                 quantityExposed,
                 quantityDonation,
@@ -41,7 +59,6 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
                 area
             }
 
-            console.log(newGameMonitoring.quantityDonation)
             const action = updateMode ? axios.put : axios.post;
 
             action("gameMonitorings", {
@@ -75,6 +92,37 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
                 </div>
             </Alert>
 
+            {!updateMode &&
+
+            <>
+                <Alert show={showAlertGame} variant="warning" onClose={() => setShowAlertGame(false)} dismissible>
+                    <div className="text-center">
+                        Jeu inexistant
+                    </div>
+                </Alert>
+
+
+                <Form.Group as={Row}>
+                    <Form.Label column sm="3">
+                        Jeu
+                    </Form.Label>
+                    <Col sm="6">
+                        {games &&
+                        <Hint options={games.map<IHintOption>(game => {
+                            return {
+                                id: game.id,
+                                label: game.name
+                            }
+                        })}>
+                            <input type="text" className="form-control" value={nameGame} onChange={event => setNameGame(event.target.value)}/>
+                        </Hint>
+                        }
+                    </Col>
+                </Form.Group>
+            </>
+            }
+
+
             <Form.Group as={Row}>
                 <Form.Label column sm="3">
                     Statut du jeu
@@ -85,12 +133,12 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
             </Form.Group>
 
             <Form.Group as={Row}>
-                <Form.Label column sm="4">
-                    <AreaSelectList selected={area} handleChange={handleChangeJSON(setArea)}/>
-                </Form.Label>
                 <Form.Label column sm="3">
                     Sélection de la zone
                 </Form.Label>
+                <Col sm="6">
+                    <AreaSelectList selected={area} handleChange={handleChangeJSON(setArea)}/>
+                </Col>
             </Form.Group>
 
             <Form.Group as={Row}>
@@ -108,7 +156,7 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
                     Quantité donnée
                 </Form.Label>
                 <Col sm="1">
-                    <Form.Control type="text" value={quantityDonation} onChange={handleChange(setQuantityDonation)}>
+                    <Form.Control type="int" value={quantityDonation} onChange={handleChange(setQuantityDonation)}>
                     </Form.Control>
                 </Col>
 
@@ -119,7 +167,7 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
                     Quantité Tombola
                 </Form.Label>
                 <Col sm={"1"}>
-                    <Form.Control type="text" value={quantityTombola} onChange={handleChange(setQuantityTombola)}>
+                    <Form.Control type="int" value={quantityTombola} onChange={handleChange(setQuantityTombola)}>
                     </Form.Control>
                 </Col>
             </Form.Group>
@@ -129,7 +177,7 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
                     Quantité exposée
                 </Form.Label>
                 <Col sm={"1"}>
-                    <Form.Control type="text" value={quantityExposed} onChange={handleChange(setQuantityExposed)}>
+                    <Form.Control type="int" value={quantityExposed} onChange={handleChange(setQuantityExposed)}>
                     </Form.Control>
                 </Col>
             </Form.Group>
@@ -149,7 +197,7 @@ const GameMonitoringForm: FC<{ gameMonitoring?: GameMonitoring, onCreate: (gM : 
                     Montant du retour
                 </Form.Label>
                     <Col sm={"1"}>
-                    <Form.Control type="text" value={returnedPrice} onChange={handleChange(setReturnedPrice)}>
+                    <Form.Control type="int" value={returnedPrice} onChange={handleChange(setReturnedPrice)}>
                     </Form.Control>
                     </Col>
             </Form.Group>

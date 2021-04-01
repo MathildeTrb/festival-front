@@ -17,7 +17,7 @@ const InvoiceRow: FC<{reservation: Reservation}> = ({reservation}) => {
 
     const amount: number = reservation.reservationDetails
         .map<number>((reservationDetail) => reservationDetail.meterReserved * reservationDetail.space.meterPrice + reservationDetail.tableReserved * reservationDetail.space.tablePrice)
-        .reduce((total, currentValue) => total + currentValue);
+        .reduce((total, currentValue) => total + currentValue, 0);
 
     const onValidate = async () => {
         reservation.mailingDate = mailingDate;

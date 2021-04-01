@@ -8,10 +8,8 @@ import {Card, Spinner} from "react-bootstrap";
 const InfoReservation = () => {
 
     const {selectedFestival} = useContext(FestivalContext);
-    console.log("exhibitorMonitorings/festival/"+selectedFestival.id)
 
     const {data: reservationConfirmedTab,isPending } = useAxios<ExhibitorMonitoring[]>("exhibitorMonitorings/festival/"+selectedFestival.id);
-    console.log(reservationConfirmedTab)
 
     return(
         <>

@@ -47,7 +47,6 @@ const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: 
                 updateFestival()
                 :
                 createFestival()
-                .then(() => console.log("festival créé"));
         }
     }, [isSubmitted, numberOfSpaces, spaces])
 

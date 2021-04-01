@@ -21,7 +21,6 @@ function PDF(props) {
         }
         return somme
     }
-    console.log(returnPrice(props))
 
     const retourJeux = (props) => {
         if(returnPrice(props) !== '0'){
@@ -30,7 +29,6 @@ function PDF(props) {
             return ""
         }
     }
-    console.log(retourJeux(props))
     return(
         `<div id="Post">
             <h1>Exposant : ${props.exhibitorMonitoring.exhibitor.name}</h1>

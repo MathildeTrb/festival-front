@@ -1,6 +1,53 @@
-import {FC} from "react";
-import {Accordion, Card, Container, Row, Col, Button} from "react-bootstrap";
-import {Company} from "../../../utils/types";
+import {FC, useState} from "react";
+import {Accordion, Card, Container, Row, Col, Button, Modal} from "react-bootstrap";
+import {Company, Contact} from "../../../utils/types";
+import {FiPhoneCall} from "react-icons/all";
+
+const ExhibitorInfosContactRow: FC<{contact: Contact}> = ({contact}) => {
+
+    const [showModalPhone, setShowModalPhone] = useState<boolean>(false)
+
+    return (
+        <Row>
+            <Col>{contact.lastname}</Col>
+            <Col>{contact.firstname}</Col>
+            <Col>{contact.mail}</Col>
+            <Col className={"text-right"}>
+                <FiPhoneCall className="p-cursor" onClick={() => setShowModalPhone(true)}/>
+                <Modal show={showModalPhone} onHide={() => setShowModalPhone(false)} centered size="lg">
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Téléphone de {contact.firstname} {contact.lastname}
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {!contact.mobilePhoneNumber && !contact.fixPhoneNumber && <div>Aucun</div>}
+                        {contact.mobilePhoneNumber &&
+                        <Row>
+                            <Col sm="4">
+                                <strong>Mobile</strong>
+                            </Col>
+                            <Col sm="2">
+                                {contact.mobilePhoneNumber}
+                            </Col>
+                        </Row>
+                        }
+                        {contact.fixPhoneNumber &&
+                        <Row>
+                            <Col sm="4">
+                                <strong>Fix</strong>
+                            </Col>
+                            <Col sm="2">
+                                {contact.fixPhoneNumber}
+                            </Col>
+                        </Row>
+                        }
+                    </Modal.Body>
+                </Modal>
+            </Col>
+        </Row>
+    )
+}
 
 const ExhibitorInfos: FC<{ exhibitor: Company }> = ({exhibitor}) => (
     <Container fluid>
@@ -13,15 +60,9 @@ const ExhibitorInfos: FC<{ exhibitor: Company }> = ({exhibitor}) => (
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                        {exhibitor.contacts.sort((c1, c2) => c1.lastname.localeCompare(c2.lastname)).map((contact, index) => {
-                            return (
-                                <Row key={index}>
-                                    <Col>{contact.lastname}</Col>
-                                    <Col>{contact.firstname}</Col>
-                                    <Col>{contact.mail}</Col>
-                                </Row>
-                            )
-                        })}
+                        {exhibitor.contacts
+                            .sort((c1, c2) => c1.lastname.localeCompare(c2.lastname))
+                            .map((contact, index) => <ExhibitorInfosContactRow key={index} contact={contact}/>)}
                     </Card.Body>
                 </Accordion.Collapse>
             </Card>

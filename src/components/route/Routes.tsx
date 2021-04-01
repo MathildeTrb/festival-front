@@ -22,17 +22,17 @@ const Routes: FC = () => {
         <Container fluid>
             <Switch>
                 <Route exact path="/" component={Home}/>
-                <Route exact path='/:idFestival/exhibitors' component={ExhibitorMonitoringList}/>
+                <Route exact path='/exhibitors' component={ExhibitorMonitoringList}/>
                 <Route exact path="/invoices" component={Invoices}/>
                 <PrivateRoute exact path='/profil' component={Profil}/>
                 <Route exact path='/login' component={Login}/>
                 <Route exact path='/register' component={Register}/>
-                <Route exact path='/allUsers' component={Users}/>
+                <Route exact path='/users' component={Users}/>
                 <Route exact path="/games" component={Games}/>
                 <Route exact path="/festivals" component={Festivals}/>
                 <Route exact path='/logout' component={Logout}/>
                 <Route exact path="/companies" component={Companies}/>
-                <Route exact path="/:idFestival/gameMonitorings" component={GameMonitorings}/>
+                <Route exact path="/gameMonitorings" component={GameMonitorings}/>
                 <Route exact path="/dashboard/:idExhibitor" component={ExhibitorDashboard}/>
                 <Route path='*'>
                     <NotFound/>

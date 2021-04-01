@@ -23,7 +23,6 @@ const ListGamesNotReceived: FC = () =>{
             {isPending && <Spinner animation="border" variant="primary"/>}
             {GamesNotReceivedTab &&
             <Card style={{width: '18rem', marginTop:'2rem'}}>
-                {console.log(GamesNotReceivedTab)}
                 <h4>Liste jeu(x) non reçu(s)</h4>
                 <ListGroup>
                     {GamesNotReceivedTab[0].areas.map((area, index) => {

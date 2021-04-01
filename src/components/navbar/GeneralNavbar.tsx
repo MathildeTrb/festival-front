@@ -8,7 +8,6 @@ const GeneralNavbar = () => {
     const {isLogged} = useContext(AuthContext)
 
     useEffect(() => {
-        console.log(isLogged)
     }, [isLogged])
 
     return (
