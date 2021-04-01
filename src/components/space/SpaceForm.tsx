@@ -70,6 +70,8 @@ const SpaceForm = ({onSubmit, isSubmitted}) => {
                         value={meterPrice}
                         onChange={handleChange(setMeterPrice)}
                     />
+                </Col>
+                <Col>
                     <label>nombre de mètre carré : </label>
                     <input
                         className="mon-input"
