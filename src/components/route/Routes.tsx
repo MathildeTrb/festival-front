@@ -29,11 +29,11 @@ const Routes: FC = () => {
                 <PrivateRoute exact path='/profil' component={Profil}/>
                 <Route exact path='/login' component={Login}/>
                 <Route exact path='/register' component={Register}/>
-                <Route exact path='/users' component={Users}/>
-                <Route exact path="/games" component={Games}/>
+                <PrivateRoute exact path='/users' component={Users}/>
+                <PrivateRoute exact path="/games" component={Games}/>
                 <Route exact path="/festivals" component={Festivals}/>
                 <Route exact path='/logout' component={Logout}/>
-                <Route exact path="/companies" component={Companies}/>
+                <PrivateRoute exact path="/companies" component={Companies}/>
                 <Route exact path="/gameMonitorings" component={GameMonitorings}/>
                 <Route exact path="/dashboard/:idExhibitor" component={ExhibitorDashboard}/>
                 <Route path='*'>
