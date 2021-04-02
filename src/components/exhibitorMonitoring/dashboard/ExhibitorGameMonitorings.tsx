@@ -42,8 +42,7 @@ const ExhibitorGameMonitorings: FC<{ exhibitorMonitoring: ExhibitorMonitoring}> 
 
     return (
         <>
-            {!exhibitorMonitoring.reservation && <div>Pas de game monitorings</div>}
-            {exhibitorMonitoring.reservation && gameMonitorings &&
+
 
                 <ExhibitorMonitoringContext.Provider value={value}>
                     <Container fluid>
@@ -53,6 +52,8 @@ const ExhibitorGameMonitorings: FC<{ exhibitorMonitoring: ExhibitorMonitoring}> 
                             <GameMonitoringCreateModal show={showModalCreate} onHide={() => setShowModalCreate(false)} onCreate={handleCreate} />
                         </div>
 
+                        {!exhibitorMonitoring.reservation && <div>Pas de game monitorings</div>}
+                        {exhibitorMonitoring.reservation && gameMonitorings &&
                         <table className="table table-hover table-bordered">
                             <thead className="thead-blue">
                             <tr className="text-center">
@@ -78,15 +79,15 @@ const ExhibitorGameMonitorings: FC<{ exhibitorMonitoring: ExhibitorMonitoring}> 
 
                                         gameMonitoring.reservation.id = exhibitorMonitoring.reservation.id;
 
-                                        return <ExhibitorGameMonitoringRow key={index} gameMonitoring={gameMonitoring} onDelete={() => handleDelete(gameMonitoring)}/>
+                                        return <ExhibitorGameMonitoringRow key={index} gameMonitoring={gameMonitoring}
+                                                                           onDelete={() => handleDelete(gameMonitoring)}/>
                                     })
                             }
                             </tbody>
                         </table>
+                        }
                     </Container>
                 </ExhibitorMonitoringContext.Provider>
-
-            }
         </>
 
 

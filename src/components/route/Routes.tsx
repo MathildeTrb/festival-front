@@ -16,12 +16,14 @@ import Companies from "../company/Companies";
 import GameMonitorings from "../gameMonitoring/GameMonitorings";
 import Invoices from "../invoice/Invoices";
 import ExhibitorDashboard from "../exhibitorMonitoring/dashboard/ExhibitorDashboard";
+import HomeVisitor from "../home/HomeVisitor";
 
 const Routes: FC = () => {
     return (
         <Container fluid>
             <Switch>
-                <Route exact path="/" component={Home}/>
+                <Route exact path="/" component={HomeVisitor}/>
+                <Route exact path="/home" component={Home}/>
                 <Route exact path='/exhibitors' component={ExhibitorMonitoringList}/>
                 <Route exact path="/invoices" component={Invoices}/>
                 <PrivateRoute exact path='/profil' component={Profil}/>

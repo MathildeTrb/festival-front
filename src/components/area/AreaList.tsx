@@ -14,7 +14,7 @@ const AreaList: FC = () => {
     return (
         <div>
             {isPending && <Spinner animation="border" variant="primary"/>}
-            {areas && areas.length === 0 && <div>Aucune information à afficher</div>}
+            {areas && areas.length === 0 && <div>Aucune zone à afficher</div>}
             {areas && areas.length > 0 &&
             <Accordion>
                 {areas.map((area, index) => <AreaCard key={index} area={area}/>)}

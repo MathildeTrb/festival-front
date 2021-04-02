@@ -15,7 +15,7 @@ const NavbarVisitor = () => {
             {currentFestival &&
             <Row>
                 <Col md={2}>
-                    <Image className="image-css" src={logo} fluid/>
+                    <Link to="/"><Image className="image-css" src={logo} fluid/></Link>
                 </Col>
                 <Col md={6} className={"navbar-col"}>
                     <h2>Bienvenue au {currentFestival.name}</h2>
@@ -35,4 +35,4 @@ const NavbarVisitor = () => {
         </div>
     )
 }
-export default NavbarVisitor
+export default NavbarVisitor;

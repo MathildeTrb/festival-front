@@ -30,8 +30,16 @@ const NavbarLogged = () => {
     const {isLogged} = useToken()
     const [loggedNavbar, setLoggedNavbar] = useState(isLogged())
 
+    const onEnter = event => {
+        if (event.key === "Enter") {
+            goToDashboard();
+        }
+    }
+
     const goToDashboard = () => {
         const company: Company = companies.find(c => c.name.toLowerCase() === nameCompany.toLowerCase());
+
+        setNameCompany("")
 
         if (company) {
             history.push(`/dashboard/${company.id}`);
@@ -45,7 +53,7 @@ const NavbarLogged = () => {
             {festivals && selectedFestival && loggedNavbar &&
             <Row>
                 <Col md={2}>
-                    <Image className="image-css" src={logo} fluid/>
+                    <Link to="/"><Image className="image-css" src={logo} fluid/></Link>
                 </Col>
                 <Col md={1} className={"navbar-col"}>
                     <FestivalSelection festivals={festivals} setFestivals={setFestivals}/>
@@ -54,7 +62,7 @@ const NavbarLogged = () => {
                     <Row>
                         <Nav fill variant="tabs" defaultActiveKey="/">
                             <Nav.Item className='nav-item'>
-                                <Link to="/" className='nav-link'><HiOutlineInformationCircle/> Informations du festival</Link>
+                                <Link to="/home" className='nav-link'><HiOutlineInformationCircle/> Informations du festival</Link>
                             </Nav.Item>
                             <Nav.Item className='nav-item'>
                                 <Link to="/exhibitors" className='nav-link'> <AiOutlineAudit/> Réservations
@@ -106,7 +114,7 @@ const NavbarLogged = () => {
                                         label: company.name
                                     }
                                 })}>
-                                    <input type="text" value={nameCompany} onChange={event => setNameCompany(event.target.value)}/>
+                                    <input type="text" onKeyDown={onEnter} placeholder="Nom de l'exposant" value={nameCompany} onChange={event => setNameCompany(event.target.value)}/>
                                 </Hint>
                             }
                             <button type="button" className="mon-validate-button" onClick={goToDashboard}>Valider</button>
