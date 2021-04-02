@@ -14,7 +14,9 @@ export const ExhibitorMonitoringContext = createContext<ExhibitorMonitoringConte
 
 const ExhibitorGameMonitorings: FC<{ exhibitorMonitoring: ExhibitorMonitoring}> = ({exhibitorMonitoring}) => {
 
-    const [gameMonitorings, setGameMonitorings] = useState<GameMonitoring[]>(exhibitorMonitoring.reservation.gameMonitorings);
+    const [gameMonitorings, setGameMonitorings] = useState<GameMonitoring[]>( exhibitorMonitoring.reservation !== null ? (exhibitorMonitoring.reservation.gameMonitorings[0].game ? exhibitorMonitoring.reservation.gameMonitorings : []) : []);
+
+    console.log("gameMonitorings", gameMonitorings)
 
     const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
 
@@ -41,7 +43,7 @@ const ExhibitorGameMonitorings: FC<{ exhibitorMonitoring: ExhibitorMonitoring}> 
     return (
         <>
             {!exhibitorMonitoring.reservation && <div>Pas de game monitorings</div>}
-            {exhibitorMonitoring.reservation &&
+            {exhibitorMonitoring.reservation && gameMonitorings &&
 
                 <ExhibitorMonitoringContext.Provider value={value}>
                     <Container fluid>

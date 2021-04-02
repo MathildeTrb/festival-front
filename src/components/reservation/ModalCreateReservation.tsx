@@ -5,6 +5,7 @@ import axios from "../../utils/axios";
 import useAxios from "../../utils/useAxios";
 import FormDetailsReservation from "./FormDetailsReservation";
 import {FestivalContext} from "../../App";
+import {useAxiosMethods} from "../../utils/axios-hooks";
 
 type ReservationContextProps = {
     reservationDetails: ReservationDetails[];
@@ -15,8 +16,8 @@ export const ReservationContext = createContext<ReservationContextProps>({} as R
 
 const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMonitoring?: ExhibitorMonitoring}> = ({show, onHide, exhibitorMonitoring}) => {
 
-    const [needVolunteer, setNeedVolunter] = useState<boolean>(exhibitorMonitoring.reservation && exhibitorMonitoring.reservation.needVolunteer)
-    const [willCome, setWillCome] = useState<boolean>(exhibitorMonitoring.reservation && exhibitorMonitoring.reservation.willCome)
+    const [needVolunteer, setNeedVolunter] = useState<boolean>(exhibitorMonitoring.reservation && exhibitorMonitoring.reservation.needVolunteer || false)
+    const [willCome, setWillCome] = useState<boolean>(exhibitorMonitoring.reservation && exhibitorMonitoring.reservation.willCome || false)
     const [discount, setDiscount] = useState<number>(exhibitorMonitoring.reservation ? exhibitorMonitoring.reservation.discount : 0)
     const [reservationDetails, setReservationDetails] = useState<ReservationDetails[]>(exhibitorMonitoring.reservation ? exhibitorMonitoring.reservation.reservationDetails : [])
 
@@ -26,10 +27,13 @@ const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMo
 
     const {data: concernedFestival, isPending} = useAxios<Festival>("festivals/"+selectedFestival.id)
 
+    const {post} = useAxiosMethods<Reservation>("reservations");
+
     const reservationContextValue = {
         reservationDetails,
         setReservationDetails
     }
+
 
     const handleChange = set => event => {
         set(event.target.value)
@@ -55,11 +59,12 @@ const ModalCreateReservation: FC<{show: boolean, onHide: () => void, exhibitorMo
             exhibitorMonitoring,
         }
 
-
-        axios.post("reservations", {
-            reservation : reservation
+        post({
+            reservation
         })
-        onHide()
+            .then(() => {
+                onHide();
+            })
     }
 
     return (

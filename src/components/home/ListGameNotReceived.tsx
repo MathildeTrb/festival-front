@@ -21,7 +21,7 @@ const ListGamesNotReceived: FC = () =>{
     return(
         <div>
             {isPending && <Spinner animation="border" variant="primary"/>}
-            {GamesNotReceivedTab &&
+            {GamesNotReceivedTab && GamesNotReceivedTab[0] &&
             <Card style={{width: '20rem', marginTop:'2rem'}}>
                 <h4>Liste jeu(x) non reçu(s)</h4>
                 <ListGroup>

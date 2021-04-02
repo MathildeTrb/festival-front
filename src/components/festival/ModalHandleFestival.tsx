@@ -1,6 +1,6 @@
 import {Festival, Space} from "../../utils/types";
 import {FC, useEffect, useState} from "react";
-import {Col, Form, Modal, Row} from "react-bootstrap";
+import {Col, Form, Modal, Row, Spinner} from "react-bootstrap";
 import axios from "../../utils/axios";
 import useToken from "../../utils/useToken";
 import SpaceForm from "../space/SpaceForm";
@@ -21,6 +21,8 @@ const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: 
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
     const [numberOfSpaces, setNumberOfSpaces] = useState<number>(3)
     const [spaces, setSpaces] = useState<Space[]>([])
+
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const {token} = useToken()
 
@@ -81,6 +83,9 @@ const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: 
 
     const createFestival = async () => {
 
+
+        setIsLoading(true)
+
         const imageUrl: string = image ? await upload(image) : null;
 
         const festival: Festival = {
@@ -102,6 +107,8 @@ const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: 
 
         savedFestival.areas = []
         savedFestival.spaces = savedSpaces
+
+        setIsLoading(false);
 
         onChange(savedFestival)
         onHide();
@@ -172,9 +179,12 @@ const ModalHandleFestival: FC<{ updateMode?: boolean, title: string, festival?: 
                     createRow()}
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className="mon-validate-button" onClick={() => setIsSubmitted(true)}>
-                        Valider
-                    </button>
+                    <div className="text-center">
+                        <button className="mon-validate-button" onClick={() => setIsSubmitted(true)}>
+                            Valider
+                        </button>
+                        {isLoading && <Spinner animation="border" variant="primary"/>}
+                    </div>
                 </Modal.Footer>
             </Modal>
         </div>

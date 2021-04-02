@@ -1,5 +1,5 @@
 import {FC, useState} from "react";
-import {ExhibitorMonitoring, ExhibitorMonitoringStatus} from "../../utils/types";
+import {ExhibitorMonitoring, ExhibitorMonitoringStatus, Reservation} from "../../utils/types";
 import {ImCalendar} from "react-icons/im"
 import "../../css/sample.css"
 import CalendarModal from "./CalendarModal";

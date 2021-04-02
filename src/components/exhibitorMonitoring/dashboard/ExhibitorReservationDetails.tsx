@@ -9,6 +9,8 @@ import CalendarModal from "../CalendarModal";
 
 const ExhibitorReservationDetails: FC<{ exhibitorMonitoring: ExhibitorMonitoring }> = ({exhibitorMonitoring}) => {
 
+    console.log("exhibitorM", exhibitorMonitoring)
+
     let totalPrice: number = 0;
 
     const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
@@ -19,8 +21,8 @@ const ExhibitorReservationDetails: FC<{ exhibitorMonitoring: ExhibitorMonitoring
     const [showModalMailingDate, setShowModalMailingDate] = useState<boolean>(false);
     const [showModalPaymentDate, setShowModalPaymentDate] = useState<boolean>(false);
 
-    const [needVolunteer, setNeedVolunteer] = useState<boolean>(exhibitorMonitoring.reservation.needVolunteer);
-    const [willCome, setWillCome] = useState<boolean>(exhibitorMonitoring.reservation.willCome);
+    const [needVolunteer, setNeedVolunteer] = useState<boolean>(exhibitorMonitoring.reservation !== null ? exhibitorMonitoring.reservation.needVolunteer : false);
+    const [willCome, setWillCome] = useState<boolean>( exhibitorMonitoring.reservation !== null ? exhibitorMonitoring.reservation.willCome : false);
 
     const {put: putReservationDate} = useAxiosMethods("reservations");
     const {put: putNeedVolunteer} = useAxiosMethods("reservations/needVolunteer");

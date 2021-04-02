@@ -10,7 +10,7 @@ const Home = () => {
 
     return (
         <div>
-            {/*<Container>
+            <Container>
                 <Row>
                     <InfoReservation/>
 
@@ -28,10 +28,7 @@ const Home = () => {
                 <ProgressionGamesReceived/>
 
                 <ProgressionGamesNotPlaced/>
-            </Container>*/}
-
-
-
+            </Container>
         </div>
 
     )
